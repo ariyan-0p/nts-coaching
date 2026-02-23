@@ -82,11 +82,12 @@ export default function Testimonials() {
     try {
       const response = await fetch('http://localhost:5000/api/testimonials', {
         method: 'POST',
-        body: formData, // Browser sets multipart/form-data automatically
+        body: formData,
       })
       
       const result = await response.json()
       if (result.success) {
+        // Real-time addition to UI
         setTestimonials(p => [result.data, ...p])
         toast.success('Testimonial published live!')
         reset()
@@ -98,16 +99,33 @@ export default function Testimonials() {
     }
   }
 
-  const togglePublish = async (id) => {
-    // In production, add a PATCH route to backend. For now, local toggle:
-    setTestimonials(p => p.map(t => t._id === id ? { ...t, published: !t.published } : t))
-    toast.success('Visibility toggled')
+  // Real-time Delete Function
+  const deleteItem = async (id) => {
+    if (!confirm('Permanently delete this testimonial?')) return
+
+    try {
+      const response = await fetch(`http://localhost:5000/api/testimonials/${id}`, {
+        method: 'DELETE',
+      })
+      
+      const result = await response.json()
+      
+      if (result.success) {
+        // REAL-TIME UI UPDATE: Instantly filters out the exact MongoDB _id
+        setTestimonials(prev => prev.filter(t => t._id !== id))
+        toast.success('Deleted permanently')
+      } else {
+        toast.error('Failed to delete from database')
+      }
+    } catch (err) {
+      toast.error('Server connection error')
+    }
   }
 
-  const deleteItem = async (id) => {
-    if (!confirm('Delete permanently?')) return
-    setTestimonials(p => p.filter(t => t._id !== id))
-    toast.success('Deleted')
+  // Local toggle for now (Add a PUT route to backend later if you want this saved permanently)
+  const togglePublish = (id) => {
+    setTestimonials(p => p.map(t => t._id === id ? { ...t, published: !t.published } : t))
+    toast.success('Visibility toggled')
   }
 
   const filtered = filter === 'all' ? testimonials
@@ -188,10 +206,27 @@ export default function Testimonials() {
           )}
         </AnimatePresence>
 
+        <div style={{ display: 'flex', gap: 1, background: 'var(--border)', width: 'fit-content', marginBottom: 20 }}>
+          {['all', 'published', 'hidden'].map(f => (
+            <button key={f} onClick={() => setFilter(f)}
+              style={{
+                padding: '8px 18px',
+                background: filter === f ? 'var(--red)' : 'var(--surface)',
+                color: filter === f ? '#fff' : 'var(--text-muted)',
+                border: 'none', cursor: 'pointer',
+                fontFamily: 'var(--font-head)', fontWeight: 700, fontSize: '0.7rem', letterSpacing: '0.1em', textTransform: 'uppercase',
+              }}
+            >{f} {f === 'all' ? `(${testimonials.length})` : f === 'published' ? `(${testimonials.filter(t=>t.published).length})` : `(${testimonials.filter(t=>!t.published).length})`}</button>
+          ))}
+        </div>
+
         <div style={{ display: 'flex', flexDirection: 'column', gap: 1, background: 'var(--border)' }}>
           {loading ? <Loader2 className="animate-spin" style={{ margin: '40px auto' }} /> : 
+            filtered.length === 0 ? (
+               <div style={{ padding: '40px', textAlign: 'center', background: 'var(--bg-2)', color: 'var(--text-dim)' }}>No testimonials found</div>
+            ) :
             filtered.map((t) => (
-              <div key={t._id} style={{ background: 'var(--bg-2)', padding: '16px 20px', display: 'flex', alignItems: 'center', gap: 16 }}>
+              <motion.div key={t._id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} style={{ background: 'var(--bg-2)', padding: '16px 20px', display: 'flex', alignItems: 'center', gap: 16 }}>
                 <div style={{ width: 40, height: 40, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--surface)' }}>
                   {t.type === 'image' ? <Image size={16} /> : t.type === 'video' ? <Video size={16} /> : <Type size={16} />}
                 </div>
@@ -203,11 +238,11 @@ export default function Testimonials() {
                   <button onClick={() => togglePublish(t._id)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-dim)' }}>
                     {t.published ? <Eye size={16} /> : <EyeOff size={16} />}
                   </button>
-                  <button onClick={() => deleteItem(t._id)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-dim)' }}>
+                  <button onClick={() => deleteItem(t._id)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--red)' }}>
                     <Trash2 size={16} />
                   </button>
                 </div>
-              </div>
+              </motion.div>
             ))
           }
         </div>
