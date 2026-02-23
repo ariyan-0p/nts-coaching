@@ -10,6 +10,10 @@ import { Link } from 'react-router-dom'
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 
+// --- IMPORTS FOR GRAPH AND TESTIMONIALS ---
+import StatsSection from '../components/StatsSection'
+import TestimonialsSection from '../components/TestimonialsSection'
+
 const modules = [
   {
     num: '01', title: 'Fundamentals of Stock Market',
@@ -227,17 +231,22 @@ export default function CourseFMP() {
             {whyCards.map(({ icon: Icon, title, desc }, i) => (
               <motion.div key={title}
                 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: (i % 3) * 0.07 }}
-                style={{ background: 'var(--bg-2)', padding: '28px 24px', transition: 'background 0.2s' }}
-                whileHover={{ backgroundColor: '#0f0f0f' }}
+                className="fmp-why-card"
               >
-                <Icon size={22} color="var(--red)" style={{ marginBottom: 14 }} />
-                <div style={{ fontFamily: 'var(--font-head)', fontWeight: 700, fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.04em', color: 'var(--text)', marginBottom: 8 }}>{title}</div>
-                <div style={{ fontSize: '0.83rem', color: 'var(--text-muted)', fontWeight: 300, lineHeight: 1.6 }}>{desc}</div>
+                <div className="fmp-why-icon"><Icon size={22} /></div>
+                <div className="fmp-why-title">{title}</div>
+                <div className="fmp-why-desc">{desc}</div>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
+
+      {/* ══════════════════════════
+          SOCIAL PROOF (GRAPH + REVIEWS)
+      ══════════════════════════ */}
+      <StatsSection />
+      <TestimonialsSection />
 
       {/* ── Enrollment Form ── */}
       <section id="enroll" style={{ background: 'var(--bg-2)', padding: '80px 0', position: 'relative', overflow: 'hidden' }}>
@@ -346,7 +355,58 @@ export default function CourseFMP() {
         .fmp-module-row { background: var(--bg-2); padding: 28px 32px; display: grid; grid-template-columns: 200px 1fr; gap: 32px; align-items: start; }
         .fmp-module-label { min-width: 0; }
         .fmp-sessions-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 24px; }
-        .fmp-why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--border); }
+        
+        /* ══════════════════════════════════════
+           UPDATED: WHY CHOOSE FMP GRID
+           Works perfectly in both themes!
+        ══════════════════════════════════════ */
+        .fmp-why-grid { 
+          display: grid; 
+          grid-template-columns: repeat(3, 1fr); 
+          gap: 1px; 
+          background: var(--border); 
+        }
+        
+        .fmp-why-card {
+          background: var(--surface);
+          padding: 32px 28px;
+          border-left: 3px solid transparent;
+          transition: all 0.2s ease;
+        }
+        
+        .fmp-why-card:hover {
+          background: var(--surface-2); 
+          border-left-color: var(--red);
+        }
+
+        .fmp-why-icon {
+          width: 44px; height: 44px;
+          display: flex; align-items: center; justify-content: center;
+          background: var(--red-dim); 
+          border: 1px solid var(--border-red);
+          color: var(--red); 
+          margin-bottom: 16px;
+        }
+
+        .fmp-why-title {
+          font-family: var(--font-head);
+          font-weight: 700;
+          font-size: 0.95rem;
+          text-transform: uppercase;
+          letter-spacing: 0.04em;
+          color: var(--text);
+          margin-bottom: 10px;
+          transition: color var(--theme-speed);
+        }
+
+        .fmp-why-desc {
+          font-size: 0.88rem;
+          color: var(--text-muted);
+          font-weight: 300;
+          line-height: 1.6;
+          transition: color var(--theme-speed);
+        }
+
         .fmp-form-card { background: var(--bg); border: 1px solid var(--border); border-top: 3px solid var(--red); padding: 40px 36px; }
         .fmp-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 

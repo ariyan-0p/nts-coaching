@@ -11,6 +11,10 @@ import { Link } from 'react-router-dom'
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 
+// --- ADDED THESE TWO IMPORTS ---
+import StatsSection from '../components/StatsSection'
+import TestimonialsSection from '../components/TestimonialsSection'
+
 const modules = [
   { num: '01', icon: Brain,         title: 'Sales Ignite & Mindset of Top Performers', desc: 'Build the mental frameworks that separate top closers from the rest — confidence, resilience, and unshakeable goal-setting.' },
   { num: '02', icon: Users,         title: 'Exploring the Psychology of Buying',        desc: 'Deep-dive into the psychological triggers that drive purchasing decisions and learn how to leverage them ethically.' },
@@ -294,6 +298,13 @@ export default function CourseSalesMastery() {
           </div>
         </div>
       </section>
+
+      {/* ══════════════════════════
+          SOCIAL PROOF (GRAPH + REVIEWS)
+      ══════════════════════════ */}
+      <StatsSection />
+      <TestimonialsSection />
+
 
       {/* ══════════════════════════
           ENROLL FORM
