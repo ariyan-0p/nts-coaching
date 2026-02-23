@@ -2,6 +2,7 @@ import { useEffect } from "react";
 
 import Navbar from "../components/Navbar";
 import HeroSection from "../components/HeroSection";
+import FeaturedIn from "../components/FeaturedIn"; // <-- 1. Import it here
 import AboutSection from "../components/AboutSection";
 import StatsSection from '../components/StatsSection';
 import ServicesSection from "../components/ServicesSection";
@@ -23,9 +24,11 @@ export default function Home() {
       <main>
         <HeroSection />
         
+        {/* 2. Place it right below the Hero! */}
+        <FeaturedIn /> 
+        
         <AboutSection />
         
-        {/* The Animated Numbers Section placed right below the About profile */}
         <StatsSection />
         
         <ServicesSection />

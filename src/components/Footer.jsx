@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Linkedin, Instagram, Youtube, Facebook, Mail, Phone, MapPin, ArrowUpRight } from 'lucide-react'
+import { useTheme } from '../context/ThemeContext'
 
 const socials = [
   { icon: Linkedin,  href: 'https://www.linkedin.com/company/nail-thesale/', label: 'LinkedIn' },
@@ -18,11 +19,20 @@ const quickLinks = [
 ]
 
 const courseLinks = [
-  { label: 'Nail the Sale',      href: '/courses/nail-the-sale' },
-  { label: 'Corporate Training', href: '/courses/corporate-training' },
+  { label: 'FMP Program',   href: '/courses/fmp' },
+  { label: 'Sales Mastery', href: '/courses/sales-mastery' },
 ]
 
 export default function Footer() {
+  // Pulling 'theme' to match Navbar logic
+  const { theme } = useTheme()
+  const isDark = theme === 'dark'
+
+  // Exact same logic as your Navbar
+  const logoSrc = isDark
+    ? '/assets/nts-logo-white.png'
+    : '/assets/nts-logo-dark.png'
+
   return (
     <footer style={{
       background: 'var(--bg-2)',
@@ -31,7 +41,7 @@ export default function Footer() {
       overflow: 'hidden',
     }}>
 
-      {/* Top glow */}
+      {/* Decorative Top Glow */}
       <div style={{
         position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)',
         width: 600, height: 1,
@@ -40,8 +50,6 @@ export default function Footer() {
       }} />
 
       <div className="container">
-
-        {/* Main Footer Grid */}
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
@@ -49,15 +57,22 @@ export default function Footer() {
           padding: '64px 0 48px',
         }}>
 
-          {/* Brand */}
+          {/* Column 1: Brand & Logo */}
           <div style={{ gridColumn: 'span 1' }}>
-            <div style={{ fontFamily: 'var(--font-head)', fontWeight: 900, fontSize: '1.4rem', letterSpacing: '0.05em', textTransform: 'uppercase', color: 'var(--text)', marginBottom: 16 }}>
-              Ankit <span style={{ color: 'var(--red)' }}>Khare</span>
-            </div>
+            <Link to="/" style={{ display: 'inline-block', marginBottom: 20 }}>
+              <img 
+                key={logoSrc} // Forces re-render just like your Navbar
+                src={logoSrc} 
+                alt="NTS Logo" 
+                style={{ height: '50px', width: 'auto', objectFit: 'contain' }} 
+              />
+            </Link>
+            
             <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', lineHeight: 1.75, fontWeight: 300, marginBottom: 24, maxWidth: 260 }}>
               Cracking the Code to Sales Psychology & High-Ticket Closures.<br />
-              <em style={{ color: 'var(--red)', fontStyle: 'italic' }}>Sell Smart • Close Big • Win Always</em>
+              <em style={{ color: 'var(--red)', fontStyle: 'italic', fontWeight: 600 }}>Sell Smart • Close Big • Win Always</em>
             </p>
+            
             <div style={{ display: 'flex', gap: 10 }}>
               {socials.map(({ icon: Icon, href, label }) => (
                 <a key={label} href={href} target="_blank" rel="noopener noreferrer"
@@ -69,16 +84,6 @@ export default function Footer() {
                     color: 'var(--text-muted)', transition: 'all 0.2s',
                     clipPath: 'polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px))',
                   }}
-                  onMouseEnter={e => {
-                    e.currentTarget.style.background = 'var(--red-dim)'
-                    e.currentTarget.style.borderColor = 'var(--border-red)'
-                    e.currentTarget.style.color = 'var(--red)'
-                  }}
-                  onMouseLeave={e => {
-                    e.currentTarget.style.background = 'var(--surface)'
-                    e.currentTarget.style.borderColor = 'var(--border)'
-                    e.currentTarget.style.color = 'var(--text-muted)'
-                  }}
                 >
                   <Icon size={15} />
                 </a>
@@ -86,15 +91,13 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* Column 2: Navigation */}
           <div>
             <div className="eyebrow" style={{ marginBottom: 20 }}>Navigation</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
               {quickLinks.map(link => (
                 <a key={link.label} href={link.href}
-                  style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: '0.88rem', color: 'var(--text-muted)', fontWeight: 400, transition: 'color 0.2s' }}
-                  onMouseEnter={e => e.currentTarget.style.color = 'var(--text)'}
-                  onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}
+                  style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: '0.88rem', color: 'var(--text-muted)', transition: 'color 0.2s' }}
                 >
                   <span style={{ color: 'var(--red)', fontSize: '0.7rem' }}>▸</span> {link.label}
                 </a>
@@ -102,7 +105,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Courses */}
+          {/* Column 3: Courses */}
           <div>
             <div className="eyebrow" style={{ marginBottom: 20 }}>Courses</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -116,16 +119,6 @@ export default function Footer() {
                     letterSpacing: '0.05em', textTransform: 'uppercase',
                     color: 'var(--text-muted)', transition: 'all 0.2s',
                   }}
-                  onMouseEnter={e => {
-                    e.currentTarget.style.borderColor = 'var(--border-red)'
-                    e.currentTarget.style.color = 'var(--red)'
-                    e.currentTarget.style.background = 'var(--red-dim)'
-                  }}
-                  onMouseLeave={e => {
-                    e.currentTarget.style.borderColor = 'var(--border)'
-                    e.currentTarget.style.color = 'var(--text-muted)'
-                    e.currentTarget.style.background = 'var(--surface)'
-                  }}
                 >
                   {link.label} <ArrowUpRight size={14} />
                 </Link>
@@ -133,7 +126,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Contact */}
+          {/* Column 4: Contact */}
           <div>
             <div className="eyebrow" style={{ marginBottom: 20 }}>Contact</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
@@ -143,9 +136,7 @@ export default function Footer() {
                 { icon: Mail,   text: 'ntswithankit@gmail.com', href: 'mailto:ntswithankit@gmail.com' },
               ].map(({ icon: Icon, text, href }) => (
                 <a key={text} href={href || '#'}
-                  style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: '0.88rem', color: 'var(--text-muted)', transition: 'color 0.2s' }}
-                  onMouseEnter={e => e.currentTarget.style.color = 'var(--text)'}
-                  onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}
+                  style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: '0.88rem', color: 'var(--text-muted)' }}
                 >
                   <div style={{
                     width: 30, height: 30, flexShrink: 0,
@@ -159,7 +150,6 @@ export default function Footer() {
               ))}
             </div>
           </div>
-
         </div>
 
         {/* Bottom Bar */}
@@ -177,13 +167,10 @@ export default function Footer() {
           </span>
           <Link to="/admin/login"
             style={{ fontSize: '0.72rem', color: 'var(--text-dim)', fontFamily: 'var(--font-head)', letterSpacing: '0.1em', textTransform: 'uppercase', transition: 'color 0.2s' }}
-            onMouseEnter={e => e.currentTarget.style.color = 'var(--text-muted)'}
-            onMouseLeave={e => e.currentTarget.style.color = 'var(--text-dim)'}
           >
-            Admin
+            Admin Portal
           </Link>
         </div>
-
       </div>
     </footer>
   )

@@ -15,7 +15,6 @@ const navLinks = [
       { label: 'Sales Mastery Program',         href: '/courses/sales-mastery' },
     ]
   },
-  { label: 'Gallery',      href: '/#gallery',      type: 'anchor' },
   { label: 'Testimonials', href: '/#testimonials', type: 'anchor' },
   { label: 'FAQ',          href: '/#faq',          type: 'anchor' },
   { label: 'Contact',      href: '/#contact',      type: 'anchor' },
@@ -184,10 +183,13 @@ export default function Navbar() {
             exit={{ opacity: 0, x: '100%' }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
           >
-            {/* Close button */}
-            <button onClick={() => setMobileOpen(false)} className="mobile-menu__close">
-              <X size={24} />
-            </button>
+            {/* Top bar with close button */}
+            <div className="mobile-menu__topbar">
+              <span className="mobile-menu__topbar-title">Menu</span>
+              <button onClick={() => setMobileOpen(false)} className="mobile-menu__close">
+                <X size={24} />
+              </button>
+            </div>
 
             <div className="mobile-menu__body">
               {navLinks.map((link, i) => (
@@ -200,11 +202,19 @@ export default function Navbar() {
                       </Link>
                     ))}
                   </div>
+                ) : link.type === 'route' ? (
+                  <Link
+                    key={link.label}
+                    to={link.href}
+                    className="mobile-menu__link"
+                  >
+                    {link.label}
+                  </Link>
                 ) : (
                   <motion.a key={link.label}
                     href={link.href}
                     className="mobile-menu__link"
-                    onClick={link.type === 'anchor' ? (e) => { e.preventDefault(); handleAnchorClick(link.href) } : undefined}
+                    onClick={(e) => { e.preventDefault(); handleAnchorClick(link.href) }}
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.05 }}
@@ -228,6 +238,7 @@ export default function Navbar() {
                 {[
                   { label: 'LinkedIn',  href: 'https://www.linkedin.com/company/nail-thesale/' },
                   { label: 'Instagram', href: 'https://www.instagram.com/nail_thesale/' },
+                  { label: 'Facebook',  href: 'https://www.facebook.com/people/Nail-the-Sale-with-Ankit/61576911484081/' },
                   { label: 'YouTube',   href: 'https://www.youtube.com/channel/UC5ArEQ8ZPw77_4oJ2HU13Zw' },
                 ].map(s => (
                   <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" className="mobile-menu__social-link">
@@ -466,7 +477,7 @@ export default function Navbar() {
           overflow-y: auto;
         }
 
-        /* Top bar: logo area + toggle + close — all in one row */
+        /* Top bar: title + close */
         .mobile-menu__topbar {
           display: flex;
           align-items: center;
@@ -476,28 +487,14 @@ export default function Navbar() {
           border-bottom: 1px solid var(--border);
           flex-shrink: 0;
         }
-        .mobile-menu__topbar-left {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-        }
-        .mobile-menu__theme-label {
+        .mobile-menu__topbar-title {
           font-family: var(--font-head);
-          font-weight: 600;
+          font-weight: 700;
           font-size: 0.72rem;
-          letter-spacing: 0.15em;
+          letter-spacing: 0.2em;
           text-transform: uppercase;
           color: var(--text-muted);
         }
-
-        .mobile-menu__body {
-          display: flex;
-          flex-direction: column;
-          flex: 1;
-          padding: 24px 28px 32px;
-          overflow-y: auto;
-        }
-
         .mobile-menu__close {
           color: var(--text);
           padding: 6px;
@@ -505,6 +502,14 @@ export default function Navbar() {
           border: none;
           cursor: pointer;
           flex-shrink: 0;
+        }
+
+        .mobile-menu__body {
+          display: flex;
+          flex-direction: column;
+          flex: 1;
+          padding: 16px 28px 24px;
+          overflow-y: auto;
         }
         .mobile-menu__links {
           display: flex;
