@@ -3,15 +3,17 @@ import { motion } from 'framer-motion'
 import CountUp from 'react-countup'
 
 export default function StatsSection() {
-  const { ref, inView } = useInView({ threshold: 0.3, triggerOnce: true })
+  // CHANGED: triggerOnce is now false so it tracks every scroll
+  const { ref, inView } = useInView({ threshold: 0.3, triggerOnce: false })
 
   const drawLine = {
-    hidden: { pathLength: 0, opacity: 0 },
+    // Added a quick exit transition so it resets instantly when scrolling away
+    hidden: { pathLength: 0, opacity: 0, transition: { duration: 0.2 } },
     visible: { pathLength: 1, opacity: 1, transition: { duration: 2.2, ease: 'easeOut' } },
   }
 
   const fadeIn = {
-    hidden: { opacity: 0 },
+    hidden: { opacity: 0, transition: { duration: 0.2 } },
     visible: { opacity: 1, transition: { duration: 0.6, delay: 2.1 } },
   }
 
@@ -23,7 +25,7 @@ export default function StatsSection() {
         <motion.div
           className="stats-header"
           initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
+          animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 20 }}
           transition={{ duration: 0.6 }}
         >
           <div className="eyebrow">By The Numbers</div>
@@ -34,7 +36,7 @@ export default function StatsSection() {
         <motion.div
           className="stats-graph-wrap"
           initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
+          animate={{ opacity: inView ? 1 : 0 }}
           transition={{ duration: 0.5 }}
         >
           <svg viewBox="0 0 1000 520" className="stats-svg" xmlns="http://www.w3.org/2000/svg">
@@ -44,33 +46,35 @@ export default function StatsSection() {
               <motion.line key={y}
                 x1="80" y1={y} x2="940" y2={y}
                 stroke="var(--border)" strokeWidth="1" strokeDasharray="4 10"
-                initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.8, delay: 0.2 }}
+                initial={{ opacity: 0 }} 
+                animate={{ opacity: inView ? 1 : 0 }} 
+                transition={{ duration: 0.8, delay: inView ? 0.2 : 0 }}
               />
             ))}
 
             {/* ── Axes ── */}
             <motion.line x1="80" y1="60" x2="80" y2="460" stroke="var(--border)" strokeWidth="2"
-              initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.6 }} />
+              initial={{ opacity: 0 }} animate={{ opacity: inView ? 1 : 0 }} transition={{ duration: 0.6 }} />
             <motion.line x1="80" y1="460" x2="940" y2="460" stroke="var(--border)" strokeWidth="2"
-              initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.6 }} />
+              initial={{ opacity: 0 }} animate={{ opacity: inView ? 1 : 0 }} transition={{ duration: 0.6 }} />
 
             {/* Axis arrows */}
             <motion.path d="M 74 65 L 80 55 L 86 65" fill="none" stroke="var(--border)" strokeWidth="2"
-              initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ delay: 0.3 }} />
+              initial={{ opacity: 0 }} animate={{ opacity: inView ? 1 : 0 }} transition={{ delay: inView ? 0.3 : 0 }} />
             <motion.path d="M 935 454 L 945 460 L 935 466" fill="none" stroke="var(--border)" strokeWidth="2"
-              initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ delay: 0.3 }} />
+              initial={{ opacity: 0 }} animate={{ opacity: inView ? 1 : 0 }} transition={{ delay: inView ? 0.3 : 0 }} />
 
             {/* ── Axis Labels ── */}
             <motion.text x="-240" y="44" transform="rotate(-90)"
               fill="var(--text-muted)" fontSize="14" fontFamily="var(--font-head)"
               fontWeight="700" letterSpacing="0.12em" textAnchor="middle"
-              initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ delay: 0.5 }}>
+              initial={{ opacity: 0 }} animate={{ opacity: inView ? 1 : 0 }} transition={{ delay: inView ? 0.5 : 0 }}>
               STUDENTS TRAINED
             </motion.text>
             <motion.text x="510" y="500"
               fill="var(--text-muted)" fontSize="14" fontFamily="var(--font-head)"
               fontWeight="700" letterSpacing="0.12em" textAnchor="middle"
-              initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ delay: 0.5 }}>
+              initial={{ opacity: 0 }} animate={{ opacity: inView ? 1 : 0 }} transition={{ delay: inView ? 0.5 : 0 }}>
               YEARS OF EXPERIENCE
             </motion.text>
 
@@ -83,7 +87,7 @@ export default function StatsSection() {
               { x: 880, label: '2024' },
             ].map(({ x, label }) => (
               <motion.g key={label}
-                initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ delay: 0.6 }}>
+                initial={{ opacity: 0 }} animate={{ opacity: inView ? 1 : 0 }} transition={{ delay: inView ? 0.6 : 0 }}>
                 <line x1={x} y1="460" x2={x} y2="470" stroke="var(--border)" strokeWidth="2" />
                 <text x={x} y="487" fill="var(--text-dim)" fontSize="13"
                   fontFamily="var(--font-head)" fontWeight="600" textAnchor="middle">
@@ -104,7 +108,10 @@ export default function StatsSection() {
 
             {/* Area under curve 1 */}
             <motion.path
-              variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { duration: 0.6, delay: 2.1 } } }}
+              variants={{ 
+                hidden: { opacity: 0, transition: { duration: 0.2 } }, 
+                visible: { opacity: 1, transition: { duration: 0.6, delay: 2.1 } } 
+              }}
               initial="hidden" animate={inView ? 'visible' : 'hidden'}
               d="M 100 440 C 220 420, 360 350, 500 260 C 640 170, 760 120, 900 80 L 900 460 L 100 460 Z"
               fill="url(#redGrad)"
@@ -114,7 +121,10 @@ export default function StatsSection() {
                 CURVE 2 — Revenue (dashed gray)
                ──────────────────────────────── */}
             <motion.path
-              variants={{ hidden: { pathLength: 0, opacity: 0 }, visible: { pathLength: 1, opacity: 1, transition: { duration: 2.2, delay: 0.35, ease: 'easeOut' } } }}
+              variants={{ 
+                hidden: { pathLength: 0, opacity: 0, transition: { duration: 0.2 } }, 
+                visible: { pathLength: 1, opacity: 1, transition: { duration: 2.2, delay: 0.35, ease: 'easeOut' } } 
+              }}
               initial="hidden" animate={inView ? 'visible' : 'hidden'}
               d="M 100 455 C 280 450, 430 420, 580 370 C 700 330, 810 285, 900 250"
               stroke="var(--text-dim)" strokeWidth="3" fill="none"
@@ -133,22 +143,32 @@ export default function StatsSection() {
 
             {/* Intersection dot */}
             <motion.circle cx="680" cy="190" r="5" fill="var(--red)"
-              initial={{ scale: 0, opacity: 0 }} animate={inView ? { scale: 1, opacity: 1 } : {}}
-              transition={{ delay: 2.3 }} style={{ transformOrigin: '680px 190px' }} />
+              initial={{ scale: 0, opacity: 0 }} 
+              animate={{ scale: inView ? 1 : 0, opacity: inView ? 1 : 0 }}
+              transition={{ delay: inView ? 2.3 : 0 }} 
+              style={{ transformOrigin: '680px 190px' }} 
+            />
 
             {/* ────────────────────────────────
                 END DOTS
                ──────────────────────────────── */}
             <motion.circle cx="900" cy="80" r="7" fill="var(--red)"
-              initial={{ scale: 0, opacity: 0 }} animate={inView ? { scale: 1, opacity: 1 } : {}}
-              transition={{ delay: 2.3 }} style={{ transformOrigin: '900px 80px' }} />
+              initial={{ scale: 0, opacity: 0 }} 
+              animate={{ scale: inView ? 1 : 0, opacity: inView ? 1 : 0 }}
+              transition={{ delay: inView ? 2.3 : 0 }} 
+              style={{ transformOrigin: '900px 80px' }} 
+            />
             <motion.circle cx="900" cy="250" r="5" fill="var(--text-dim)"
-              initial={{ scale: 0, opacity: 0 }} animate={inView ? { scale: 1, opacity: 1 } : {}}
-              transition={{ delay: 2.5 }} style={{ transformOrigin: '900px 250px' }} />
+              initial={{ scale: 0, opacity: 0 }} 
+              animate={{ scale: inView ? 1 : 0, opacity: inView ? 1 : 0 }}
+              transition={{ delay: inView ? 2.5 : 0 }} 
+              style={{ transformOrigin: '900px 250px' }} 
+            />
 
             {/* ────────────────────────────────
                 LABELS
                ──────────────────────────────── */}
+            {/* By conditionally rendering them, they unmount and remount fresh every time */}
             {inView && (
               <>
                 {/* Curve 1 end label */}
@@ -190,7 +210,7 @@ export default function StatsSection() {
             )}
 
             {/* ── Legend ── */}
-            <motion.g initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ delay: 2.7 }}>
+            <motion.g initial={{ opacity: 0 }} animate={{ opacity: inView ? 1 : 0 }} transition={{ delay: inView ? 2.7 : 0 }}>
               <rect x="100" y="74" width="22" height="4" rx="2" fill="var(--red)" />
               <text x="130" y="82" fill="var(--text-muted)" fontSize="12" fontFamily="var(--font-head)"
                 fontWeight="700" letterSpacing="0.1em">STUDENTS TRAINED</text>
@@ -220,9 +240,10 @@ export default function StatsSection() {
           ].map(({ value, suffix, label }, i) => (
             <motion.div key={label} className="stats-pill"
               initial={{ opacity: 0, y: 16 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 2.7 + i * 0.1 }}>
+              animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 16 }}
+              transition={{ duration: 0.5, delay: inView ? 2.7 + i * 0.1 : 0 }}>
               <div className="stats-pill__value">
+                {/* CountUp unmounts to '0' when scrolled away, re-animating fully on return */}
                 {inView ? <CountUp end={value} duration={2} delay={2.5} /> : '0'}{suffix}
               </div>
               <div className="stats-pill__label">{label}</div>
