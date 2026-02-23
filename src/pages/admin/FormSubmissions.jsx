@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { 
   Download, Trash2, Search, Mail, Phone, 
-  Instagram, Linkedin, Globe, Loader2, FileText
+  Instagram, Linkedin, Globe, Loader2, FileText, Calendar
 } from 'lucide-react'
 import AdminSidebar from './AdminSidebar'
 import toast from 'react-hot-toast'
@@ -10,10 +10,11 @@ import * as XLSX from 'xlsx'
 
 const STATUS_OPTIONS = ['new', 'contacted', 'converted', 'closed'];
 
-const COURSES = [
-  { id: 'fmp-program', label: 'FMP Program' },
-  { id: 'nail-the-sale', label: 'Sales Mastery' },
-  { id: 'corporate-training', label: 'Corporate' }
+const TABS = [
+  { id: 'fmp-program', label: 'FMP Program', type: 'course' },
+  { id: 'sales-mastery', label: 'Sales Mastery', type: 'course' },
+  { id: 'corporate-training', label: 'Corporate', type: 'course' },
+  { id: 'homepage-contact', label: 'Homepage Inquiries', type: 'contact' }
 ]
 
 export default function FormSubmissions() {
@@ -21,12 +22,18 @@ export default function FormSubmissions() {
   const [activeTab, setActiveTab] = useState('fmp-program')
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
+  
+  // ── DATE FILTER STATES ──
+  const [startDate, setStartDate] = useState('')
+  const [endDate, setEndDate] = useState('')
 
-  // This function fetches ONLY the leads for the active tab from your MongoDB
+  const isHomepageTab = TABS.find(t => t.id === activeTab)?.type === 'contact';
+
   const fetchSubmissions = async () => {
     try {
       setLoading(true)
-      const response = await fetch(`http://localhost:5000/api/submissions?course=${activeTab}`)
+      const queryParam = isHomepageTab ? `source=${activeTab}` : `course=${activeTab}`;
+      const response = await fetch(`http://localhost:5000/api/submissions?${queryParam}`)
       const result = await response.json()
       if (result.success) {
         setSubmissions(result.data)
@@ -41,59 +48,62 @@ export default function FormSubmissions() {
   useEffect(() => {
     document.title = `${activeTab.toUpperCase()} Leads | Admin`
     fetchSubmissions()
-  }, [activeTab]) // Refetches data whenever you switch between FMP and Sales Mastery
+  }, [activeTab])
 
-  // --- Excel Export Logic (Differentiated by Course) ---
+  // ── FILTERING LOGIC (Search + Date) ──
+  const filtered = submissions.filter(s => {
+    const matchesSearch = (s.fullName || s.name || '').toLowerCase().includes(search.toLowerCase()) || 
+                          (s.email || '').toLowerCase().includes(search.toLowerCase());
+    
+    if (!startDate && !endDate) return matchesSearch;
+
+    const submissionDate = new Date(s.createdAt).setHours(0,0,0,0);
+    const start = startDate ? new Date(startDate).setHours(0,0,0,0) : null;
+    const end = endDate ? new Date(endDate).setHours(0,0,0,0) : null;
+
+    if (start && submissionDate < start) return false;
+    if (end && submissionDate > end) return false;
+
+    return matchesSearch;
+  });
+
   const handleExportExcel = () => {
-    if (submissions.length === 0) {
-      toast.error(`No ${activeTab} leads found to export`);
+    if (filtered.length === 0) {
+      toast.error(`No filtered leads to export`);
       return;
     }
 
-    // Format the data for the Excel sheet
-    const excelData = submissions.map((lead) => ({
-      'Submission Date': new Date(lead.createdAt).toLocaleDateString(),
-      'Course': lead.course === 'fmp-program' ? 'Financial Market Professional' : 'Sales Mastery',
-      'Full Name': lead.fullName,
-      'Email': lead.email,
-      'Phone': lead.phone,
-      'Status': lead.status?.toUpperCase(),
-      'DOB': lead.dateOfBirth || 'N/A',
-      'Designation': lead.currentDesignation || 'N/A',
-      'Company': lead.currentCompany || 'N/A',
-      'Instagram': lead.instagramId || 'N/A',
-      'LinkedIn': lead.linkedinUrl || 'N/A',
-      'Portfolio': lead.portfolioUrl || 'N/A',
-      'Help Needed': lead.helpNeeded || 'N/A'
-    }));
+    const excelData = filtered.map((lead) => {
+      const common = {
+        'Date': new Date(lead.createdAt).toLocaleDateString(),
+        'Name': isHomepageTab ? lead.name : lead.fullName,
+        'Email': lead.email,
+        'Phone': lead.phone,
+        'Status': lead.status?.toUpperCase(),
+      };
+
+      return isHomepageTab ? 
+        { ...common, 'Interest': lead.interest, 'Message': lead.message } : 
+        { ...common, 'Course': lead.course, 'Company': lead.currentCompany, 'Help Needed': lead.helpNeeded };
+    });
 
     const worksheet = XLSX.utils.json_to_sheet(excelData);
     const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Leads");
-    
-    // The filename dynamically changes based on the active course tab
-    const fileName = `NTS_${activeTab}_Export_${new Date().toISOString().split('T')[0]}.xlsx`;
-    XLSX.writeFile(workbook, fileName);
-    
-    toast.success(`Exported ${activeTab} leads successfully!`);
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Filtered Leads");
+    XLSX.writeFile(workbook, `NTS_Leads_${activeTab}_${new Date().toISOString().split('T')[0]}.xlsx`);
+    toast.success(`Exported ${filtered.length} leads!`);
   }
 
   const updateStatus = async (id, newStatus) => {
-    // Optimistically update UI
     setSubmissions(p => p.map(s => s._id === id ? { ...s, status: newStatus } : s))
-    toast.success(`Lead status updated to ${newStatus.toUpperCase()}`)
+    toast.success(`Updated to ${newStatus.toUpperCase()}`)
   }
 
   const deleteLead = async (id) => {
-    if (!confirm('Are you sure you want to delete this lead from the database?')) return
+    if (!confirm('Permanently delete this lead?')) return
     setSubmissions(p => p.filter(s => s._id !== id))
-    toast.success('Lead removed from sheet')
+    toast.success('Lead deleted')
   }
-
-  const filtered = submissions.filter(s => 
-    s.fullName?.toLowerCase().includes(search.toLowerCase()) || 
-    s.email?.toLowerCase().includes(search.toLowerCase())
-  )
 
   return (
     <div className="admin-layout">
@@ -101,91 +111,127 @@ export default function FormSubmissions() {
       <main className="admin-content">
         
         {/* Header */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 24 }}>
           <div>
             <h1 style={{ fontFamily: 'var(--font-head)', fontWeight: 900, fontSize: '1.8rem', textTransform: 'uppercase' }}>
-              {activeTab === 'fmp-program' ? 'FMP' : 'Sales'} Lead Sheet
+              {isHomepageTab ? 'General Inquiries' : 'Course Lead Sheet'}
             </h1>
-            <p style={{ color: 'var(--text-dim)', fontSize: '0.8rem' }}>Manage and export submissions for this course category.</p>
+            <p style={{ color: 'var(--text-dim)', fontSize: '0.8rem' }}>
+                Total: {filtered.length} {filtered.length === 1 ? 'Lead' : 'Leads'} found
+            </p>
           </div>
           
-          <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-            <div style={{ position: 'relative' }}>
-              <Search size={14} style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-dim)' }} />
-              <input className="form-input" placeholder="Search this sheet..." value={search} onChange={(e) => setSearch(e.target.value)} style={{ paddingLeft: 36, width: 220 }} />
-            </div>
-
-            <button 
-              onClick={handleExportExcel}
-              className="btn btn-primary" 
-              style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.75rem', padding: '10px 16px' }}
-            >
-              <FileText size={14} /> Export {activeTab === 'fmp-program' ? 'FMP' : 'Sales'} to Excel
-            </button>
-          </div>
+          <button onClick={handleExportExcel} className="btn btn-primary" style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.75rem' }}>
+            <FileText size={14} /> Export Filtered to Excel
+          </button>
         </div>
 
-        {/* Dynamic Course Tabs */}
-        <div style={{ display: 'flex', borderBottom: '1px solid var(--border)', marginBottom: 0, gap: 24 }}>
-          {COURSES.map(c => (
-            <button key={c.id} onClick={() => setActiveTab(c.id)} style={{
+        {/* ── FILTERS BAR ── */}
+        <div style={{ 
+          background: 'var(--bg-2)', 
+          border: '1px solid var(--border)', 
+          padding: '16px 20px', 
+          display: 'flex', 
+          flexWrap: 'wrap', 
+          gap: '20px', 
+          alignItems: 'center',
+          marginBottom: '20px' 
+        }}>
+          {/* Search */}
+          <div style={{ position: 'relative', flex: '1', minWidth: '200px' }}>
+            <Search size={14} style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-dim)' }} />
+            <input className="form-input" placeholder="Search name or email..." value={search} onChange={(e) => setSearch(e.target.value)} style={{ paddingLeft: 36, width: '100%' }} />
+          </div>
+
+          {/* Date Start */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            <span style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--text-dim)', textTransform: 'uppercase' }}>From:</span>
+            <input type="date" className="form-input" value={startDate} onChange={(e) => setStartDate(e.target.value)} style={{ fontSize: '0.8rem', width: '150px' }} />
+          </div>
+
+          {/* Date End */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            <span style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--text-dim)', textTransform: 'uppercase' }}>To:</span>
+            <input type="date" className="form-input" value={endDate} onChange={(e) => setEndDate(e.target.value)} style={{ fontSize: '0.8rem', width: '150px' }} />
+          </div>
+
+          {/* Clear Dates */}
+          {(startDate || endDate) && (
+            <button 
+              onClick={() => { setStartDate(''); setEndDate(''); }}
+              style={{ background: 'none', border: 'none', color: 'var(--red)', fontSize: '0.75rem', cursor: 'pointer', fontWeight: 600 }}
+            >
+              Reset Dates
+            </button>
+          )}
+        </div>
+
+        {/* Tabs */}
+        <div style={{ display: 'flex', borderBottom: '1px solid var(--border)', gap: 24 }}>
+          {TABS.map(t => (
+            <button key={t.id} onClick={() => setActiveTab(t.id)} style={{
               padding: '12px 8px', background: 'none', border: 'none', cursor: 'pointer',
-              borderBottom: activeTab === c.id ? '2px solid var(--red)' : '2px solid transparent',
-              color: activeTab === c.id ? 'var(--text)' : 'var(--text-dim)',
+              borderBottom: activeTab === t.id ? '2px solid var(--red)' : '2px solid transparent',
+              color: activeTab === t.id ? 'var(--text)' : 'var(--text-dim)',
               fontFamily: 'var(--font-head)', fontWeight: 700, fontSize: '0.7rem', textTransform: 'uppercase'
-            }}>{c.label}</button>
+            }}>{t.label}</button>
           ))}
         </div>
 
-        {/* Sheet Table */}
+        {/* Table */}
         <div style={{ width: '100%', overflowX: 'auto', background: 'var(--bg-2)', border: '1px solid var(--border)', borderTop: 'none' }}>
           {loading ? (
             <div style={{ padding: 100, textAlign: 'center' }}><Loader2 className="animate-spin" /></div>
           ) : (
-            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.8rem', minWidth: '1600px' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.8rem', minWidth: '1400px' }}>
               <thead>
                 <tr style={{ background: 'var(--bg-3)', textAlign: 'left', borderBottom: '1px solid var(--border)' }}>
-                  {['Date', 'Full Name', 'Status', 'Phone', 'Email', 'DOB', 'Designation', 'Company', 'Instagram', 'LinkedIn', 'Portfolio', 'Help Needed', 'Actions'].map(h => (
-                    <th key={h} style={headerStyle}>{h}</th>
-                  ))}
+                  <th style={headerStyle}>Date</th>
+                  <th style={headerStyle}>Name</th>
+                  <th style={headerStyle}>Status</th>
+                  <th style={headerStyle}>Email</th>
+                  <th style={headerStyle}>Phone</th>
+                  {isHomepageTab ? (
+                    <> <th style={headerStyle}>Interest</th> <th style={headerStyle}>Message</th> </>
+                  ) : (
+                    <> <th style={headerStyle}>Designation</th> <th style={headerStyle}>Company</th> <th style={headerStyle}>Help Needed</th> </>
+                  )}
+                  <th style={headerStyle}>Actions</th>
                 </tr>
               </thead>
               <tbody>
-                {filtered.map((sub) => (
-                  <tr key={sub._id} style={rowStyle} className="table-row-hover">
+                {filtered.length > 0 ? filtered.map((sub) => (
+                  <tr key={sub._id} style={rowStyle}>
                     <td style={cellStyle}>{new Date(sub.createdAt).toLocaleDateString()}</td>
-                    <td style={{ ...cellStyle, fontWeight: 600, color: 'var(--text)' }}>{sub.fullName}</td>
+                    <td style={{ ...cellStyle, fontWeight: 600, color: 'var(--text)' }}>{isHomepageTab ? sub.name : sub.fullName}</td>
                     <td style={cellStyle}>
-                      <select 
-                        value={sub.status || 'new'} 
-                        onChange={(e) => updateStatus(sub._id, e.target.value)}
-                        style={selectStyle}
-                      >
+                      <select value={sub.status || 'new'} onChange={(e) => updateStatus(sub._id, e.target.value)} style={selectStyle}>
                         {STATUS_OPTIONS.map(opt => <option key={opt} value={opt}>{opt.toUpperCase()}</option>)}
                       </select>
                     </td>
-                    <td style={cellStyle}>{sub.phone}</td>
                     <td style={cellStyle}>{sub.email}</td>
-                    <td style={cellStyle}>{sub.dateOfBirth || '-'}</td>
-                    <td style={cellStyle}>{sub.currentDesignation || '-'}</td>
-                    <td style={cellStyle}>{sub.currentCompany || '-'}</td>
-                    <td style={cellStyle}>{sub.instagramId ? `@${sub.instagramId}` : '-'}</td>
-                    <td style={cellStyle}>
-                      {sub.linkedinUrl ? <a href={sub.linkedinUrl} target="_blank" rel="noreferrer" style={{ color: 'var(--red)' }}><Linkedin size={14}/></a> : '-'}
-                    </td>
-                    <td style={cellStyle}>
-                      {sub.portfolioUrl ? <a href={sub.portfolioUrl} target="_blank" rel="noreferrer" style={{ color: 'var(--text)' }}><Globe size={14}/></a> : '-'}
-                    </td>
-                    <td style={{ ...cellStyle, maxWidth: '250px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={sub.helpNeeded}>
-                      {sub.helpNeeded || '-'}
-                    </td>
+                    <td style={cellStyle}>{sub.phone}</td>
+                    {isHomepageTab ? (
+                      <>
+                        <td style={cellStyle}><span style={{ color: 'var(--red)', fontWeight: 600 }}>{sub.interest}</span></td>
+                        <td style={{ ...cellStyle, maxWidth: '300px', whiteSpace: 'normal' }}>{sub.message}</td>
+                      </>
+                    ) : (
+                      <>
+                        <td style={cellStyle}>{sub.currentDesignation || '-'}</td>
+                        <td style={cellStyle}>{sub.currentCompany || '-'}</td>
+                        <td style={{ ...cellStyle, maxWidth: '250px', overflow: 'hidden', textOverflow: 'ellipsis' }}>{sub.helpNeeded}</td>
+                      </>
+                    )}
                     <td style={cellStyle}>
                       <button onClick={() => deleteLead(sub._id)} style={{ background: 'none', border: 'none', color: 'var(--text-dim)', cursor: 'pointer' }}>
                         <Trash2 size={14} />
                       </button>
                     </td>
                   </tr>
-                ))}
+                )) : (
+                  <tr><td colSpan="10" style={{ padding: '40px', textAlign: 'center', color: 'var(--text-dim)' }}>No leads matching your criteria.</td></tr>
+                )}
               </tbody>
             </table>
           )}
@@ -195,7 +241,6 @@ export default function FormSubmissions() {
   )
 }
 
-// Global Styles for Table
 const headerStyle = { padding: '12px 15px', fontFamily: 'var(--font-head)', color: 'var(--text-dim)', fontWeight: 700, textTransform: 'uppercase', fontSize: '0.65rem' };
 const cellStyle = { padding: '12px 15px', whiteSpace: 'nowrap' };
 const rowStyle = { borderBottom: '1px solid var(--border)' };
