@@ -93,11 +93,24 @@ export default function CourseFMP() {
 
   const onSubmit = async (data) => {
     try {
-      await new Promise(r => setTimeout(r, 1000))
+      const response = await fetch('http://localhost:5000/api/submissions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ ...data, course: 'fmp-program' }), 
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || 'Something went wrong');
+      }
+
       toast.success('Enrollment request sent! Our team will contact you within 24 hours.')
       reset()
-    } catch {
-      toast.error('Something went wrong. Please try again.')
+    } catch (error) {
+      toast.error('Failed to submit form: ' + error.message)
     }
   }
 
@@ -236,13 +249,16 @@ export default function CourseFMP() {
               <h2 className="section-title" style={{ textAlign: 'center' }}>Start Your <span>Market Journey</span></h2>
               <p style={{ color: 'var(--text-muted)', fontWeight: 300, marginTop: 12 }}>Fill in your details and our team will contact you within 24 hours with batch details and next steps.</p>
             </div>
+            
             <div className="fmp-form-card">
               <form onSubmit={handleSubmit(onSubmit)} style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+                
+                {/* Row 1: Name & Email */}
                 <div className="fmp-form-row">
                   <div className="form-group">
                     <label className="form-label">Full Name *</label>
-                    <input className="form-input" placeholder="Your full name" {...register('name', { required: 'Required' })} />
-                    {errors.name && <span className="form-error">{errors.name.message}</span>}
+                    <input className="form-input" placeholder="Your full name" {...register('fullName', { required: 'Required' })} />
+                    {errors.fullName && <span className="form-error">{errors.fullName.message}</span>}
                   </div>
                   <div className="form-group">
                     <label className="form-label">Email *</label>
@@ -250,6 +266,8 @@ export default function CourseFMP() {
                     {errors.email && <span className="form-error">{errors.email.message}</span>}
                   </div>
                 </div>
+
+                {/* Row 2: Phone & DOB */}
                 <div className="fmp-form-row">
                   <div className="form-group">
                     <label className="form-label">Phone Number *</label>
@@ -257,40 +275,46 @@ export default function CourseFMP() {
                     {errors.phone && <span className="form-error">{errors.phone.message}</span>}
                   </div>
                   <div className="form-group">
-                    <label className="form-label">Your Profession</label>
-                    <input className="form-input" placeholder="e.g. Student, Engineer, Business Owner" {...register('profession')} />
+                    <label className="form-label">Date of Birth</label>
+                    <input className="form-input" type="date" {...register('dateOfBirth')} style={{ color: 'var(--text)' }} />
                   </div>
                 </div>
+
+                {/* Row 3: Company & Designation */}
                 <div className="fmp-form-row">
                   <div className="form-group">
-                    <label className="form-label">Market Experience</label>
-                    <select className="form-input" {...register('experience')} style={{ background: 'var(--surface)', color: 'var(--text)' }}>
-                      <option value="">Select level...</option>
-                      <option value="none">No experience</option>
-                      <option value="beginner">Beginner (know basics)</option>
-                      <option value="intermediate">Intermediate (traded before)</option>
-                      <option value="advanced">Advanced</option>
-                    </select>
+                    <label className="form-label">Current Company</label>
+                    <input className="form-input" placeholder="Where do you work?" {...register('currentCompany')} />
                   </div>
                   <div className="form-group">
-                    <label className="form-label">How Did You Hear About Us?</label>
-                    <select className="form-input" {...register('source')} style={{ background: 'var(--surface)', color: 'var(--text)' }}>
-                      <option value="">Select...</option>
-                      <option value="instagram">Instagram</option>
-                      <option value="youtube">YouTube</option>
-                      <option value="linkedin">LinkedIn</option>
-                      <option value="referral">Referral / Friend</option>
-                      <option value="google">Google Search</option>
-                      <option value="newspaper">Newspaper</option>
-                      <option value="other">Other</option>
-                    </select>
+                    <label className="form-label">Current Designation</label>
+                    <input className="form-input" placeholder="Your role / title" {...register('currentDesignation')} />
                   </div>
                 </div>
+
+                {/* Row 4: Socials */}
+                <div className="fmp-form-row">
+                  <div className="form-group">
+                    <label className="form-label">Instagram User ID</label>
+                    <input className="form-input" placeholder="@yourhandle" {...register('instagramId')} />
+                  </div>
+                  <div className="form-group">
+                    <label className="form-label">LinkedIn URL</label>
+                    <input className="form-input" placeholder="linkedin.com/in/yourprofile" {...register('linkedinUrl')} />
+                  </div>
+                </div>
+
+                {/* Row 5: Portfolio & Help Needed */}
+                <div className="form-group">
+                  <label className="form-label">Portfolio / Website Link</label>
+                  <input className="form-input" placeholder="yourwebsite.com" {...register('portfolioUrl')} />
+                </div>
+
                 <div className="form-group">
                   <label className="form-label">What do you want to achieve from this course?</label>
-                  <textarea className="form-input" placeholder="Share your financial goals, what you want to learn, or any specific questions..." {...register('goals')} style={{ minHeight: 100 }} />
+                  <textarea className="form-input" placeholder="Share your financial goals, what you want to learn, or any specific questions..." {...register('helpNeeded')} style={{ minHeight: 110 }} />
                 </div>
-                <input type="hidden" value="fmp-program" {...register('course')} />
+
                 <button type="submit" className="btn btn-primary" disabled={isSubmitting}
                   style={{ justifyContent: 'center', width: '100%', padding: '16px', fontSize: '1rem', opacity: isSubmitting ? 0.7 : 1 }}>
                   {isSubmitting ? 'Submitting...' : <><Send size={16} /> Submit Enrollment Request</>}

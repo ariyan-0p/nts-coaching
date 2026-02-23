@@ -36,9 +36,9 @@ const includes = [
 
 const outcomes = [
   { icon: Target,        stat: 'Laser-Target', label: 'Ideal Clients' },
-  { icon: MessageSquare, stat: 'Start',         label: 'Natural Conversations' },
-  { icon: Award,         stat: 'Prove',         label: "Your Offer's Value" },
-  { icon: Zap,           stat: 'Melt Away',     label: 'Every Objection' },
+  { icon: MessageSquare, stat: 'Start',        label: 'Natural Conversations' },
+  { icon: Award,         stat: 'Prove',        label: "Your Offer's Value" },
+  { icon: Zap,           stat: 'Melt Away',    label: 'Every Objection' },
 ]
 
 export default function CourseSalesmastery() {
@@ -51,11 +51,24 @@ export default function CourseSalesmastery() {
 
   const onSubmit = async (data) => {
     try {
-      await new Promise(r => setTimeout(r, 1000))
+      const response = await fetch('http://localhost:5000/api/submissions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ ...data, course: 'nail-the-sale' }), 
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || 'Something went wrong');
+      }
+
       toast.success('Request sent! Our team will contact you within 24 hours.')
       reset()
-    } catch {
-      toast.error('Something went wrong. Please try again.')
+    } catch (error) {
+      toast.error('Failed to submit form: ' + error.message)
     }
   }
 
@@ -223,11 +236,13 @@ export default function CourseSalesmastery() {
             </div>
             <div className="smp-form-card">
               <form onSubmit={handleSubmit(onSubmit)} style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+                
+                {/* Row 1: Name & Email */}
                 <div className="smp-form-row">
                   <div className="form-group">
                     <label className="form-label">Full Name *</label>
-                    <input className="form-input" placeholder="Your full name" {...register('name', { required: 'Required' })} />
-                    {errors.name && <span className="form-error">{errors.name.message}</span>}
+                    <input className="form-input" placeholder="Your full name" {...register('fullName', { required: 'Required' })} />
+                    {errors.fullName && <span className="form-error">{errors.fullName.message}</span>}
                   </div>
                   <div className="form-group">
                     <label className="form-label">Email *</label>
@@ -235,6 +250,8 @@ export default function CourseSalesmastery() {
                     {errors.email && <span className="form-error">{errors.email.message}</span>}
                   </div>
                 </div>
+
+                {/* Row 2: Phone & DOB */}
                 <div className="smp-form-row">
                   <div className="form-group">
                     <label className="form-label">Phone Number *</label>
@@ -242,44 +259,46 @@ export default function CourseSalesmastery() {
                     {errors.phone && <span className="form-error">{errors.phone.message}</span>}
                   </div>
                   <div className="form-group">
-                    <label className="form-label">Your Profession *</label>
-                    <input className="form-input" placeholder="e.g. Sales Executive, Freelancer, Coach" {...register('profession', { required: 'Required' })} />
-                    {errors.profession && <span className="form-error">{errors.profession.message}</span>}
+                    <label className="form-label">Date of Birth</label>
+                    <input className="form-input" type="date" {...register('dateOfBirth')} style={{ color: 'var(--text)' }} />
                   </div>
                 </div>
+
+                {/* Row 3: Company & Designation */}
                 <div className="smp-form-row">
                   <div className="form-group">
-                    <label className="form-label">Sales Experience</label>
-                    <select className="form-input" {...register('experience')} style={{ background: 'var(--surface)', color: 'var(--text)' }}>
-                      <option value="">Select level...</option>
-                      <option value="none">No sales experience</option>
-                      <option value="beginner">1–2 years</option>
-                      <option value="intermediate">3–5 years</option>
-                      <option value="senior">5+ years</option>
-                    </select>
+                    <label className="form-label">Current Company</label>
+                    <input className="form-input" placeholder="Where do you work?" {...register('currentCompany')} />
                   </div>
                   <div className="form-group">
-                    <label className="form-label">Industry / Sector</label>
-                    <input className="form-input" placeholder="e.g. Real Estate, IT, EdTech, Finance" {...register('industry')} />
+                    <label className="form-label">Current Designation</label>
+                    <input className="form-input" placeholder="Your role / title" {...register('currentDesignation')} />
                   </div>
                 </div>
-                <div className="form-group">
-                  <label className="form-label">How Did You Hear About Us?</label>
-                  <select className="form-input" {...register('source')} style={{ background: 'var(--surface)', color: 'var(--text)' }}>
-                    <option value="">Select...</option>
-                    <option value="instagram">Instagram</option>
-                    <option value="youtube">YouTube</option>
-                    <option value="linkedin">LinkedIn</option>
-                    <option value="referral">Referral / Friend</option>
-                    <option value="google">Google Search</option>
-                    <option value="other">Other</option>
-                  </select>
+
+                {/* Row 4: Socials */}
+                <div className="smp-form-row">
+                  <div className="form-group">
+                    <label className="form-label">Instagram User ID</label>
+                    <input className="form-input" placeholder="@yourhandle" {...register('instagramId')} />
+                  </div>
+                  <div className="form-group">
+                    <label className="form-label">LinkedIn URL</label>
+                    <input className="form-input" placeholder="linkedin.com/in/yourprofile" {...register('linkedinUrl')} />
+                  </div>
                 </div>
+
+                {/* Row 5: Portfolio & Help Needed */}
                 <div className="form-group">
-                  <label className="form-label">What's Your Biggest Sales Challenge Right Now?</label>
-                  <textarea className="form-input" placeholder="Describe your current challenges — objections, closing, leads, confidence, etc." {...register('challenge')} style={{ minHeight: 110 }} />
+                  <label className="form-label">Portfolio / Website Link</label>
+                  <input className="form-input" placeholder="yourwebsite.com" {...register('portfolioUrl')} />
                 </div>
-                <input type="hidden" value="sales-mastery-program" {...register('course')} />
+
+                <div className="form-group">
+                  <label className="form-label">What Help Do You Need?</label>
+                  <textarea className="form-input" placeholder="Describe your current challenges and what you're looking to achieve..." {...register('helpNeeded')} style={{ minHeight: 110 }} />
+                </div>
+
                 <button type="submit" className="btn btn-primary" disabled={isSubmitting}
                   style={{ justifyContent: 'center', width: '100%', padding: '16px', fontSize: '1rem', opacity: isSubmitting ? 0.7 : 1 }}>
                   {isSubmitting ? 'Submitting...' : <><Send size={16} /> Submit Enrollment Request</>}
