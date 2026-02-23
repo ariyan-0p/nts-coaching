@@ -1,175 +1,338 @@
+import { useState } from 'react'
 import { useInView } from 'react-intersection-observer'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { ArrowRight, BookOpen, Users, Award, Clock, ChevronRight } from 'lucide-react'
-import { useTheme } from '../context/ThemeContext'
+import { Play } from 'lucide-react'
 
-const courses = [
-  {
-    id: 'fmp',
-    href: '/courses/fmp',
-    tag: '2.5-Month Live Course',
-    title: 'Financial Market Professional',
-    subtitle: 'FMP — Never Depend on a Single Income',
-    desc: 'A certified 4-module program covering Stock Market Fundamentals, Money Management, Technical Analysis, and Derivatives — designed to help you achieve financial freedom.',
-    modules: 4,
-    students: '1,000+',
-    duration: '2.5 Months',
-    level: 'All Levels',
-    highlights: [
-      'Stock Market Fundamentals & Indices',
-      'Money Management & Financial Goals',
-      'Technical Analysis — Charts, Indicators, SMC',
-      'Futures & Options — Greeks, Hedging, Strategies',
-      '25+ Back-tested Trading Strategies',
-      '25+ Screeners for Investing',
-    ],
-    badge: 'Certified',
-  },
-  {
-    id: 'sales-mastery',
-    href: '/courses/sales-mastery',
-    tag: '10-Module Transformation',
-    title: 'Sales Mastery Program',
-    subtitle: 'Turn Your Profession into Predictable Income',
-    desc: 'A proven 10-module sales training that gives you the exact roadmap to attract perfect-fit clients effortlessly and authentically — without ever feeling "salesy".',
-    modules: 10,
-    students: '500+',
-    duration: 'Self-paced',
-    level: 'All Levels',
-    highlights: [
-      'Sales Ignite & Top Performer Mindset',
-      'Psychology of Buying & Demand Triggers',
-      'Closing Secrets & Negotiation Tactics',
-      'Advance Objection Handling',
-      'Follow-Up & Relationship Selling',
-      'Unlocking Revenue in the Digital Age',
-    ],
-    badge: 'NTS Signature',
-  },
-]
+// --- 1. DATA SETUP ---
+const tabData = {
+  courses: [
+    {
+      id: 'fmp',
+      href: '/courses/fmp',
+      title: 'Financial Market Professional',
+      desc: 'A certified program covering Stock Market Fundamentals, Money Management, Technical Analysis, and Derivatives to help you achieve financial freedom.',
+      ctaText: 'Explore FMP Program',
+      imgBg: 'linear-gradient(135deg, #111, #222)', 
+      hasVideo: false, // <-- CHANGED TO FALSE
+    },
+    {
+      id: 'sales-mastery',
+      href: '/courses/sales-mastery',
+      title: 'Sales Mastery Program',
+      desc: 'The exact roadmap to attract perfect-fit clients effortlessly and authentically — without ever feeling "salesy".',
+      ctaText: 'Join Sales Mastery',
+      imgBg: 'linear-gradient(135deg, #440000, var(--red))',
+      hasVideo: false, 
+    }
+  ],
+  membership: [
+    {
+      id: 'inner-circle',
+      href: '/#contact',
+      title: 'NTS Inner Circle',
+      desc: 'Join an exclusive community of top-performing sales professionals. Get monthly group coaching, live Q&As, and direct access to Ankit.',
+      ctaText: 'Apply For Membership',
+      imgBg: 'linear-gradient(135deg, #0a0a0a, #1a1a1a)',
+      hasVideo: false,
+    }
+  ]
+}
 
 export default function CoursesSection() {
   const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true })
-  const { theme } = useTheme()
+  
+  // State to manage which tab is currently active
+  const [activeTab, setActiveTab] = useState('courses')
 
-  const moduleHoverBg = theme === 'light' ? '#f1f3f5' : '#0f0f0f'
+  // Get the data for the currently active tab
+  const currentItems = tabData[activeTab]
 
   return (
-    <section id="courses" className="section" ref={ref}
-      style={{ background: 'var(--bg)', overflow: 'hidden', position: 'relative' }}
-    >
-      <div className="grid-bg" style={{ position: 'absolute', inset: 0, opacity: 0.3, pointerEvents: 'none' }} />
-      <div style={{
-        position: 'absolute', top: 0, left: 0,
-        width: 400, height: 400,
-        background: 'radial-gradient(circle, var(--red-dim) 0%, transparent 70%)',
-        pointerEvents: 'none',
-      }} />
+    <section id="courses" className="section" ref={ref} style={{ background: 'var(--bg)', padding: '100px 0' }}>
+      <div className="container">
 
-      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-
-        {/* Header */}
+        {/* --- HEADER --- */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          style={{ textAlign: 'center', marginBottom: 64 }}
+          style={{ textAlign: 'center', marginBottom: '40px' }}
         >
-          <div className="eyebrow" style={{ justifyContent: 'center' }}>
-            <span style={{ width: 24, height: 2, background: 'var(--red)', display: 'inline-block' }} />
-            Courses
-            <span style={{ width: 24, height: 2, background: 'var(--red)', display: 'inline-block' }} />
-          </div>
-          <h2 className="section-title" style={{ textAlign: 'center' }}>
-            Programs Built for <span>Real Results</span>
-          </h2>
-          <p className="section-sub" style={{ margin: '16px auto 0', textAlign: 'center' }}>
-            Four powerhouse programs — from sales mastery to financial market expertise — designed to transform how you earn, sell, and invest.
-          </p>
+          <h2 className="section-title">Your Path to <span>Growth</span></h2>
         </motion.div>
 
-        {/* Course Cards — 2x2 grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2, marginBottom: 64 }}>
-          {courses.map((course, i) => (
-            <motion.div key={course.id}
-              initial={{ opacity: 0, y: 40 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: i * 0.12 }}
-              style={{
-                background: 'var(--bg-2)',
-                border: '1px solid var(--border)',
-                position: 'relative', overflow: 'hidden',
-                display: 'flex', flexDirection: 'column',
-              }}
-            >
-              {/* Top accent bar */}
-              <div style={{ height: 3, background: 'linear-gradient(90deg, var(--red), transparent)' }} />
+        {/* --- TABS --- */}
+        <motion.div 
+          className="tab-container"
+          initial={{ opacity: 0, y: 10 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          <button 
+            className={`tab-btn ${activeTab === 'courses' ? 'active' : ''}`}
+            onClick={() => setActiveTab('courses')}
+          >
+            Courses
+          </button>
+          <button 
+            className={`tab-btn ${activeTab === 'membership' ? 'active' : ''}`}
+            onClick={() => setActiveTab('membership')}
+          >
+            Membership
+          </button>
+        </motion.div>
 
-              {/* Badge */}
-              <div style={{ padding: '24px 28px 0' }}>
-                <span className="badge badge-red" style={{ marginBottom: 16 }}>
-                  <span className="red-dot" /> {course.badge}
-                </span>
-                <div style={{ fontFamily: 'var(--font-head)', fontSize: '0.7rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--text-dim)', marginBottom: 8 }}>{course.tag}</div>
-                <h3 style={{ fontFamily: 'var(--font-head)', fontWeight: 900, fontSize: 'clamp(1.5rem, 2.5vw, 2.2rem)', textTransform: 'uppercase', color: 'var(--text)', lineHeight: 1, marginBottom: 4 }}>
-                  {course.title}
-                </h3>
-                <div style={{ fontFamily: 'var(--font-head)', fontWeight: 600, fontSize: '0.85rem', letterSpacing: '0.05em', textTransform: 'uppercase', color: 'var(--red)', marginBottom: 16 }}>
-                  {course.subtitle}
-                </div>
-                <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', lineHeight: 1.75, fontWeight: 300, marginBottom: 24 }}>
-                  {course.desc}
-                </p>
-              </div>
+        {/* --- CARDS GRID --- */}
+        <AnimatePresence mode="wait">
+          <motion.div 
+            key={activeTab} 
+            className="cards-grid"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+          >
+            {currentItems.map((item) => (
+              <div key={item.id} className="course-card">
+                
+                {/* CSS Laptop Mockup */}
+                <div className="laptop-mockup">
+                  <div className="laptop-screen">
+                    <div className="screen-content" style={{ background: item.imgBg }}>
+                      
+                      {/* --- THE NTS LOGO --- */}
+                      <img 
+                        src="/assets/nts-logo-white.png" 
+                        alt="NTS Logo" 
+                        style={{ 
+                          // If there's a play button, make the logo smaller and push it up. Otherwise, make it large and centered.
+                          height: item.hasVideo ? '30px' : '50px', 
+                          marginBottom: item.hasVideo ? '65px' : '0',
+                          opacity: 0.9,
+                          objectFit: 'contain',
+                          zIndex: 2,
+                          transition: 'all 0.3s ease'
+                        }} 
+                      />
 
-              {/* Meta row */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 1, background: 'var(--border)', margin: '0 28px', marginBottom: 24 }}>
-                {[
-                  { icon: BookOpen, label: 'Modules',  value: course.modules ? `${course.modules}` : 'Custom' },
-                  { icon: Users,    label: 'Trained',  value: course.students },
-                  { icon: Clock,    label: 'Duration', value: course.duration },
-                  { icon: Award,    label: 'Level',    value: course.level },
-                ].map(({ icon: Icon, label, value }) => (
-                  <div key={label} style={{ background: 'var(--bg)', padding: '12px 8px', textAlign: 'center' }}>
-                    <Icon size={13} color="var(--red)" style={{ margin: '0 auto 4px' }} />
-                    <div style={{ fontFamily: 'var(--font-head)', fontWeight: 700, fontSize: '0.72rem', color: 'var(--text)', lineHeight: 1.1 }}>{value}</div>
-                    <div style={{ fontFamily: 'var(--font-head)', fontSize: '0.52rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text-dim)', marginTop: 2 }}>{label}</div>
-                  </div>
-                ))}
-              </div>
+                      {/* --- THE PLAY BUTTON --- */}
+                      {item.hasVideo && (
+                        <div className="screen-play-btn">
+                          <Play size={20} fill="#fff" style={{ marginLeft: '4px' }} />
+                        </div>
+                      )}
 
-              {/* Highlights */}
-              <div style={{ padding: '0 28px', flex: 1 }}>
-                <div style={{ fontFamily: 'var(--font-head)', fontSize: '0.65rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--text-dim)', marginBottom: 12 }}>What You Get</div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                  {course.highlights.map(h => (
-                    <div key={h} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                      <ChevronRight size={13} color="var(--red)" style={{ flexShrink: 0 }} />
-                      <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)', fontWeight: 300 }}>{h}</span>
                     </div>
-                  ))}
+                  </div>
+                  <div className="laptop-base">
+                    <div className="laptop-notch"></div>
+                  </div>
                 </div>
-              </div>
 
-              {/* CTA */}
-              <div style={{ padding: 28, marginTop: 24, borderTop: '1px solid var(--border)', display: 'flex', gap: 10 }}>
-                <Link to={course.href} className="btn btn-primary" style={{ flex: 1, justifyContent: 'center' }}>
-                  View Details <ArrowRight size={15} />
+                {/* Card Text Content */}
+                <h3 className="card-title">{item.title}</h3>
+                <p className="card-desc">{item.desc}</p>
+                
+                {/* CTA Button */}
+                <Link to={item.href} className="card-cta">
+                  {item.ctaText}
                 </Link>
-                <a href="/#contact" className="btn btn-outline btn-sm">Enquire</a>
+
               </div>
-            </motion.div>
-          ))}
-        </div>
+            ))}
+          </motion.div>
+        </AnimatePresence>
 
       </div>
 
+      {/* --- STYLES --- */}
       <style>{`
-        @media (max-width: 900px) {
-          #courses > div > div[style*="grid-template-columns: 1fr 1fr"] {
-            grid-template-columns: 1fr !important;
-          }
+        /* --- Tabs --- */
+        .tab-container {
+          display: flex;
+          justify-content: center;
+          gap: 12px;
+          margin-bottom: 60px;
+          flex-wrap: wrap;
+        }
+        
+        .tab-btn {
+          padding: 14px 40px;
+          background: transparent;
+          border: 1px solid var(--border);
+          color: var(--text-muted);
+          font-family: var(--font-head);
+          font-size: 0.9rem;
+          font-weight: 700;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+          cursor: pointer;
+          border-radius: 4px;
+          transition: all 0.3s ease;
+        }
+
+        .tab-btn:hover {
+          border-color: var(--text-dim);
+          color: var(--text);
+        }
+
+        .tab-btn.active {
+          background: var(--red);
+          border-color: var(--red);
+          color: #fff;
+          box-shadow: 0 10px 20px rgba(220, 38, 38, 0.2);
+        }
+
+        /* --- Grid Layout --- */
+        .cards-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+          gap: 40px;
+          max-width: 1100px;
+          margin: 0 auto;
+          align-items: start;
+        }
+
+        .course-card {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          height: 100%;
+        }
+
+        /* --- Pure CSS Laptop Mockup --- */
+        .laptop-mockup {
+          width: 100%;
+          max-width: 340px;
+          margin: 0 auto 30px;
+          perspective: 1000px;
+        }
+
+        .laptop-screen {
+          width: 100%;
+          aspect-ratio: 16 / 10;
+          background: #111;
+          border: 6px solid #222;
+          border-radius: 12px 12px 0 0;
+          position: relative;
+          overflow: hidden;
+          box-shadow: inset 0 0 0 2px #000;
+        }
+
+        [data-theme="light"] .laptop-screen {
+          border-color: #ddd;
+          background: #fff;
+          box-shadow: inset 0 0 0 2px #eee;
+        }
+
+        .screen-content {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          position: relative;
+        }
+
+        /* Play Button specific styles */
+        .screen-play-btn {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -30%);
+          width: 50px;
+          height: 50px;
+          background: var(--red);
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+          transition: transform 0.2s ease, background 0.2s ease;
+          z-index: 3;
+        }
+        
+        .course-card:hover .screen-play-btn {
+          transform: translate(-50%, -30%) scale(1.1);
+          background: #ff0000;
+        }
+
+        .laptop-base {
+          width: 115%;
+          height: 14px;
+          background: #333;
+          margin-left: -7.5%;
+          border-radius: 0 0 16px 16px;
+          position: relative;
+          box-shadow: 0 15px 25px rgba(0,0,0,0.4);
+        }
+
+        [data-theme="light"] .laptop-base {
+          background: #ccc;
+          box-shadow: 0 15px 25px rgba(0,0,0,0.1);
+        }
+
+        .laptop-notch {
+          position: absolute;
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 60px;
+          height: 4px;
+          background: #222;
+          border-radius: 0 0 4px 4px;
+        }
+        [data-theme="light"] .laptop-notch { background: #aaa; }
+
+        /* --- Text Content --- */
+        .card-title {
+          font-family: var(--font-head);
+          font-size: 1.3rem;
+          font-weight: 800;
+          color: var(--text);
+          margin-bottom: 12px;
+          line-height: 1.3;
+        }
+
+        .card-desc {
+          font-size: 0.95rem;
+          color: var(--text-muted);
+          line-height: 1.6;
+          margin-bottom: 30px;
+          flex-grow: 1;
+        }
+
+        /* --- Full Width CTA Button --- */
+        .card-cta {
+          display: block;
+          width: 100%;
+          padding: 16px 0;
+          background: var(--red);
+          color: #fff;
+          font-family: var(--font-head);
+          font-weight: 800;
+          font-size: 0.85rem;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          text-decoration: none;
+          border-radius: 4px;
+          transition: all 0.2s ease;
+        }
+
+        .card-cta:hover {
+          background: #b91c1c;
+          transform: translateY(-2px);
+          box-shadow: 0 10px 20px rgba(220, 38, 38, 0.3);
+        }
+
+        /* --- Mobile Adjustments --- */
+        @media (max-width: 768px) {
+          .tab-btn { padding: 12px 24px; font-size: 0.8rem; }
+          .laptop-mockup { max-width: 280px; }
+          .card-title { font-size: 1.2rem; }
         }
       `}</style>
     </section>
