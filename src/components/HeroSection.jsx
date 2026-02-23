@@ -405,9 +405,12 @@ export default function HeroSection() {
 
         .vid-thumb-bg {
           position: absolute; inset: 0;
-          background:
-            radial-gradient(ellipse 60% 70% at 50% 40%, #1f0606 0%, #0c0606 50%, #040404 100%);
+          background-image: url('/assets/youtube-cover.png');
+          background-size: cover;
+          background-position: center;
         }
+        
+        
         .vid-thumb-glow {
           position: absolute; inset: 0; z-index: 1; pointer-events: none;
           background: radial-gradient(ellipse 55% 55% at 50% 50%, rgba(220,38,38,0.2) 0%, transparent 65%);
@@ -732,8 +735,6 @@ export default function HeroSection() {
           <div className="vid-thumb">
             <div className="vid-thumb-bg" />
             <div className="vid-thumb-glow" />
-            <div className="vid-letterbox top" />
-            <div className="vid-letterbox bot" />
             <div className="vid-topline" />
             <div className="vid-hud tl" /><div className="vid-hud tr" />
             <div className="vid-hud bl" /><div className="vid-hud br" />
