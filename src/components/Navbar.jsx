@@ -149,10 +149,8 @@ export default function Navbar() {
 
           {/* ── Right Side ── */}
           <div className="navbar__right">
-            {/* Theme Toggle — desktop only */}
-            <div className="desktop-theme-toggle">
-              <ThemeSwitch theme={theme} toggleTheme={toggleTheme} />
-            </div>
+            {/* Theme Toggle — always visible (desktop + mobile top bar) */}
+            <ThemeSwitch theme={theme} toggleTheme={toggleTheme} />
 
             {/* CTA — desktop only */}
             <a
@@ -186,20 +184,12 @@ export default function Navbar() {
             exit={{ opacity: 0, x: '100%' }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
           >
+            {/* Close button */}
             <button onClick={() => setMobileOpen(false)} className="mobile-menu__close">
               <X size={24} />
             </button>
 
-            {/* Theme toggle at top */}
-            <div className="mobile-menu__theme">
-              <ThemeSwitch theme={theme} toggleTheme={toggleTheme} />
-              <span className="mobile-menu__theme-label">
-                {isDark ? 'Dark Mode' : 'Light Mode'}
-              </span>
-            </div>
-
-            {/* Links */}
-            <div className="mobile-menu__links">
+            <div className="mobile-menu__body">
               {navLinks.map((link, i) => (
                 link.type === 'dropdown' ? (
                   <div key={link.label} className="mobile-menu__group">
@@ -288,7 +278,7 @@ export default function Navbar() {
           flex-shrink: 0;
         }
         .navbar__logo {
-          height: 48px;        /* increased from 42px */
+          height: 62px;
           width: auto;
           object-fit: contain;
           display: block;
@@ -473,34 +463,48 @@ export default function Navbar() {
           background: var(--bg);
           display: flex;
           flex-direction: column;
-          padding: 80px 28px 32px;
           overflow-y: auto;
         }
+
+        /* Top bar: logo area + toggle + close — all in one row */
+        .mobile-menu__topbar {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 0 20px;
+          height: 68px;
+          border-bottom: 1px solid var(--border);
+          flex-shrink: 0;
+        }
+        .mobile-menu__topbar-left {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+        }
+        .mobile-menu__theme-label {
+          font-family: var(--font-head);
+          font-weight: 600;
+          font-size: 0.72rem;
+          letter-spacing: 0.15em;
+          text-transform: uppercase;
+          color: var(--text-muted);
+        }
+
+        .mobile-menu__body {
+          display: flex;
+          flex-direction: column;
+          flex: 1;
+          padding: 24px 28px 32px;
+          overflow-y: auto;
+        }
+
         .mobile-menu__close {
-          position: absolute;
-          top: 20px;
-          right: 20px;
           color: var(--text);
           padding: 6px;
           background: none;
           border: none;
           cursor: pointer;
-        }
-        .mobile-menu__theme {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          margin-bottom: 32px;
-          padding-bottom: 24px;
-          border-bottom: 1px solid var(--border);
-        }
-        .mobile-menu__theme-label {
-          font-family: var(--font-head);
-          font-weight: 600;
-          font-size: 0.75rem;
-          letter-spacing: 0.15em;
-          text-transform: uppercase;
-          color: var(--text-muted);
+          flex-shrink: 0;
         }
         .mobile-menu__links {
           display: flex;
