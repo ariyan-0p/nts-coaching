@@ -8,21 +8,21 @@ import { Play } from 'lucide-react'
 const tabData = {
   courses: [
     {
-      id: 'fmp',
-      href: '/courses/fmp',
-      title: 'Financial Market Professional',
-      desc: 'A certified program covering Stock Market Fundamentals, Money Management, Technical Analysis, and Derivatives to help you achieve financial freedom.',
-      ctaText: 'Explore FMP Program',
-      imgBg: 'linear-gradient(135deg, #111, #222)', 
-      hasVideo: false, // <-- CHANGED TO FALSE
-    },
-    {
       id: 'sales-mastery',
       href: '/courses/sales-mastery',
       title: 'Sales Mastery Program',
       desc: 'The exact roadmap to attract perfect-fit clients effortlessly and authentically — without ever feeling "salesy".',
       ctaText: 'Join Sales Mastery',
       imgBg: 'linear-gradient(135deg, #440000, var(--red))',
+      hasVideo: false, 
+    },
+    {
+      id: 'fmp',
+      href: '/courses/fmp',
+      title: 'Financial Market Professional',
+      desc: 'A certified program covering Stock Market Fundamentals, Money Management, Technical Analysis, and Derivatives to help you achieve financial freedom.',
+      ctaText: 'Explore FMP Program',
+      imgBg: 'linear-gradient(135deg, #111, #222)', 
       hasVideo: false, 
     }
   ],
