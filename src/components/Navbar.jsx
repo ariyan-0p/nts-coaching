@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, ChevronDown } from 'lucide-react'
+import { Menu, X, ChevronDown, Sun, Moon } from 'lucide-react'
 import { useTheme } from '../context/ThemeContext'
 
 const navLinks = [
@@ -11,8 +11,9 @@ const navLinks = [
   {
     label: 'Courses', href: '#', type: 'dropdown',
     children: [
-      { label: 'Financial Market Professional', href: '/courses/fmp' },
+      // ── SWAPPED ORDER: Sales Mastery First ──
       { label: 'Sales Mastery Program',         href: '/courses/sales-mastery' },
+      { label: 'Financial Market Professional', href: '/courses/fmp' },
     ]
   },
   { label: 'Testimonials', href: '/#testimonials', type: 'anchor' },
@@ -20,38 +21,28 @@ const navLinks = [
   { label: 'Contact',      href: '/#contact',      type: 'anchor' },
 ]
 
-// ── Inline Theme Toggle Switch ──────────────────────────────
+// ── Modern Animated Theme Toggle ──────────────────────────────
 function ThemeSwitch({ theme, toggleTheme }) {
   const isDark = theme === 'dark'
   return (
     <button
       onClick={toggleTheme}
-      aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
-      className="theme-switch"
+      className={`modern-theme-toggle ${isDark ? 'modern-theme-toggle--dark' : ''}`}
+      aria-label="Toggle theme"
       title={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
     >
-      {/* Sun icon */}
-      <svg className="theme-switch__icon theme-switch__icon--sun" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="5"/>
-        <line x1="12" y1="1" x2="12" y2="3"/>
-        <line x1="12" y1="21" x2="12" y2="23"/>
-        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-        <line x1="1" y1="12" x2="3" y2="12"/>
-        <line x1="21" y1="12" x2="23" y2="12"/>
-        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-      </svg>
-
-      {/* Track */}
-      <div className={`theme-switch__track ${isDark ? 'theme-switch__track--dark' : ''}`}>
-        <div className={`theme-switch__thumb ${isDark ? 'theme-switch__thumb--dark' : ''}`} />
-      </div>
-
-      {/* Moon icon */}
-      <svg className="theme-switch__icon theme-switch__icon--moon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-      </svg>
+      <motion.div
+        className="modern-theme-toggle__thumb"
+        initial={false}
+        animate={{ x: isDark ? 24 : 0 }}
+        transition={{ type: "spring", stiffness: 500, damping: 30 }}
+      >
+        {isDark ? (
+          <Moon size={12} strokeWidth={2.5} color="var(--bg)" />
+        ) : (
+          <Sun size={12} strokeWidth={2.5} color="var(--bg)" />
+        )}
+      </motion.div>
     </button>
   )
 }
@@ -98,7 +89,7 @@ export default function Navbar() {
           {/* ── Logo ── */}
           <Link to="/" className="navbar__logo-link">
             <img
-              key={logoSrc}           /* key forces re-render on theme change */
+              key={logoSrc}          /* key forces re-render on theme change */
               src={logoSrc}
               alt="NTS Logo"
               className="navbar__logo"
@@ -368,7 +359,7 @@ export default function Navbar() {
         .navbar__right {
           display: flex;
           align-items: center;
-          gap: 10px;
+          gap: 14px;
           flex-shrink: 0;
         }
 
@@ -405,63 +396,41 @@ export default function Navbar() {
         }
 
         /* ══════════════════════════════════════
-            THEME TOGGLE SWITCH
+            MODERN THEME TOGGLE SWITCH
            ══════════════════════════════════════ */
-        .theme-switch {
-          display: flex;
-          align-items: center;
-          gap: 7px;
-          background: none;
-          border: 1px solid var(--border);
-          border-radius: 999px;
-          padding: 5px 10px;
-          cursor: pointer;
-          transition: border-color 0.2s, background 0.2s;
-        }
-        .theme-switch:hover {
-          border-color: var(--red);
-          background: var(--red-dim);
-        }
-        .theme-switch__icon {
-          color: var(--text-muted);
-          flex-shrink: 0;
-          transition: color 0.2s;
-        }
-        .theme-switch:hover .theme-switch__icon {
-          color: var(--red);
-        }
-
-        /* Track */
-        .theme-switch__track {
-          width: 32px;
-          height: 17px;
+        .modern-theme-toggle {
+          width: 52px;
+          height: 28px;
           border-radius: 999px;
           background: var(--surface);
           border: 1px solid var(--border);
+          padding: 2px;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
           position: relative;
-          transition: background 0.25s;
-          flex-shrink: 0;
+          transition: background 0.3s, border-color 0.3s;
         }
-        .theme-switch__track--dark {
-          background: var(--red);
+        .modern-theme-toggle:hover {
           border-color: var(--red);
         }
-
-        /* Thumb */
-        .theme-switch__thumb {
-          position: absolute;
-          top: 50%;
-          left: 2px;
-          transform: translateY(-50%);
-          width: 11px;
-          height: 11px;
-          border-radius: 50%;
-          background: var(--text-muted);
-          transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), background 0.25s;
+        .modern-theme-toggle--dark {
+          background: var(--surface-2);
+          border-color: var(--border);
         }
-        .theme-switch__thumb--dark {
-          transform: translate(15px, -50%);
-          background: #fff;
+        .modern-theme-toggle--dark:hover {
+          border-color: var(--red);
+        }
+        
+        .modern-theme-toggle__thumb {
+          width: 22px;
+          height: 22px;
+          border-radius: 50%;
+          background: var(--text);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 2px 5px rgba(0,0,0,0.15);
         }
 
         /* ══════════════════════════════════════
@@ -618,12 +587,10 @@ export default function Navbar() {
           .navbar__hamburger { display: none !important; }
           .desktop-nav       { display: flex !important; }
           .desktop-cta       { display: inline-flex !important; }
-          .desktop-theme-toggle { display: block !important; }
         }
         @media (max-width: 1023px) {
           .desktop-nav          { display: none !important; }
           .desktop-cta          { display: none !important; }
-          .desktop-theme-toggle { display: none !important; }
           .navbar__hamburger    { display: flex !important; }
           .navbar__inner        { padding: 0 20px; }
         }
