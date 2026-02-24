@@ -2,10 +2,12 @@ import { useEffect } from "react";
 
 import Navbar from "../components/Navbar";
 import HeroSection from "../components/HeroSection";
-import FeaturedIn from "../components/FeaturedIn"; // <-- 1. Import it here
+import FeaturedIn from "../components/FeaturedIn";
+import LaptopSection from "../components/LaptopSection"; // <-- Added Laptop Section
 import AboutSection from "../components/AboutSection";
 import StatsSection from '../components/StatsSection';
 import ServicesSection from "../components/ServicesSection";
+import PromoBanner from "../components/PromoBanner"; 
 import CoursesSection from "../components/CoursesSection";
 import TestimonialsSection from "../components/TestimonialsSection";
 import FAQSection from "../components/FAQSection";
@@ -24,14 +26,18 @@ export default function Home() {
       <main>
         <HeroSection />
         
-        {/* 2. Place it right below the Hero! */}
         <FeaturedIn /> 
+
+        {/* --- Laptop Mockup Section: Right under FeaturedIn --- */}
+        <LaptopSection />
         
         <AboutSection />
         
         <StatsSection />
         
         <ServicesSection />
+
+        <PromoBanner /> 
         
         <CoursesSection />
         
