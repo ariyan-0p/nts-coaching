@@ -33,7 +33,7 @@ export default function FormSubmissions() {
     try {
       setLoading(true)
       const queryParam = isHomepageTab ? `source=${activeTab}` : `course=${activeTab}`;
-      const response = await fetch(`http://localhost:5000/api/submissions?${queryParam}`)
+      const response = await fetch(`https://ntswithankit.com/api/submissions?${queryParam}`)
       const result = await response.json()
       if (result.success) {
         setSubmissions(result.data)

@@ -43,7 +43,7 @@ export default function Testimonials() {
 
   const fetchTestimonials = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/testimonials')
+      const res = await fetch('https://ntswithankit.com/api/testimonials')
       const result = await res.json()
       if (result.success) setTestimonials(result.data)
     } catch (err) {
@@ -80,7 +80,7 @@ export default function Testimonials() {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/api/testimonials', {
+      const response = await fetch('https://ntswithankit.com/api/testimonials', {
         method: 'POST',
         body: formData,
       })
@@ -104,7 +104,7 @@ export default function Testimonials() {
     if (!confirm('Permanently delete this testimonial?')) return
 
     try {
-      const response = await fetch(`http://localhost:5000/api/testimonials/${id}`, {
+      const response = await fetch(`https://ntswithankit.com/api/testimonials/${id}`, {
         method: 'DELETE',
       })
       

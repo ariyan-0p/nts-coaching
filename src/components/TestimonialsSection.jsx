@@ -23,7 +23,7 @@ export default function TestimonialsSection() {
   useEffect(() => {
     const fetchTestimonials = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/testimonials')
+        const res = await fetch('https://ntswithankit.com/api/testimonials')
         const result = await res.json()
         if (result.success) {
           // Show only published testimonials
@@ -101,13 +101,13 @@ export default function TestimonialsSection() {
                   {featured.type === 'video' ? (
                     <video 
                       key={featured.content} // Force reload on change
-                      src={`http://localhost:5000${featured.content}`} 
+                      src={`https://ntswithankit.com${featured.content}`} 
                       controls 
                       className="t-video"
                     />
                   ) : (
                     <img 
-                      src={`http://localhost:5000${featured.content}`} 
+                      src={`https://ntswithankit.com${featured.content}`} 
                       alt={`${featured.name}'s testimonial`} 
                       className="t-image"
                     />

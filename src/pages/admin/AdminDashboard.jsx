@@ -22,7 +22,7 @@ export default function AdminDashboard() {
       try {
         setLoading(true)
         // Fetch all submissions to calculate metrics
-        const response = await fetch('http://localhost:5000/api/submissions')
+        const response = await fetch('https://ntswithankit.com/api/submissions')
         const result = await response.json()
 
         if (result.success) {

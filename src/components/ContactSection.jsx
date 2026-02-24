@@ -10,7 +10,7 @@ export default function ContactSection() {
 
   const onSubmit = async (data) => {
     try {
-      const response = await fetch('http://localhost:5000/api/submissions', {
+      const response = await fetch('https://ntswithankit.com/api/submissions', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...data, source: 'homepage-contact' }),
