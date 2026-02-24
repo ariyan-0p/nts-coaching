@@ -65,13 +65,13 @@ export default function FAQSection() {
 
             {/* Decorative stat */}
             <div style={{
-              marginTop: 40, padding: '20px 24px',
+              marginTop: 40, padding: '24px 28px',
               background: 'var(--surface)',
               border: '1px solid var(--border)',
               borderLeft: '3px solid var(--red)',
             }}>
-              <div style={{ fontFamily: 'var(--font-head)', fontWeight: 900, fontSize: '2.5rem', color: 'var(--text)', lineHeight: 1 }}>98%</div>
-              <div style={{ fontFamily: 'var(--font-head)', fontSize: '0.7rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--text-muted)', marginTop: 6 }}>
+              <div style={{ fontFamily: 'var(--font-head)', fontWeight: 900, fontSize: '3rem', color: 'var(--text)', lineHeight: 1 }}>98%</div>
+              <div style={{ fontFamily: 'var(--font-head)', fontSize: '0.85rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--text-muted)', marginTop: 8 }}>
                 Client Satisfaction Rate
               </div>
             </div>
@@ -97,22 +97,22 @@ export default function FAQSection() {
                 <button
                   onClick={() => setOpen(open === i ? -1 : i)}
                   style={{
-                    width: '100%', textAlign: 'left', padding: '20px 24px',
+                    width: '100%', textAlign: 'left', padding: '24px',
                     display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16,
                     background: 'none', border: 'none', cursor: 'pointer',
                   }}
                 >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
                     <span style={{
-                      fontFamily: 'var(--font-head)', fontWeight: 700, fontSize: '0.65rem',
+                      fontFamily: 'var(--font-head)', fontWeight: 800, fontSize: '0.85rem',
                       color: open === i ? 'var(--red)' : 'var(--text-dim)',
-                      minWidth: 28, flexShrink: 0, letterSpacing: '0.1em',
+                      minWidth: 32, flexShrink: 0, letterSpacing: '0.1em',
                     }}>
                       {String(i + 1).padStart(2, '0')}
                     </span>
                     <span style={{
-                      fontFamily: 'var(--font-head)', fontWeight: 700,
-                      fontSize: '0.95rem', letterSpacing: '0.03em', textTransform: 'uppercase',
+                      fontFamily: 'var(--font-head)', fontWeight: 800,
+                      fontSize: '1.15rem', letterSpacing: '0.03em', textTransform: 'uppercase',
                       color: open === i ? 'var(--text)' : 'var(--text-muted)',
                       textAlign: 'left', lineHeight: 1.3,
                     }}>
@@ -122,7 +122,7 @@ export default function FAQSection() {
 
                   {/* Plus/Minus icon */}
                   <div style={{
-                    width: 28, height: 28, flexShrink: 0,
+                    width: 32, height: 32, flexShrink: 0,
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     background: open === i ? 'var(--red)' : 'var(--surface)',
                     border: '1px solid',
@@ -130,8 +130,8 @@ export default function FAQSection() {
                     transition: 'all 0.2s',
                   }}>
                     {open === i
-                      ? <Minus size={14} color="#fff" />
-                      : <Plus size={14} color="var(--text-muted)" />
+                      ? <Minus size={16} color="#fff" />
+                      : <Plus size={16} color="var(--text-muted)" />
                     }
                   </div>
                 </button>
@@ -144,8 +144,8 @@ export default function FAQSection() {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                     >
-                      <div style={{ padding: '0 24px 20px 66px' }}>
-                        <p style={{ fontSize: '0.92rem', color: 'var(--text-muted)', lineHeight: 1.8, fontWeight: 300 }}>
+                      <div style={{ padding: '0 24px 24px 72px' }}>
+                        <p style={{ fontSize: '1.05rem', color: 'var(--text-muted)', lineHeight: 1.7, fontWeight: 400 }}>
                           {faq.a}
                         </p>
                       </div>

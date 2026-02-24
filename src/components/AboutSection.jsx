@@ -22,30 +22,30 @@ export default function AboutSection() {
             transition={{ duration: 0.7 }}
             style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}
           >
-            <div style={{ fontFamily: 'var(--font-head)', fontSize: '1rem', color: 'var(--text)', marginBottom: 16 }}>
+            <div style={{ fontFamily: 'var(--font-head)', fontSize: '1.1rem', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--red)', marginBottom: 16 }}>
               Who is behind Nail the Sale
             </div>
             
-            <h2 style={{ fontFamily: 'var(--font-head)', fontWeight: 900, fontSize: '3.5rem', color: 'var(--text)', lineHeight: 1.1, marginBottom: 40 }}>
+            <h2 style={{ fontFamily: 'var(--font-head)', fontWeight: 900, fontSize: '3.8rem', color: 'var(--text)', lineHeight: 1.1, marginBottom: 40, textTransform: 'uppercase' }}>
               Hi, I'm Ankit Khare
             </h2>
 
-            <p style={{ fontSize: '1.1rem', color: 'var(--text-muted)', lineHeight: 2, fontWeight: 300, marginBottom: 32 }}>
+            <p style={{ fontSize: '1.15rem', color: 'var(--text-muted)', lineHeight: 1.8, fontWeight: 400, marginBottom: 32 }}>
               I've spent more than 18 years in the corporate trenches, researching and personally experimenting with <span className="highlight-text">neuroscience-backed buyer psychology and high-ticket closures</span> as a sales professional.
             </p>
 
-            <p style={{ fontSize: '1.1rem', color: 'var(--text-muted)', lineHeight: 2, fontWeight: 300, marginBottom: 32 }}>
+            <p style={{ fontSize: '1.15rem', color: 'var(--text-muted)', lineHeight: 1.8, fontWeight: 400, marginBottom: 32 }}>
               What started as a drive to hit my own targets turned into a life-long mission to help you <span className="highlight-text">harness the full potential of your pitch and turn it into record-breaking revenue</span>. Rising from an executive to the AVP level, leading 1,000+ executives, I firmly believe this is a crucial part of creating a better future for sales teams.
             </p>
 
-            <p style={{ fontSize: '1.1rem', color: 'var(--text-muted)', lineHeight: 2, fontWeight: 300 }}>
+            <p style={{ fontSize: '1.15rem', color: 'var(--text-muted)', lineHeight: 1.8, fontWeight: 400 }}>
               The Nail the Sale system is the result of thousands of hours spent teaching, speaking, and coaching teams across IT, Real Estate, Startups, and Fortune 500 giants... 
               <br /><br />
               And I can't wait to share it with you.
             </p>
           </motion.div>
 
-          {/* Right — The New Photo */}
+          {/* Right — The Photo */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
@@ -61,7 +61,7 @@ export default function AboutSection() {
               boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)'
             }}>
               <img
-                src="/assets/ankit-photo.png" // Swapped back to .png
+                src="/assets/ankit-photo.png" 
                 alt="Ankit Khare"
                 style={{
                   width: '100%', 
@@ -98,7 +98,7 @@ export default function AboutSection() {
 
         @media (max-width: 1100px) {
           .about-grid { gap: 60px; }
-          h2 { font-size: 2.8rem !important; }
+          h2 { font-size: 3.2rem !important; }
         }
 
         @media (max-width: 900px) {
@@ -109,7 +109,7 @@ export default function AboutSection() {
           }
           .about-grid > div:first-child { order: 1; }
           .about-grid > div:last-child  { order: 2; }
-          h2 { font-size: 2.5rem !important; }
+          h2 { font-size: 2.8rem !important; }
         }
       `}</style>
     </section>

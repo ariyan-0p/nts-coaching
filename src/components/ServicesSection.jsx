@@ -102,7 +102,7 @@ export default function ServicesSection() {
               {/* Top row: icon + number badge */}
               <div className="service-card__top">
                 <div className="service-card__icon-wrap">
-                  <Icon size={20} className="service-card__icon-svg" />
+                  <Icon size={22} className="service-card__icon-svg" />
                 </div>
                 <span className="service-card__badge">{number}</span>
               </div>
@@ -191,7 +191,7 @@ export default function ServicesSection() {
           align-items: end;
         }
         .services-header__cta {
-          margin-top: 20px;
+          margin-top: 24px;
           display: inline-flex;
         }
 
@@ -207,7 +207,7 @@ export default function ServicesSection() {
         /* ── Card ── */
         .service-card {
           background: var(--bg-2);
-          padding: 36px 28px 32px;
+          padding: 40px 32px 36px;
           position: relative;
           overflow: hidden;
           cursor: default;
@@ -216,8 +216,7 @@ export default function ServicesSection() {
             transform 0.25s ease;
         }
 
-        /* 
-          Hover overlay via pseudo-element — theme-agnostic.
+        /* Hover overlay via pseudo-element — theme-agnostic.
           Instead of changing background-color (which fights CSS vars),
           we layer a semi-transparent red tint on top.
           Works correctly in BOTH dark and light mode.
@@ -268,7 +267,7 @@ export default function ServicesSection() {
         .service-card__number {
           position: absolute;
           top: 12px;
-          right: 18px;
+          right: 24px;
           font-family: var(--font-head);
           font-weight: 900;
           font-size: 5rem;
@@ -287,13 +286,13 @@ export default function ServicesSection() {
           display: flex;
           align-items: flex-start;
           justify-content: space-between;
-          margin-bottom: 20px;
+          margin-bottom: 24px;
         }
 
         /* Icon box */
         .service-card__icon-wrap {
-          width: 46px;
-          height: 46px;
+          width: 50px;
+          height: 50px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -315,7 +314,7 @@ export default function ServicesSection() {
         .service-card__badge {
           font-family: var(--font-head);
           font-weight: 800;
-          font-size: 0.7rem;
+          font-size: 0.8rem;
           letter-spacing: 0.15em;
           color: var(--text-dim);
           opacity: 0.5;
@@ -326,13 +325,13 @@ export default function ServicesSection() {
         /* Title */
         .service-card__title {
           font-family: var(--font-head);
-          font-weight: 700;
-          font-size: 1.05rem;
+          font-weight: 800;
+          font-size: 1.25rem; /* Increased */
           letter-spacing: 0.03em;
           text-transform: uppercase;
           color: var(--text);
           margin-bottom: 12px;
-          line-height: 1.25;
+          line-height: 1.3;
           transition: color 0.3s;
         }
         .service-card:hover .service-card__title {
@@ -341,11 +340,11 @@ export default function ServicesSection() {
 
         /* Description */
         .service-card__desc {
-          font-size: 0.875rem;
+          font-size: 1rem; /* Increased */
           color: var(--text-muted);
-          line-height: 1.78;
-          font-weight: 300;
-          margin-bottom: 22px;
+          line-height: 1.7;
+          font-weight: 400; /* Increased */
+          margin-bottom: 28px;
           transition: color 0.3s;
         }
 
@@ -353,15 +352,15 @@ export default function ServicesSection() {
         .service-card__tags {
           display: flex;
           flex-wrap: wrap;
-          gap: 6px;
+          gap: 8px;
         }
         .service-card__tag {
-          padding: 3px 9px;
+          padding: 4px 10px;
           background: var(--surface);
           border: 1px solid var(--border);
           font-family: var(--font-head);
           font-weight: 600;
-          font-size: 0.63rem;
+          font-size: 0.75rem; /* Increased */
           letter-spacing: 0.12em;
           text-transform: uppercase;
           color: var(--text-dim);
@@ -378,18 +377,18 @@ export default function ServicesSection() {
           background: var(--bg-2);
           border: 1px solid var(--border);
           border-top: none;
-          padding: 24px 32px;
+          padding: 28px 36px;
           display: flex;
           align-items: center;
           justify-content: space-between;
           flex-wrap: wrap;
-          gap: 16px;
+          gap: 20px;
           transition: background 0.3s;
         }
         .services-cta-strip__text {
           font-family: var(--font-head);
-          font-weight: 600;
-          font-size: 1.05rem;
+          font-weight: 700;
+          font-size: 1.15rem; /* Increased */
           letter-spacing: 0.05em;
           text-transform: uppercase;
           color: var(--text);
@@ -443,7 +442,7 @@ export default function ServicesSection() {
 
           /* Tighter card padding on mobile */
           .service-card {
-            padding: 28px 20px 24px;
+            padding: 32px 24px 28px;
           }
 
           /* Hide watermark number on small screens (badge is enough) */
@@ -453,18 +452,18 @@ export default function ServicesSection() {
 
           /* Make badge more prominent */
           .service-card__badge {
-            font-size: 0.75rem;
+            font-size: 0.85rem;
             opacity: 0.6;
           }
 
           .service-card__title {
-            font-size: 0.98rem;
+            font-size: 1.15rem;
           }
 
           .services-cta-strip {
             flex-direction: column;
             align-items: flex-start;
-            padding: 20px;
+            padding: 24px;
           }
           .services-cta-strip__actions {
             width: 100%;
@@ -475,7 +474,7 @@ export default function ServicesSection() {
           }
 
           .services-cta-strip__text {
-            font-size: 0.9rem;
+            font-size: 1rem;
           }
         }
 
@@ -484,13 +483,13 @@ export default function ServicesSection() {
            ════════════════════════════════ */
         @media (max-width: 380px) {
           .service-card {
-            padding: 22px 16px 20px;
+            padding: 24px 20px 20px;
           }
           .service-card__title {
-            font-size: 0.92rem;
+            font-size: 1.1rem;
           }
           .service-card__desc {
-            font-size: 0.83rem;
+            font-size: 0.95rem;
           }
         }
 

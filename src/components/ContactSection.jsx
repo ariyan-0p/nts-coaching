@@ -44,43 +44,43 @@ export default function ContactSection() {
           {/* Left Panel: Info */}
           <motion.div initial={{ opacity: 0, x: -24 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.6 }} style={{ background: 'var(--bg)', padding: '40px 36px', display: 'flex', flexDirection: 'column', gap: 32 }}>
             <div>
-              <h3 style={{ fontFamily: 'var(--font-head)', fontWeight: 800, fontSize: '1.5rem', textTransform: 'uppercase', color: 'var(--text)', marginBottom: 8 }}>Get In Touch</h3>
-              <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', lineHeight: 1.75, fontWeight: 300 }}>Ready to transform your sales game? Reach out directly or fill the form and Ankit will personally get back to you.</p>
+              <h3 style={{ fontFamily: 'var(--font-head)', fontWeight: 800, fontSize: '1.6rem', textTransform: 'uppercase', color: 'var(--text)', marginBottom: 12 }}>Get In Touch</h3>
+              <p style={{ fontSize: '1.05rem', color: 'var(--text-muted)', lineHeight: 1.75, fontWeight: 400 }}>Ready to transform your sales game? Reach out directly or fill the form and Ankit will personally get back to you.</p>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
               {[{ icon: MapPin, label: 'Location', value: 'Delhi, India', href: null }, { icon: Phone, label: 'Phone', value: '+91 97528 09028', href: 'tel:+919752809028' }, { icon: Mail, label: 'Email', value: 'ntswithankit@gmail.com', href: 'mailto:ntswithankit@gmail.com' }].map(({ icon: Icon, label, value, href }) => (
-                <a key={label} href={href || '#'} style={{ display: 'flex', gap: 14, textDecoration: 'none' }}>
-                  <div style={{ width: 44, height: 44, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--red-dim)', border: '1px solid var(--border-red)', clipPath: 'polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px))' }}><Icon size={18} color="var(--red)" /></div>
+                <a key={label} href={href || '#'} style={{ display: 'flex', gap: 16, textDecoration: 'none' }}>
+                  <div style={{ width: 46, height: 46, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--red-dim)', border: '1px solid var(--border-red)', clipPath: 'polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px))' }}><Icon size={20} color="var(--red)" /></div>
                   <div>
-                    <div style={{ fontFamily: 'var(--font-head)', fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--text-dim)', marginBottom: 2 }}>{label}</div>
-                    <div style={{ fontSize: '0.92rem', color: 'var(--text)', fontWeight: 400 }}>{value}</div>
+                    <div style={{ fontFamily: 'var(--font-head)', fontSize: '0.75rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--text-dim)', marginBottom: 2 }}>{label}</div>
+                    <div style={{ fontSize: '1.05rem', color: 'var(--text)', fontWeight: 500 }}>{value}</div>
                   </div>
                 </a>
               ))}
             </div>
 
             <div>
-              <div style={{ fontFamily: 'var(--font-head)', fontSize: '0.65rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--text-dim)', marginBottom: 14 }}>Follow Ankit</div>
-              <div style={{ display: 'flex', gap: 10 }}>
+              <div style={{ fontFamily: 'var(--font-head)', fontSize: '0.75rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--text-dim)', marginBottom: 14 }}>Follow Ankit</div>
+              <div style={{ display: 'flex', gap: 12 }}>
                 {[{ icon: Linkedin, href: 'https://www.linkedin.com/company/nail-thesale/', label: 'LinkedIn' }, { icon: Instagram, href: 'https://www.instagram.com/nail_thesale/', label: 'Instagram' }, { icon: Facebook, href: 'https://www.facebook.com/people/Nail-the-Sale-with-Ankit/61576911484081/', label: 'Facebook' }, { icon: Youtube, href: 'https://www.youtube.com/channel/UC5ArEQ8ZPw77_4oJ2HU13Zw', label: 'YouTube' }].map(({ icon: Icon, href, label }) => (
-                  <a key={label} href={href} target="_blank" rel="noopener noreferrer" style={{ width: 40, height: 40, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--surface)', border: '1px solid var(--border)', color: 'var(--text-muted)', clipPath: 'polygon(0 0, calc(100% - 7px) 0, 100% 7px, 100% 100%, 7px 100%, 0 calc(100% - 7px))', transition: 'all 0.2s' }}>
-                    <Icon size={16} />
+                  <a key={label} href={href} target="_blank" rel="noopener noreferrer" style={{ width: 42, height: 42, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--surface)', border: '1px solid var(--border)', color: 'var(--text-muted)', clipPath: 'polygon(0 0, calc(100% - 7px) 0, 100% 7px, 100% 100%, 7px 100%, 0 calc(100% - 7px))', transition: 'all 0.2s' }}>
+                    <Icon size={18} />
                   </a>
                 ))}
               </div>
             </div>
 
-            <div style={{ padding: '20px', marginTop: 'auto', background: 'var(--red-dim)', border: '1px solid var(--border-red)', borderLeft: '3px solid var(--red)' }}>
-              <p style={{ fontSize: '0.88rem', color: 'var(--text)', lineHeight: 1.6, fontStyle: 'italic', fontWeight: 300 }}>"Cracking the Code to Sales Psychology & High-Ticket Closures — Sell Smart • Close Big • Win Always"</p>
-              <div style={{ marginTop: 8, fontFamily: 'var(--font-head)', fontWeight: 700, fontSize: '0.75rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--red)' }}>— Ankit Khare</div>
+            <div style={{ padding: '24px', marginTop: 'auto', background: 'var(--red-dim)', border: '1px solid var(--border-red)', borderLeft: '3px solid var(--red)' }}>
+              <p style={{ fontSize: '1rem', color: 'var(--text)', lineHeight: 1.6, fontStyle: 'italic', fontWeight: 400 }}>"Cracking the Code to Sales Psychology & High-Ticket Closures — Sell Smart • Close Big • Win Always"</p>
+              <div style={{ marginTop: 10, fontFamily: 'var(--font-head)', fontWeight: 700, fontSize: '0.85rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--red)' }}>— Ankit Khare</div>
             </div>
           </motion.div>
 
           {/* Right Panel: Form */}
           <motion.div initial={{ opacity: 0, x: 24 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.6, delay: 0.15 }} style={{ background: 'var(--bg)', padding: '40px 36px' }}>
-            <h3 style={{ fontFamily: 'var(--font-head)', fontWeight: 800, fontSize: '1.5rem', textTransform: 'uppercase', color: 'var(--text)', marginBottom: 8 }}>Send a Message</h3>
-            <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', fontWeight: 300, marginBottom: 32 }}>Fill in your details and Ankit will personally respond within 24 hours.</p>
+            <h3 style={{ fontFamily: 'var(--font-head)', fontWeight: 800, fontSize: '1.6rem', textTransform: 'uppercase', color: 'var(--text)', marginBottom: 8 }}>Send a Message</h3>
+            <p style={{ fontSize: '1rem', color: 'var(--text-muted)', fontWeight: 400, marginBottom: 32 }}>Fill in your details and Ankit will personally respond within 24 hours.</p>
 
             <form onSubmit={handleSubmit(onSubmit)} style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: 16 }}>
@@ -121,10 +121,10 @@ export default function ContactSection() {
                 {errors.message && <span className="form-error">{errors.message.message}</span>}
               </div>
 
-              <button type="submit" className="btn btn-primary" disabled={isSubmitting} style={{ justifyContent: 'center', opacity: isSubmitting ? 0.7 : 1, width: '100%', padding: '16px 28px' }}>
-                {isSubmitting ? 'Sending...' : <><Send size={16} /> Send Message</>}
+              <button type="submit" className="btn btn-primary" disabled={isSubmitting} style={{ justifyContent: 'center', opacity: isSubmitting ? 0.7 : 1, width: '100%', padding: '16px 28px', fontSize: '1rem' }}>
+                {isSubmitting ? 'Sending...' : <><Send size={18} /> Send Message</>}
               </button>
-              <p style={{ fontSize: '0.75rem', color: 'var(--text-dim)', textAlign: 'center' }}>No spam, ever. Your data is secure.</p>
+              <p style={{ fontSize: '0.85rem', color: 'var(--text-dim)', textAlign: 'center' }}>No spam, ever. Your data is secure.</p>
             </form>
           </motion.div>
         </div>

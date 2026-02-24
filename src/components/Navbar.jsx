@@ -105,7 +105,7 @@ export default function Navbar() {
                   onMouseLeave={() => setDropdown(false)}
                 >
                   <button className="navbar__link navbar__link--btn">
-                    {link.label} <ChevronDown size={13} className={`navbar__chevron ${dropdown ? 'navbar__chevron--open' : ''}`} />
+                    {link.label} <ChevronDown size={14} className={`navbar__chevron ${dropdown ? 'navbar__chevron--open' : ''}`} />
                   </button>
                   <AnimatePresence>
                     {dropdown && (
@@ -157,7 +157,7 @@ export default function Navbar() {
               className="hamburger navbar__hamburger"
               aria-label="Toggle menu"
             >
-              {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+              {mobileOpen ? <X size={26} /> : <Menu size={26} />}
             </button>
           </div>
 
@@ -178,7 +178,7 @@ export default function Navbar() {
             <div className="mobile-menu__topbar">
               <span className="mobile-menu__topbar-title">Menu</span>
               <button onClick={() => setMobileOpen(false)} className="mobile-menu__close">
-                <X size={24} />
+                <X size={26} />
               </button>
             </div>
 
@@ -267,7 +267,7 @@ export default function Navbar() {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          height: 68px;
+          height: 72px; /* Increased slightly for breathing room */
           max-width: 1400px;
           margin: 0 auto;
           padding: 0 40px;
@@ -280,7 +280,7 @@ export default function Navbar() {
           flex-shrink: 0;
         }
         .navbar__logo {
-          height: 62px;
+          height: 64px;
           width: auto;
           object-fit: contain;
           display: block;
@@ -292,13 +292,13 @@ export default function Navbar() {
         .navbar__links {
           display: flex;
           align-items: center;
-          gap: 4px;
+          gap: 6px;
         }
         .navbar__link {
-          padding: 8px 14px;
+          padding: 8px 16px;
           font-family: var(--font-head);
-          font-weight: 600;
-          font-size: 0.8rem;
+          font-weight: 700;
+          font-size: 0.9rem; /* Increased for readability */
           letter-spacing: 0.12em;
           text-transform: uppercase;
           color: var(--text-muted);
@@ -310,7 +310,7 @@ export default function Navbar() {
         .navbar__link--btn {
           display: flex;
           align-items: center;
-          gap: 4px;
+          gap: 6px;
           background: none;
           border: none;
           cursor: pointer;
@@ -332,16 +332,16 @@ export default function Navbar() {
           left: 0;
           background: var(--bg-2);
           border: 1px solid var(--border);
-          min-width: 250px;
-          padding: 8px 0;
+          min-width: 260px;
+          padding: 10px 0;
           box-shadow: 0 20px 40px rgba(0,0,0,0.25);
         }
         .navbar__dropdown-item {
           display: block;
-          padding: 10px 18px;
+          padding: 12px 20px;
           font-family: var(--font-head);
-          font-weight: 600;
-          font-size: 0.78rem;
+          font-weight: 700;
+          font-size: 0.9rem; /* Increased for readability */
           letter-spacing: 0.1em;
           text-transform: uppercase;
           color: var(--text-muted);
@@ -359,7 +359,7 @@ export default function Navbar() {
         .navbar__right {
           display: flex;
           align-items: center;
-          gap: 14px;
+          gap: 16px;
           flex-shrink: 0;
         }
 
@@ -367,12 +367,12 @@ export default function Navbar() {
         .navbar__cta {
           display: inline-flex;
           align-items: center;
-          padding: 10px 22px;
+          padding: 12px 24px;
           background: var(--red);
           color: #fff;
           font-family: var(--font-head);
-          font-weight: 700;
-          font-size: 0.82rem;
+          font-weight: 800;
+          font-size: 0.95rem; /* Increased for prominence */
           letter-spacing: 0.12em;
           text-transform: uppercase;
           text-decoration: none;
@@ -451,15 +451,15 @@ export default function Navbar() {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding: 0 20px;
-          height: 68px;
+          padding: 0 24px;
+          height: 72px;
           border-bottom: 1px solid var(--border);
           flex-shrink: 0;
         }
         .mobile-menu__topbar-title {
           font-family: var(--font-head);
-          font-weight: 700;
-          font-size: 0.72rem;
+          font-weight: 800;
+          font-size: 0.85rem;
           letter-spacing: 0.2em;
           text-transform: uppercase;
           color: var(--text-muted);
@@ -477,7 +477,7 @@ export default function Navbar() {
           display: flex;
           flex-direction: column;
           flex: 1;
-          padding: 16px 28px 24px;
+          padding: 24px 32px 32px;
           overflow-y: auto;
         }
         .mobile-menu__links {
@@ -488,10 +488,10 @@ export default function Navbar() {
         }
         .mobile-menu__link {
           display: block;
-          padding: 14px 0;
+          padding: 16px 0;
           font-family: var(--font-head);
           font-weight: 800;
-          font-size: 1.55rem;
+          font-size: 1.8rem; /* Increased for readability on phones */
           letter-spacing: 0.02em;
           text-transform: uppercase;
           color: var(--text);
@@ -501,32 +501,32 @@ export default function Navbar() {
         }
         .mobile-menu__link:hover {
           color: var(--red);
-          padding-left: 8px;
+          padding-left: 10px;
         }
         .mobile-menu__group {
-          padding: 16px 0 8px;
+          padding: 20px 0 12px;
           border-bottom: 1px solid var(--border);
         }
         .mobile-menu__group-label {
           font-family: var(--font-head);
-          font-weight: 700;
-          font-size: 0.68rem;
+          font-weight: 800;
+          font-size: 0.8rem;
           letter-spacing: 0.22em;
           text-transform: uppercase;
           color: var(--red);
-          margin-bottom: 10px;
+          margin-bottom: 14px;
         }
         .mobile-menu__sub-link {
           display: block;
-          padding: 10px 14px;
+          padding: 12px 16px;
           font-family: var(--font-head);
           font-weight: 700;
-          font-size: 1rem;
+          font-size: 1.15rem; /* Increased for mobile taps */
           letter-spacing: 0.05em;
           text-transform: uppercase;
           color: var(--text-muted);
           border-left: 2px solid var(--border-red);
-          margin-bottom: 4px;
+          margin-bottom: 6px;
           text-decoration: none;
           transition: color 0.2s, border-color 0.2s;
         }
@@ -535,18 +535,18 @@ export default function Navbar() {
           border-left-color: var(--red);
         }
         .mobile-menu__footer {
-          margin-top: 32px;
+          margin-top: 40px;
         }
         .mobile-menu__cta {
           width: 100%;
           display: flex;
           justify-content: center;
-          padding: 14px 24px;
+          padding: 16px 24px;
           background: var(--red);
           color: #fff;
           font-family: var(--font-head);
-          font-weight: 700;
-          font-size: 1rem;
+          font-weight: 800;
+          font-size: 1.1rem;
           letter-spacing: 0.12em;
           text-transform: uppercase;
           text-decoration: none;
@@ -555,7 +555,7 @@ export default function Navbar() {
         }
         .mobile-menu__cta:hover { opacity: 0.88; }
         .mobile-menu__socials {
-          margin-top: 24px;
+          margin-top: 32px;
           display: flex;
           gap: 16px;
           align-items: center;
@@ -563,15 +563,16 @@ export default function Navbar() {
         }
         .mobile-menu__follow {
           font-family: var(--font-head);
-          font-size: 0.68rem;
+          font-weight: 700;
+          font-size: 0.8rem;
           letter-spacing: 0.18em;
           color: var(--text-dim);
           text-transform: uppercase;
         }
         .mobile-menu__social-link {
           font-family: var(--font-head);
-          font-weight: 700;
-          font-size: 0.75rem;
+          font-weight: 800;
+          font-size: 0.85rem;
           letter-spacing: 0.1em;
           text-transform: uppercase;
           color: var(--text-muted);
@@ -595,7 +596,7 @@ export default function Navbar() {
           .navbar__inner        { padding: 0 20px; }
         }
         @media (max-width: 480px) {
-          .mobile-menu__link { font-size: 1.25rem; }
+          .mobile-menu__link { font-size: 1.5rem; }
           .mobile-menu { padding: 72px 20px 28px; }
         }
 

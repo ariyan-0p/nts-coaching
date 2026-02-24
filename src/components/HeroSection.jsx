@@ -68,7 +68,7 @@ function StatCard({ icon: Icon, value, label, delay, started }) {
       transition={{ delay, duration: 0.5 }}
       className="h-stat-card"
     >
-      <div className="h-stat-icon"><Icon size={15} /></div>
+      <div className="h-stat-icon"><Icon size={18} /></div>
       <div className="h-stat-value">{display}</div>
       <div className="h-stat-label">{label}</div>
     </motion.div>
@@ -172,21 +172,28 @@ export default function HeroSection() {
           flex: 1;
           display: grid; grid-template-columns: 1fr 1fr;
           max-width: 1400px; width: 100%;
-          margin: 0 auto; padding: 0 40px;
+          margin: 0 auto; 
+          padding: 120px 40px 40px; 
           align-items: center; position: relative; z-index: 10;
         }
-        @media (max-width: 900px) { .hero-body { grid-template-columns: 1fr; padding: 0 20px; align-items: start; } }
-        @media (max-width: 480px) { .hero-body { padding: 0 16px; } }
+        @media (max-width: 900px) { 
+          .hero-body { grid-template-columns: 1fr; padding: 100px 20px 20px; align-items: start; } 
+        }
+        @media (max-width: 480px) { 
+          .hero-body { padding: 90px 16px 16px; } 
+        }
 
-        .hero-left { display: flex; flex-direction: column; padding: 32px 0 16px; }
-        @media (max-width: 900px) { .hero-left { padding: 84px 0 16px; } }
-        @media (max-width: 480px) { .hero-left { padding: 80px 0 12px; } }
+        .hero-left { 
+          display: flex; flex-direction: column; padding: 0 0 16px; 
+        }
+        @media (max-width: 900px) { .hero-left { padding: 0 0 16px; } }
+        @media (max-width: 480px) { .hero-left { padding: 0 0 12px; } }
 
         .h-slide-tag {
           display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px;
           border: 1px solid var(--border-red); border-radius: 2px; background: var(--red-dim);
-          color: var(--red); font-size: 0.7rem; font-family: var(--font-head);
-          letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 16px; width: fit-content;
+          color: var(--red); font-size: 0.8rem; font-family: var(--font-head);
+          letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 20px; width: fit-content;
           transition: background var(--theme-speed), border-color var(--theme-speed);
         }
         .h-dot-blink {
@@ -215,17 +222,17 @@ export default function HeroSection() {
           width: 100%; height: 3px; background: linear-gradient(90deg, var(--red), transparent);
         }
         .h-subtext {
-          font-size: clamp(0.85rem, 1.5vw, 1rem); color: var(--text-muted);
-          line-height: 1.65; max-width: 480px; font-weight: 300; margin-top: 16px;
+          font-size: clamp(1rem, 1.5vw, 1.15rem); color: var(--text-muted);
+          line-height: 1.7; max-width: 500px; font-weight: 400; margin-top: 20px;
           transition: color var(--theme-speed);
         }
-        @media (max-width: 900px) { .h-subtext { font-size: 0.9rem; max-width: 100%; } }
+        @media (max-width: 900px) { .h-subtext { max-width: 100%; } }
 
-        .h-cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 28px; }
+        .h-cta-row { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 32px; margin-top: 10px; }
         .h-btn-primary {
-          display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px;
+          display: inline-flex; align-items: center; gap: 8px; padding: 16px 32px;
           background: var(--red); color: #fff; font-family: var(--font-head); font-weight: 700;
-          font-size: 0.95rem; letter-spacing: 0.12em; text-transform: uppercase;
+          font-size: 1rem; letter-spacing: 0.12em; text-transform: uppercase;
           border: none; cursor: pointer;
           clip-path: polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));
           transition: all 0.2s; position: relative; overflow: hidden;
@@ -237,16 +244,16 @@ export default function HeroSection() {
         .h-btn-primary:hover::before { transform: translateX(0); }
         .h-btn-primary:hover { box-shadow: 0 0 30px rgba(220,38,38,0.5); }
         .h-btn-secondary {
-          display: inline-flex; align-items: center; gap: 8px; padding: 13px 24px;
+          display: inline-flex; align-items: center; gap: 10px; padding: 15px 28px;
           background: transparent; color: var(--text); font-family: var(--font-head); font-weight: 600;
-          font-size: 0.95rem; letter-spacing: 0.12em; text-transform: uppercase;
+          font-size: 1rem; letter-spacing: 0.12em; text-transform: uppercase;
           border: 1px solid var(--border); cursor: pointer;
           clip-path: polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));
           transition: all 0.2s;
         }
         .h-btn-secondary:hover { border-color: var(--border-red); background: var(--red-dim); color: var(--red); }
         .h-play-icon {
-          width: 28px; height: 28px; border-radius: 50%; background: var(--red-dim);
+          width: 30px; height: 30px; border-radius: 50%; background: var(--red-dim);
           border: 1px solid var(--border-red); display: flex; align-items: center; justify-content: center; flex-shrink: 0;
         }
 
@@ -256,17 +263,17 @@ export default function HeroSection() {
         }
         @media (max-width: 600px) { .h-stats-row { grid-template-columns: repeat(2, 1fr); } }
         .h-stat-card {
-          background: var(--surface); padding: 16px 12px;
-          display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center; transition: background 0.2s;
+          background: var(--surface); padding: 18px 12px;
+          display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; transition: background 0.2s;
         }
         .h-stat-card:hover { background: var(--red-dim); }
         .h-stat-icon {
-          width: 28px; height: 28px; border-radius: 4px; background: var(--red-dim);
+          width: 32px; height: 32px; border-radius: 4px; background: var(--red-dim);
           border: 1px solid var(--border-red); display: flex; align-items: center; justify-content: center;
-          color: var(--red); margin-bottom: 4px;
+          color: var(--red); margin-bottom: 6px;
         }
-        .h-stat-value { font-family: var(--font-head); font-weight: 800; font-size: 1.5rem; color: var(--text); line-height: 1; transition: color var(--theme-speed); }
-        .h-stat-label { font-size: 0.62rem; color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase; font-family: var(--font-head); transition: color var(--theme-speed); }
+        .h-stat-value { font-family: var(--font-head); font-weight: 800; font-size: 1.6rem; color: var(--text); line-height: 1; transition: color var(--theme-speed); }
+        .h-stat-label { font-size: 0.7rem; color: var(--text-muted); letter-spacing: 0.1em; text-transform: uppercase; font-family: var(--font-head); transition: color var(--theme-speed); }
 
         .hero-right { position: relative; display: flex; align-items: center; justify-content: center; height: 100%; }
         @media (max-width: 900px) { .hero-right { display: none; } }
@@ -298,13 +305,13 @@ export default function HeroSection() {
         .h-hud-tag {
           position: absolute; right: -20px; background: var(--bg-2);
           border: 1px solid var(--border); border-left: 2px solid var(--red);
-          padding: 8px 14px; backdrop-filter: blur(10px); z-index: 10;
+          padding: 10px 16px; backdrop-filter: blur(10px); z-index: 10;
           transition: background var(--theme-speed), border-color var(--theme-speed);
         }
         .h-hud-tag.t1 { top: 30%; }
         .h-hud-tag.t2 { top: 55%; right: -10px; }
-        .h-hud-tag-label { font-size: 0.6rem; color: var(--text-muted); letter-spacing: 0.15em; text-transform: uppercase; font-family: var(--font-head); }
-        .h-hud-tag-value { font-family: var(--font-head); font-size: 1.1rem; font-weight: 700; color: var(--text); line-height: 1.2; transition: color var(--theme-speed); }
+        .h-hud-tag-label { font-size: 0.65rem; color: var(--text-muted); letter-spacing: 0.15em; text-transform: uppercase; font-family: var(--font-head); margin-bottom: 2px; }
+        .h-hud-tag-value { font-family: var(--font-head); font-size: 1.2rem; font-weight: 700; color: var(--text); line-height: 1.2; transition: color var(--theme-speed); }
 
         .h-mobile-img { display: none; position: relative; height: 320px; overflow: visible; margin: 20px 0; }
         @media (max-width: 900px) { .h-mobile-img { display: flex; align-items: flex-end; justify-content: center; } }
@@ -324,32 +331,13 @@ export default function HeroSection() {
           background: linear-gradient(to top,var(--bg),transparent); z-index: 3; pointer-events: none;
         }
 
-        .h-footer {
-          position: relative; z-index: 20;
-          display: flex; align-items: center; justify-content: space-between;
-          padding: 14px 32px; border-top: 1px solid var(--border);
-          backdrop-filter: blur(10px); background: var(--surface);
-          transition: border-color var(--theme-speed), background var(--theme-speed);
-        }
-        @media (max-width: 600px) { .h-footer { padding: 12px 20px; } }
-        .h-slide-counter { font-family: var(--font-head); font-size: 0.75rem; color: var(--text-muted); letter-spacing: 0.1em; }
-        .h-slide-counter span { color: var(--red); }
-        .h-progress-dot { height: 2px; border-radius: 2px; transition: all 0.3s; cursor: pointer; border: none; padding: 0; }
-        .h-progress-dot.active  { width: 32px; background: var(--red); box-shadow: 0 0 8px rgba(220,38,38,0.5); }
-        .h-progress-dot.inactive{ width: 16px; background: var(--border); }
-        .h-arrow-btn {
-          width: 36px; height: 36px; background: var(--surface); border: 1px solid var(--border);
-          color: var(--text); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s;
-          clip-path: polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));
-        }
-        .h-arrow-btn:hover { background: var(--red-dim); border-color: var(--border-red); color: var(--red); }
-
+       
         /* ═══════════════════════════════════════════════════════
-           VIDEO BROADCAST CARD OVERLAY - ADJUSTED MARGINS
+           VIDEO BROADCAST CARD OVERLAY
         ═══════════════════════════════════════════════════════ */
         .vid-wrap {
           position: relative;
-          margin: -20px auto 40px; /* <--- CHANGED: Removed negative bottom margin to prevent text overlap */
+          margin: -20px auto 40px; 
           width: calc(100% - 80px);
           max-width: 1100px;
           z-index: 30;
@@ -410,7 +398,6 @@ export default function HeroSection() {
           background-position: center;
         }
         
-        
         .vid-thumb-glow {
           position: absolute; inset: 0; z-index: 1; pointer-events: none;
           background: radial-gradient(ellipse 55% 55% at 50% 50%, rgba(220,38,38,0.2) 0%, transparent 65%);
@@ -439,15 +426,15 @@ export default function HeroSection() {
 
         .vid-rec {
           position: absolute; top: 16px; left: 16px; z-index: 7;
-          display: flex; align-items: center; gap: 6px;
+          display: flex; align-items: center; gap: 8px;
           background: rgba(0,0,0,0.7); backdrop-filter: blur(6px);
           border: 1px solid rgba(220,38,38,0.4); border-radius: 3px;
-          padding: 4px 10px;
-          font-family: var(--font-head); font-size: 0.6rem;
+          padding: 6px 12px;
+          font-family: var(--font-head); font-size: 0.7rem;
           letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.7);
         }
         .vid-rec-dot {
-          width: 6px; height: 6px; border-radius: 50%; background: var(--red);
+          width: 8px; height: 8px; border-radius: 50%; background: var(--red);
           box-shadow: 0 0 6px var(--red);
           animation: h-blink 1.2s ease-in-out infinite;
         }
@@ -455,8 +442,8 @@ export default function HeroSection() {
         .vid-dur {
           position: absolute; bottom: 16px; right: 14px; z-index: 7;
           background: rgba(0,0,0,0.8); border-radius: 3px;
-          padding: 3px 8px;
-          font-family: var(--font-head); font-size: 0.65rem;
+          padding: 4px 10px;
+          font-family: var(--font-head); font-size: 0.75rem;
           letter-spacing: 0.08em; color: rgba(255,255,255,0.65);
         }
 
@@ -493,11 +480,11 @@ export default function HeroSection() {
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          padding: 28px 30px;
+          padding: 32px 36px;
           overflow: hidden;
         }
-        @media (max-width: 900px) { .vid-panel { padding: 22px 24px; } }
-        @media (max-width: 720px) { .vid-panel { padding: 20px 20px; } }
+        @media (max-width: 900px) { .vid-panel { padding: 26px 28px; } }
+        @media (max-width: 720px) { .vid-panel { padding: 24px 24px; } }
 
         .vid-panel-bg-text {
           position: absolute;
@@ -508,48 +495,48 @@ export default function HeroSection() {
           text-transform: uppercase; pointer-events: none; user-select: none;
           letter-spacing: -0.04em;
         }
-        @media (max-width: 900px) { .vid-panel-bg-text { font-size: 5.5rem; } }
+        @media (max-width: 900px) { .vid-panel-bg-text { font-size: 6rem; } }
 
         .vid-panel-slash {
           position: absolute; top: 0; right: 0;
           width: 0; height: 0;
           border-style: solid;
-          border-width: 0 70px 70px 0;
+          border-width: 0 80px 80px 0;
           border-color: transparent rgba(255,255,255,0.1) transparent transparent;
           pointer-events: none;
         }
 
         .vid-panel-top {}
         .vid-panel-label {
-          font-family: var(--font-head); font-size: 0.62rem;
+          font-family: var(--font-head); font-size: 0.7rem;
           letter-spacing: 0.25em; text-transform: uppercase;
-          color: rgba(255,255,255,0.6); margin-bottom: 10px;
-          display: flex; align-items: center; gap: 8px;
+          color: rgba(255,255,255,0.7); margin-bottom: 12px;
+          display: flex; align-items: center; gap: 10px;
         }
         .vid-panel-label::before {
           content: ''; display: block;
-          width: 24px; height: 2px; background: rgba(255,255,255,0.5);
+          width: 24px; height: 2px; background: rgba(255,255,255,0.6);
         }
         .vid-panel-headline {
           font-family: var(--font-head); font-weight: 900;
-          font-size: clamp(1.3rem, 2.2vw, 1.7rem);
+          font-size: clamp(1.4rem, 2.5vw, 1.8rem);
           line-height: 1.1; letter-spacing: -0.02em;
           color: #fff; text-transform: uppercase;
-          margin-bottom: 14px;
+          margin-bottom: 16px;
         }
         .vid-panel-sub {
-          font-size: 0.8rem; color: rgba(255,255,255,0.72);
-          line-height: 1.55; font-weight: 400;
+          font-size: 1rem; color: rgba(255,255,255,0.8);
+          line-height: 1.6; font-weight: 400;
         }
 
         .vid-panel-cta {
           display: inline-flex; align-items: center; gap: 8px;
-          margin-top: 18px;
-          font-family: var(--font-head); font-size: 0.75rem;
+          margin-top: 20px;
+          font-family: var(--font-head); font-size: 0.85rem;
           letter-spacing: 0.15em; text-transform: uppercase;
           color: #fff; font-weight: 700;
-          border-bottom: 1px solid rgba(255,255,255,0.35);
-          padding-bottom: 3px;
+          border-bottom: 1px solid rgba(255,255,255,0.4);
+          padding-bottom: 4px;
           width: fit-content;
           transition: border-color 0.2s, gap 0.2s;
           cursor: pointer;
@@ -560,12 +547,12 @@ export default function HeroSection() {
         .vid-panel-divider {
           height: 1px;
           background: rgba(255,255,255,0.2);
-          margin: 16px 0 14px;
+          margin: 20px 0 16px;
         }
         .vid-panel-seen {
-          font-family: var(--font-head); font-size: 0.58rem;
+          font-family: var(--font-head); font-size: 0.65rem;
           letter-spacing: 0.2em; text-transform: uppercase;
-          color: rgba(255,255,255,0.5); margin-bottom: 10px;
+          color: rgba(255,255,255,0.6); margin-bottom: 12px;
         }
 
         .vid-ticker-outer {
@@ -585,21 +572,21 @@ export default function HeroSection() {
         }
         .vid-ticker-item {
           font-family: var(--font-head); font-weight: 700;
-          font-size: 0.7rem; letter-spacing: 0.1em;
-          text-transform: uppercase; color: rgba(255,255,255,0.55);
+          font-size: 0.8rem; letter-spacing: 0.1em;
+          text-transform: uppercase; color: rgba(255,255,255,0.7);
           white-space: nowrap;
           transition: color 0.2s;
         }
-        .vid-ticker-item:hover { color: rgba(255,255,255,0.9); }
+        .vid-ticker-item:hover { color: rgba(255,255,255,1); }
         .vid-ticker-sep {
-          color: rgba(255,255,255,0.25);
-          font-size: 0.6rem;
+          color: rgba(255,255,255,0.3);
+          font-size: 0.7rem;
         }
 
         /* FAB */
         .h-fab {
           position: fixed; bottom: 28px; right: 28px; z-index: 100;
-          width: 52px; height: 52px; background: var(--red); color: white; border: none; cursor: pointer;
+          width: 56px; height: 56px; background: var(--red); color: white; border: none; cursor: pointer;
           display: flex; align-items: center; justify-content: center;
           clip-path: polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));
           box-shadow: 0 0 20px rgba(220,38,38,0.4); transition: all 0.2s;
@@ -660,7 +647,7 @@ export default function HeroSection() {
               <button className="h-btn-primary">Let's Connect Today</button>
               <button className="h-btn-secondary">
                 <div className="h-play-icon">
-                  <Play size={12} fill="#dc2626" color="#dc2626" />
+                  <Play size={14} fill="#dc2626" color="#dc2626" />
                 </div>
                 Watch Video
               </button>
@@ -701,15 +688,15 @@ export default function HeroSection() {
           <div className="h-slide-counter">
             <span>0{current + 1}</span> / 0{slides.length}
           </div>
-          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
             {slides.map((_, i) => (
               <button key={i} onClick={() => setCurrent(i)}
                 className={`h-progress-dot ${i === current ? "active" : "inactive"}`} />
             ))}
           </div>
-          <div style={{ display: "flex", gap: 8 }}>
-            <button className="h-arrow-btn" onClick={prev}><ChevronLeft size={16} /></button>
-            <button className="h-arrow-btn" onClick={next}><ChevronRight size={16} /></button>
+          <div style={{ display: "flex", gap: 10 }}>
+            <button className="h-arrow-btn" onClick={prev}><ChevronLeft size={18} /></button>
+            <button className="h-arrow-btn" onClick={next}><ChevronRight size={18} /></button>
           </div>
         </div>
 
@@ -769,7 +756,7 @@ export default function HeroSection() {
                 className="vid-panel-cta"
                 onClick={e => { e.stopPropagation(); window.open(YOUTUBE_CHANNEL, "_blank"); }}
               >
-                Watch on YouTube <ArrowUpRight size={14} />
+                Watch on YouTube <ArrowUpRight size={16} />
               </div>
             </div>
 
@@ -797,7 +784,7 @@ export default function HeroSection() {
         transition={{ delay: 1, type: "spring", stiffness: 200 }}
         onClick={() => window.location.href = "tel:+919752809028"}
       >
-        <Phone size={20} />
+        <Phone size={22} />
       </motion.button>
     </>
   );

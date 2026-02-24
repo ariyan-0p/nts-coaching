@@ -57,8 +57,9 @@ export default function CoursesSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          style={{ textAlign: 'center', marginBottom: '40px' }}
+          style={{ textAlign: 'center', margin: '0 auto 40px' }}
         >
+          <div className="eyebrow" style={{ justifyContent: 'center' }}>Our Programs</div>
           <h2 className="section-title">Your Path to <span>Growth</span></h2>
         </motion.div>
 
@@ -163,7 +164,7 @@ export default function CoursesSection() {
           border: 1px solid var(--border);
           color: var(--text-muted);
           font-family: var(--font-head);
-          font-size: 0.9rem;
+          font-size: 1rem;
           font-weight: 700;
           letter-spacing: 0.05em;
           text-transform: uppercase;
@@ -290,7 +291,7 @@ export default function CoursesSection() {
         /* --- Text Content --- */
         .card-title {
           font-family: var(--font-head);
-          font-size: 1.3rem;
+          font-size: 1.6rem;
           font-weight: 800;
           color: var(--text);
           margin-bottom: 12px;
@@ -298,10 +299,11 @@ export default function CoursesSection() {
         }
 
         .card-desc {
-          font-size: 0.95rem;
+          font-size: 1.05rem;
           color: var(--text-muted);
-          line-height: 1.6;
+          line-height: 1.7;
           margin-bottom: 30px;
+          font-weight: 400;
           flex-grow: 1;
         }
 
@@ -309,12 +311,12 @@ export default function CoursesSection() {
         .card-cta {
           display: block;
           width: 100%;
-          padding: 16px 0;
+          padding: 18px 0;
           background: var(--red);
           color: #fff;
           font-family: var(--font-head);
           font-weight: 800;
-          font-size: 0.85rem;
+          font-size: 1rem;
           letter-spacing: 0.1em;
           text-transform: uppercase;
           text-decoration: none;
@@ -330,9 +332,9 @@ export default function CoursesSection() {
 
         /* --- Mobile Adjustments --- */
         @media (max-width: 768px) {
-          .tab-btn { padding: 12px 24px; font-size: 0.8rem; }
+          .tab-btn { padding: 12px 24px; font-size: 0.95rem; }
           .laptop-mockup { max-width: 280px; }
-          .card-title { font-size: 1.2rem; }
+          .card-title { font-size: 1.4rem; }
         }
       `}</style>
     </section>
