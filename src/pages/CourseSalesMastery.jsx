@@ -11,7 +11,6 @@ import { Link } from 'react-router-dom'
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 
-// --- ADDED THESE TWO IMPORTS ---
 import StatsSection from '../components/StatsSection'
 import TestimonialsSection from '../components/TestimonialsSection'
 
@@ -77,7 +76,7 @@ export default function CourseSalesMastery() {
         <div className="smp-hero-glow" />
 
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-          <Link to="/" className="smp-back-link"><ArrowLeft size={14} /> Back to Home</Link>
+          <Link to="/" className="smp-back-link"><ArrowLeft size={16} /> Back to Home</Link>
 
           <div className="smp-hero-layout">
             <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>
@@ -99,12 +98,12 @@ export default function CourseSalesMastery() {
                   { icon: Users,    text: 'All Levels'  },
                   { icon: Star,     text: '4.9 Rated'  },
                 ].map(({ icon: Icon, text }) => (
-                  <div key={text} className="smp-meta-item"><Icon size={12} /> {text}</div>
+                  <div key={text} className="smp-meta-item"><Icon size={14} /> {text}</div>
                 ))}
               </div>
               <div className="smp-hero-ctas">
-                <a href="#enroll" className="btn btn-primary"><Send size={15} /> Enroll Now</a>
-                <a href="#modules" className="btn btn-outline"><BookOpen size={14} /> View Curriculum</a>
+                <a href="#enroll" className="btn btn-primary"><Send size={16} /> Enroll Now</a>
+                <a href="#modules" className="btn btn-outline"><BookOpen size={16} /> View Curriculum</a>
               </div>
             </motion.div>
 
@@ -117,13 +116,13 @@ export default function CourseSalesMastery() {
                     <motion.div key={item} className="smp-include-item"
                       initial={{ opacity: 0, x: 12 }} animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.3 + i * 0.06 }}>
-                      <CheckCircle size={14} style={{ color: 'var(--red)', flexShrink: 0 }} />
+                      <CheckCircle size={16} style={{ color: 'var(--red)', flexShrink: 0 }} />
                       <span>{item}</span>
                     </motion.div>
                   ))}
                 </div>
                 <div className="smp-card-guarantee">
-                  <Shield size={16} style={{ color: 'var(--red)', flexShrink: 0, marginTop: 2 }} />
+                  <Shield size={20} style={{ color: 'var(--red)', flexShrink: 0, marginTop: 2 }} />
                   <div>
                     <div className="smp-guarantee-title">Results-Focused Guarantee</div>
                     <p className="smp-guarantee-text">Built on real-world frameworks that deliver measurable results — regardless of your industry.</p>
@@ -146,7 +145,7 @@ export default function CourseSalesMastery() {
           <div className="smp-outcomes-grid">
             {outcomes.map(({ icon: Icon, label, desc }, i) => (
               <motion.div key={label} className="smp-outcome-card" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}>
-                <div className="smp-outcome-icon"><Icon size={20} /></div>
+                <div className="smp-outcome-icon"><Icon size={24} /></div>
                 <div className="smp-outcome-label">{label}</div>
                 <div className="smp-outcome-desc">{desc}</div>
               </motion.div>
@@ -204,7 +203,7 @@ export default function CourseSalesMastery() {
       <TestimonialsSection />
 
       {/* ══════════════════════════
-          ENROLL FORM (ORIGINAL FULL FLOW)
+          ENROLL FORM
       ══════════════════════════ */}
       <section id="enroll" className="smp-enroll-section">
         <div className="smp-enroll-glow" />
@@ -276,7 +275,7 @@ export default function CourseSalesMastery() {
                 </div>
 
                 <button type="submit" className="btn btn-primary" disabled={isSubmitting} style={{ justifyContent: 'center', width: '100%', padding: '16px', fontSize: '1rem', opacity: isSubmitting ? 0.7 : 1 }}>
-                  {isSubmitting ? 'Submitting...' : <><Send size={16} /> Submit Enrollment Request</>}
+                  {isSubmitting ? 'Submitting...' : <><Send size={18} /> Submit Enrollment Request</>}
                 </button>
                 <p className="smp-form-note">No spam. Your data is secure.</p>
               </form>
@@ -288,67 +287,78 @@ export default function CourseSalesMastery() {
       <Footer />
 
       <style>{`
+        /* Hero */
         .smp-hero { min-height: 80vh; background: var(--bg); display: flex; align-items: center; padding: 120px 0 80px; position: relative; overflow: hidden; transition: background var(--theme-speed); }
         .smp-hero-grid-bg { position: absolute; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 60px 60px; opacity: 0.6; pointer-events: none; }
         .smp-hero-glow { position: absolute; top: 20%; right: -5%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(220,38,38,0.08) 0%, transparent 70%); pointer-events: none; }
-        .smp-back-link { display: inline-flex; align-items: center; gap: 6px; color: var(--text-muted); font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 36px; }
+        .smp-back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--text-muted); font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 36px; }
         .smp-hero-layout { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 64px; align-items: start; }
-        .smp-eyebrow-wrap { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; background: var(--red-dim); border: 1px solid var(--border-red); border-radius: 2px; font-size: 0.68rem; font-weight: 700; color: var(--red); margin-bottom: 20px; }
+        .smp-eyebrow-wrap { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; background: var(--red-dim); border: 1px solid var(--border-red); border-radius: 2px; font-size: 0.75rem; font-weight: 700; color: var(--red); margin-bottom: 20px; }
         .smp-eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red); animation: smp-blink 1.5s ease-in-out infinite; }
         @keyframes smp-blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
         .smp-h1 { font-family: var(--font-head); font-weight: 900; font-size: clamp(3rem, 6vw, 5.5rem); line-height: 0.95; text-transform: uppercase; color: var(--text); margin-bottom: 20px; }
         .smp-h1-accent { color: var(--red); position: relative; }
-        .smp-hero-sub { font-size: 1rem; color: var(--text-muted); line-height: 1.75; font-weight: 300; max-width: 460px; margin-bottom: 24px; }
-        .smp-meta-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
-        .smp-meta-item { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; background: var(--surface); border: 1px solid var(--border); font-size: 0.72rem; font-weight: 600; text-transform: uppercase; color: var(--text-muted); }
-        .smp-hero-card { background: var(--bg-2); border: 1px solid var(--border); padding: 32px 28px; position: relative; }
+        .smp-hero-sub { font-size: 1.15rem; color: var(--text-muted); line-height: 1.8; font-weight: 400; max-width: 480px; margin-bottom: 28px; }
+        
+        .smp-meta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 36px; }
+        .smp-meta-item { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; background: var(--surface); border: 1px solid var(--border); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; color: var(--text-muted); }
+        
+        .smp-hero-card { background: var(--bg-2); border: 1px solid var(--border); padding: 36px 32px; position: relative; }
         .smp-card-top-bar { position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--red), transparent); }
-        .smp-card-label { font-size: 0.68rem; font-weight: 700; color: var(--red); margin-bottom: 20px; text-transform: uppercase; }
-        .smp-includes-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
-        .smp-include-item { display: flex; align-items: center; gap: 10px; font-size: 0.88rem; color: var(--text-muted); font-weight: 300; }
-        .smp-card-guarantee { display: flex; gap: 12px; padding: 16px; background: var(--red-dim); border: 1px solid var(--border-red); border-radius: 2px; }
-        .smp-guarantee-title { font-weight: 700; font-size: 0.82rem; text-transform: uppercase; color: var(--text); margin-bottom: 4px; }
-        .smp-guarantee-text { font-size: 0.78rem; color: var(--text-muted); font-weight: 300; line-height: 1.55; }
+        .smp-card-label { font-size: 0.8rem; font-weight: 700; color: var(--red); margin-bottom: 24px; text-transform: uppercase; letter-spacing: 0.1em; }
+        .smp-includes-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+        .smp-include-item { display: flex; align-items: center; gap: 12px; font-size: 1rem; color: var(--text-muted); font-weight: 400; }
+        .smp-card-guarantee { display: flex; gap: 14px; padding: 20px; background: var(--red-dim); border: 1px solid var(--border-red); border-radius: 2px; }
+        .smp-guarantee-title { font-weight: 700; font-size: 0.95rem; text-transform: uppercase; color: var(--text); margin-bottom: 6px; letter-spacing: 0.05em; }
+        .smp-guarantee-text { font-size: 0.9rem; color: var(--text-muted); font-weight: 400; line-height: 1.6; }
+
+        /* Outcomes */
         .smp-outcomes-section { background: var(--bg-2); padding: 64px 0; }
         .smp-outcomes-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--border); }
-        .smp-outcome-card { background: var(--bg-2); padding: 28px 20px; text-align: center; }
-        .smp-outcome-icon { width: 44px; height: 44px; background: var(--red-dim); border: 1px solid var(--border-red); display: flex; align-items: center; justify-content: center; color: var(--red); margin: 0 auto 12px; }
-        .smp-outcome-label { font-weight: 700; font-size: 0.78rem; text-transform: uppercase; color: var(--text); margin-bottom: 6px; }
-        .smp-outcome-desc { font-size: 0.73rem; color: var(--text-dim); font-weight: 300; line-height: 1.5; }
+        .smp-outcome-card { background: var(--bg-2); padding: 32px 24px; text-align: center; }
+        .smp-outcome-icon { width: 48px; height: 48px; background: var(--red-dim); border: 1px solid var(--border-red); display: flex; align-items: center; justify-content: center; color: var(--red); margin: 0 auto 16px; }
+        .smp-outcome-label { font-weight: 700; font-size: 0.9rem; text-transform: uppercase; color: var(--text); margin-bottom: 8px; letter-spacing: 0.05em;}
+        .smp-outcome-desc { font-size: 0.85rem; color: var(--text-dim); font-weight: 400; line-height: 1.6; }
+
+        /* Curriculum */
         .smp-curriculum-section { background: var(--bg); padding: 80px 0; }
         .smp-section-header { text-align: center; margin-bottom: 48px; }
-        .smp-section-sub { font-size: 0.95rem; color: var(--text-muted); font-weight: 300; line-height: 1.7; max-width: 580px; margin: 12px auto 0; }
         .smp-journey { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--border); border: 1px solid var(--border); }
         .smp-pillars { display: flex; flex-direction: column; gap: 1px; background: var(--border); }
         .smp-pillar { display: flex; background: var(--bg-2); transition: background 0.2s; border-left: 3px solid transparent; }
         .smp-pillar:hover { background: var(--surface-2); border-left-color: var(--red); }
-        .smp-pillar-num { font-weight: 900; font-size: 0.68rem; color: var(--red); writing-mode: vertical-rl; padding: 20px 14px; border-right: 1px solid var(--border); }
-        .smp-pillar-body { padding: 20px; }
-        .smp-pillar-theme { font-weight: 800; font-size: 0.85rem; text-transform: uppercase; color: var(--text); margin-bottom: 8px; }
-        .smp-pillar-teaser { font-size: 0.83rem; color: var(--text-muted); font-weight: 300; line-height: 1.65; }
-        .smp-proof-block { background: var(--bg-2); padding: 36px 32px; position: relative; }
+        .smp-pillar-num { font-weight: 900; font-size: 0.8rem; color: var(--red); writing-mode: vertical-rl; padding: 24px 16px; border-right: 1px solid var(--border); letter-spacing: 0.1em; }
+        .smp-pillar-body { padding: 24px; }
+        .smp-pillar-theme { font-weight: 800; font-size: 1rem; text-transform: uppercase; color: var(--text); margin-bottom: 10px; letter-spacing: 0.05em; }
+        .smp-pillar-teaser { font-size: 0.95rem; color: var(--text-muted); font-weight: 400; line-height: 1.65; }
+
+        /* Proof Block */
+        .smp-proof-block { background: var(--bg-2); padding: 40px 36px; position: relative; }
         .smp-proof-top-bar { position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--red), transparent); }
-        .smp-proof-headline { font-weight: 800; font-size: 1.2rem; line-height: 1.25; color: var(--text); text-transform: uppercase; margin-bottom: 16px; }
-        .smp-proof-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 28px; }
-        .smp-proof-stat { background: var(--surface); padding: 16px 12px; text-align: center; }
-        .smp-proof-stat-val { font-weight: 900; font-size: 1.6rem; color: var(--red); line-height: 1; }
-        .smp-proof-stat-label { font-size: 0.6rem; text-transform: uppercase; color: var(--text-muted); margin-top: 4px; }
-        .smp-proof-divider { height: 1px; background: var(--border); margin-bottom: 24px; }
-        .smp-proof-quote { font-size: 0.88rem; color: var(--text-muted); font-style: italic; line-height: 1.7; padding-left: 16px; border-left: 2px solid var(--red); }
-        .smp-proof-attr { font-size: 0.7rem; text-transform: uppercase; color: var(--text-dim); padding-left: 16px; margin-top: 8px; }
+        .smp-proof-headline { font-weight: 800; font-size: 1.4rem; line-height: 1.3; color: var(--text); text-transform: uppercase; margin-bottom: 20px; }
+        .smp-proof-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 32px; }
+        .smp-proof-stat { background: var(--surface); padding: 20px 16px; text-align: center; }
+        .smp-proof-stat-val { font-weight: 900; font-size: 1.8rem; color: var(--red); line-height: 1; }
+        .smp-proof-stat-label { font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); margin-top: 8px; letter-spacing: 0.1em;}
+        .smp-proof-quote { font-size: 1rem; color: var(--text-muted); font-style: italic; line-height: 1.7; padding-left: 16px; border-left: 2px solid var(--red); }
+        .smp-proof-attr { font-size: 0.8rem; text-transform: uppercase; color: var(--text-dim); padding-left: 16px; margin-top: 10px; font-weight: 600; letter-spacing: 0.1em; }
+
+        /* Highlights */
         .smp-why-section { background: var(--bg-2); padding: 80px 0; }
         .smp-highlights-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); }
-        .smp-highlight-card { background: var(--bg-2); padding: 32px 28px; border-left: 3px solid transparent; transition: all 0.2s; }
+        .smp-highlight-card { background: var(--bg-2); padding: 36px 32px; border-left: 3px solid transparent; transition: all 0.2s; }
         .smp-highlight-card:hover { background: var(--surface-2); border-left-color: var(--red); }
-        .smp-highlight-icon { width: 44px; height: 44px; background: var(--red-dim); border: 1px solid var(--border-red); display: flex; align-items: center; justify-content: center; color: var(--red); margin-bottom: 16px; }
-        .smp-highlight-title { font-weight: 700; font-size: 0.95rem; text-transform: uppercase; color: var(--text); margin-bottom: 10px; }
-        .smp-highlight-desc { font-size: 0.88rem; color: var(--text-muted); font-weight: 300; line-height: 1.75; }
+        .smp-highlight-icon { width: 48px; height: 48px; background: var(--red-dim); border: 1px solid var(--border-red); display: flex; align-items: center; justify-content: center; color: var(--red); margin-bottom: 20px; }
+        .smp-highlight-title { font-weight: 700; font-size: 1.1rem; text-transform: uppercase; color: var(--text); margin-bottom: 12px; letter-spacing: 0.05em; }
+        .smp-highlight-desc { font-size: 1rem; color: var(--text-muted); font-weight: 400; line-height: 1.75; }
+
+        /* Enroll */
         .smp-enroll-section { background: var(--bg); padding: 80px 0; position: relative; overflow: hidden; }
         .smp-enroll-glow { position: absolute; top: 50%; left: 50%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(220,38,38,0.05) 0%, transparent 70%); transform: translate(-50%,-50%); pointer-events: none; }
-        .smp-enroll-wrap { max-width: 760px; margin: 0 auto; }
-        .smp-form-card { background: var(--bg-2); border: 1px solid var(--border); border-top: 3px solid var(--red); padding: 40px 36px; margin-top: 40px; }
-        .smp-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-        .smp-form-note { font-size: 0.75rem; color: var(--text-dim); text-align: center; margin-top: 12px; }
+        .smp-enroll-wrap { max-width: 800px; margin: 0 auto; }
+        .smp-form-card { background: var(--bg-2); border: 1px solid var(--border); border-top: 3px solid var(--red); padding: 48px 40px; margin-top: 40px; }
+        .smp-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .smp-form-note { font-size: 0.85rem; color: var(--text-dim); text-align: center; margin-top: 16px; }
 
         @media (max-width: 1024px) { .smp-outcomes-grid { grid-template-columns: repeat(3, 1fr) !important; } }
         @media (max-width: 900px) {

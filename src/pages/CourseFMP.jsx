@@ -10,7 +10,6 @@ import { Link } from 'react-router-dom'
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 
-// --- IMPORTS FOR GRAPH AND TESTIMONIALS ---
 import StatsSection from '../components/StatsSection'
 import TestimonialsSection from '../components/TestimonialsSection'
 
@@ -122,49 +121,49 @@ export default function CourseFMP() {
         <div className="grid-bg" style={{ position: 'absolute', inset: 0, opacity: 0.4, pointerEvents: 'none' }} />
         <div style={{ position: 'absolute', top: '20%', right: '-60px', width: 520, height: 520, background: 'radial-gradient(circle, rgba(220,38,38,0.07) 0%, transparent 70%)', pointerEvents: 'none' }} />
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-          <Link to="/" className="fmp-back-link"><ArrowLeft size={14} /> Back to Home</Link>
+          <Link to="/" className="fmp-back-link"><ArrowLeft size={16} /> Back to Home</Link>
 
           <div className="fmp-hero-grid">
             <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>
               <span className="badge badge-red" style={{ marginBottom: 20 }}><span className="red-dot" /> Certified Program</span>
               <div className="eyebrow">2.5-Month Live Course</div>
               <h1 className="fmp-h1">Financial <span style={{ color: 'var(--red)' }}>Market</span> Professional</h1>
-              <div style={{ fontFamily: 'var(--font-head)', fontWeight: 600, fontSize: '1rem', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: 24 }}>
+              <div style={{ fontFamily: 'var(--font-head)', fontWeight: 600, fontSize: '1.15rem', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: 24 }}>
                 FMP Program — Never Depend on a Single Income
               </div>
-              <p style={{ fontSize: '1rem', color: 'var(--text-muted)', lineHeight: 1.8, fontWeight: 300, marginBottom: 32, maxWidth: 480 }}>
+              <p style={{ fontSize: '1.15rem', color: 'var(--text-muted)', lineHeight: 1.8, fontWeight: 400, marginBottom: 36, maxWidth: 500 }}>
                 A comprehensive 4-module certified program covering Stock Market Fundamentals, Money Management, Technical Analysis, and Derivatives.
               </p>
-              <div className="fmp-stats-grid" style={{ marginBottom: 32 }}>
+              <div className="fmp-stats-grid" style={{ marginBottom: 36 }}>
                 {stats.map(({ icon: Icon, value, label }) => (
-                  <div key={label} style={{ background: 'var(--surface)', padding: '14px 10px', textAlign: 'center' }}>
-                    <Icon size={14} color="var(--red)" style={{ margin: '0 auto 4px' }} />
-                    <div style={{ fontFamily: 'var(--font-head)', fontWeight: 800, fontSize: '1.1rem', color: 'var(--text)' }}>{value}</div>
-                    <div style={{ fontFamily: 'var(--font-head)', fontSize: '0.52rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text-dim)', marginTop: 2 }}>{label}</div>
+                  <div key={label} style={{ background: 'var(--surface)', padding: '16px 12px', textAlign: 'center' }}>
+                    <Icon size={16} color="var(--red)" style={{ margin: '0 auto 6px' }} />
+                    <div style={{ fontFamily: 'var(--font-head)', fontWeight: 800, fontSize: '1.4rem', color: 'var(--text)' }}>{value}</div>
+                    <div style={{ fontFamily: 'var(--font-head)', fontSize: '0.75rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text-dim)', marginTop: 4 }}>{label}</div>
                   </div>
                 ))}
               </div>
-              <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-                <a href="#enroll" className="btn btn-primary">Enroll Now</a>
-                <a href="tel:6269956666" className="btn btn-outline"><Phone size={14} /> 6269-956666</a>
+              <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
+                <a href="#enroll" className="btn btn-primary"><Send size={16}/> Enroll Now</a>
+                <a href="tel:6269956666" className="btn btn-outline"><Phone size={16} /> 6269-956666</a>
               </div>
             </motion.div>
 
             <motion.div initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.15 }}>
-              <div style={{ background: 'var(--bg-2)', border: '1px solid var(--border)', borderTop: '3px solid var(--red)', padding: '32px 28px' }}>
-                <div style={{ fontFamily: 'var(--font-head)', fontWeight: 700, fontSize: '0.7rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--red)', marginBottom: 20 }}>Course Inclusions</div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+              <div style={{ background: 'var(--bg-2)', border: '1px solid var(--border)', borderTop: '3px solid var(--red)', padding: '36px 32px' }}>
+                <div style={{ fontFamily: 'var(--font-head)', fontWeight: 700, fontSize: '0.85rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--red)', marginBottom: 24 }}>Course Inclusions</div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
                   {includes.map(item => (
-                    <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                      <CheckCircle size={15} color="var(--red)" style={{ flexShrink: 0 }} />
-                      <span style={{ fontSize: '0.9rem', color: 'var(--text-muted)', fontWeight: 300 }}>{item}</span>
+                    <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                      <CheckCircle size={16} color="var(--red)" style={{ flexShrink: 0 }} />
+                      <span style={{ fontSize: '1rem', color: 'var(--text-muted)', fontWeight: 400 }}>{item}</span>
                     </div>
                   ))}
                 </div>
-                <div style={{ marginTop: 28, padding: '20px', background: 'var(--red-dim)', border: '1px solid var(--border-red)' }}>
-                  <div style={{ fontFamily: 'var(--font-head)', fontWeight: 700, fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: 8 }}>Fees Structure</div>
-                  <div style={{ fontFamily: 'var(--font-head)', fontWeight: 900, fontSize: '2rem', color: 'var(--text)', letterSpacing: '-0.02em' }}>₹49,999</div>
-                  <div style={{ fontSize: '0.78rem', color: 'var(--text-dim)', marginBottom: 4 }}>Including 18% GST</div>
+                <div style={{ marginTop: 32, padding: '24px', background: 'var(--red-dim)', border: '1px solid var(--border-red)' }}>
+                  <div style={{ fontFamily: 'var(--font-head)', fontWeight: 700, fontSize: '0.8rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: 8 }}>Fees Structure</div>
+                  <div style={{ fontFamily: 'var(--font-head)', fontWeight: 900, fontSize: '2.4rem', color: 'var(--text)', letterSpacing: '-0.02em', lineHeight: 1 }}>₹49,999</div>
+                  <div style={{ fontSize: '0.9rem', color: 'var(--text-dim)', marginTop: 6, marginBottom: 16 }}>Including 18% GST</div>
                   <a href="#enroll" className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }}>Enroll Now</a>
                 </div>
               </div>
@@ -176,7 +175,7 @@ export default function CourseFMP() {
       {/* ── Modules ── */}
       <section style={{ background: 'var(--bg-2)', padding: '80px 0' }}>
         <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: 48 }}>
+          <div style={{ textAlign: 'center', marginBottom: 56 }}>
             <div className="eyebrow" style={{ justifyContent: 'center' }}>Full Curriculum</div>
             <h2 className="section-title" style={{ textAlign: 'center' }}>4 Modules. <span>Complete Mastery.</span></h2>
           </div>
@@ -184,14 +183,14 @@ export default function CourseFMP() {
             {modules.map((mod, i) => (
               <motion.div key={mod.num} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }} className="fmp-module-row">
                 <div className="fmp-module-label">
-                  <div style={{ fontFamily: 'var(--font-head)', fontWeight: 800, fontSize: '3rem', color: 'rgba(220,38,38,0.15)', lineHeight: 1 }}>{mod.num}</div>
-                  <div style={{ fontFamily: 'var(--font-head)', fontWeight: 800, fontSize: '0.9rem', textTransform: 'uppercase', color: 'var(--text)', lineHeight: 1.3 }}>{mod.title}</div>
+                  <div style={{ fontFamily: 'var(--font-head)', fontWeight: 800, fontSize: '4rem', color: 'rgba(220,38,38,0.15)', lineHeight: 0.9 }}>{mod.num}</div>
+                  <div style={{ fontFamily: 'var(--font-head)', fontWeight: 800, fontSize: '1.1rem', textTransform: 'uppercase', color: 'var(--text)', lineHeight: 1.3, marginTop: 10 }}>{mod.title}</div>
                 </div>
                 <div className="fmp-sessions-grid">
                   {mod.sessions.map(s => (
-                    <div key={s} style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
-                      <div style={{ width: 4, height: 4, background: 'var(--red)', flexShrink: 0, marginTop: 7 }} />
-                      <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)', fontWeight: 300 }}>{s}</span>
+                    <div key={s} style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
+                      <div style={{ width: 5, height: 5, background: 'var(--red)', flexShrink: 0, marginTop: 10 }} />
+                      <span style={{ fontSize: '1rem', color: 'var(--text-muted)', fontWeight: 400, lineHeight: 1.6 }}>{s}</span>
                     </div>
                   ))}
                 </div>
@@ -204,14 +203,14 @@ export default function CourseFMP() {
       {/* ── Why Choose FMP ── */}
       <section style={{ background: 'var(--bg)', padding: '80px 0' }}>
         <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: 48 }}>
+          <div style={{ textAlign: 'center', marginBottom: 56 }}>
             <div className="eyebrow" style={{ justifyContent: 'center' }}>Why Choose FMP</div>
             <h2 className="section-title" style={{ textAlign: 'center' }}>Built for <span>Real Market Success</span></h2>
           </div>
           <div className="fmp-why-grid">
             {whyCards.map(({ icon: Icon, title, desc }, i) => (
               <motion.div key={title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: (i % 3) * 0.07 }} className="fmp-why-card">
-                <div className="fmp-why-icon"><Icon size={22} /></div>
+                <div className="fmp-why-icon"><Icon size={24} /></div>
                 <div className="fmp-why-title">{title}</div>
                 <div className="fmp-why-desc">{desc}</div>
               </motion.div>
@@ -228,11 +227,11 @@ export default function CourseFMP() {
       <section id="enroll" style={{ background: 'var(--bg-2)', padding: '80px 0', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: 600, height: 600, background: 'radial-gradient(circle, rgba(220,38,38,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-          <div style={{ maxWidth: 720, margin: '0 auto' }}>
+          <div style={{ maxWidth: 800, margin: '0 auto' }}>
             <div style={{ textAlign: 'center', marginBottom: 40 }}>
               <div className="eyebrow" style={{ justifyContent: 'center' }}>Enrollment</div>
               <h2 className="section-title" style={{ textAlign: 'center' }}>Start Your <span>Market Journey</span></h2>
-              <p style={{ color: 'var(--text-muted)', fontWeight: 300 }}>Fill in your details and our team will contact you within 24 hours.</p>
+              <p style={{ color: 'var(--text-muted)', fontWeight: 400, fontSize: '1.15rem', marginTop: 12 }}>Fill in your details and our team will contact you within 24 hours.</p>
             </div>
             
             <div className="fmp-form-card">
@@ -296,7 +295,7 @@ export default function CourseFMP() {
                 </div>
 
                 <button type="submit" className="btn btn-primary" disabled={isSubmitting} style={{ justifyContent: 'center', width: '100%', padding: '16px', fontSize: '1rem', opacity: isSubmitting ? 0.7 : 1 }}>
-                  {isSubmitting ? 'Submitting...' : <><Send size={16} /> Submit Enrollment Request</>}
+                  {isSubmitting ? 'Submitting...' : <><Send size={18} /> Submit Enrollment Request</>}
                 </button>
               </form>
             </div>
@@ -307,27 +306,27 @@ export default function CourseFMP() {
       <Footer />
 
       <style>{`
-        .fmp-hero { min-height: 70vh; background: var(--bg); padding: 100px 0 60px; position: relative; overflow: hidden; }
-        .fmp-back-link { display: inline-flex; align-items: center; gap: 6px; color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; margin-bottom: 32px; }
+        .fmp-hero { min-height: 70vh; background: var(--bg); padding: 120px 0 80px; position: relative; overflow: hidden; }
+        .fmp-back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--text-muted); font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 36px; }
         .fmp-h1 { font-family: var(--font-head); font-weight: 900; font-size: clamp(2.4rem, 5vw, 4.8rem); text-transform: uppercase; line-height: 1; color: var(--text); }
         .fmp-hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
         .fmp-stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
-        .fmp-module-row { background: var(--bg-2); padding: 28px 32px; display: grid; grid-template-columns: 200px 1fr; gap: 32px; align-items: start; }
-        .fmp-sessions-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 24px; }
+        .fmp-module-row { background: var(--bg-2); padding: 36px 40px; display: grid; grid-template-columns: 220px 1fr; gap: 40px; align-items: start; }
+        .fmp-sessions-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px 28px; }
         
         .fmp-why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); }
-        .fmp-why-card { background: var(--surface); padding: 32px 28px; border-left: 3px solid transparent; transition: all 0.2s ease; }
+        .fmp-why-card { background: var(--surface); padding: 40px 32px; border-left: 3px solid transparent; transition: all 0.2s ease; }
         .fmp-why-card:hover { background: var(--surface-2); border-left-color: var(--red); }
-        .fmp-why-icon { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: var(--red-dim); border: 1px solid var(--border-red); color: var(--red); margin-bottom: 16px; }
-        .fmp-why-title { font-family: var(--font-head); font-weight: 700; font-size: 0.95rem; text-transform: uppercase; color: var(--text); margin-bottom: 10px; transition: color var(--theme-speed); }
-        .fmp-why-desc { font-size: 0.88rem; color: var(--text-muted); font-weight: 300; line-height: 1.6; transition: color var(--theme-speed); }
+        .fmp-why-icon { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; background: var(--red-dim); border: 1px solid var(--border-red); color: var(--red); margin-bottom: 20px; }
+        .fmp-why-title { font-family: var(--font-head); font-weight: 800; font-size: 1.1rem; text-transform: uppercase; color: var(--text); margin-bottom: 12px; letter-spacing: 0.05em; transition: color var(--theme-speed); }
+        .fmp-why-desc { font-size: 1rem; color: var(--text-muted); font-weight: 400; line-height: 1.6; transition: color var(--theme-speed); }
 
-        .fmp-form-card { background: var(--bg); border: 1px solid var(--border); border-top: 3px solid var(--red); padding: 40px 36px; }
-        .fmp-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .fmp-form-card { background: var(--bg); border: 1px solid var(--border); border-top: 3px solid var(--red); padding: 48px 40px; margin-top: 40px;}
+        .fmp-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 
         @media (max-width: 900px) {
-          .fmp-hero-grid { grid-template-columns: 1fr; }
-          .fmp-module-row { grid-template-columns: 1fr; gap: 16px; }
+          .fmp-hero-grid { grid-template-columns: 1fr; gap: 40px; }
+          .fmp-module-row { grid-template-columns: 1fr; gap: 24px; }
           .fmp-why-grid { grid-template-columns: repeat(2, 1fr); }
         }
         @media (max-width: 600px) {
