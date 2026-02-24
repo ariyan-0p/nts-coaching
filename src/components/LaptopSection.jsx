@@ -15,7 +15,7 @@ export default function LaptopSection() {
           <div className="laptop-glow" />
           
           <img 
-            src="/assets/nts-laptop-mockup.jpg" 
+            src="/assets/nts-laptop-mockup.png" 
             alt="NTS System Mockup" 
             className="laptop-image"
           />
