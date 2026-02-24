@@ -19,16 +19,14 @@ const quickLinks = [
 ]
 
 const courseLinks = [
-  { label: 'FMP Program',   href: '/courses/fmp' },
   { label: 'Sales Mastery', href: '/courses/sales-mastery' },
+  { label: 'FMP Program',   href: '/courses/fmp' },
 ]
 
 export default function Footer() {
-  // Pulling 'theme' to match Navbar logic
   const { theme } = useTheme()
   const isDark = theme === 'dark'
 
-  // Exact same logic as your Navbar
   const logoSrc = isDark
     ? '/assets/nts-logo-white.png'
     : '/assets/nts-logo-dark.png'
@@ -61,7 +59,7 @@ export default function Footer() {
           <div style={{ gridColumn: 'span 1' }}>
             <Link to="/" style={{ display: 'inline-block', marginBottom: 20 }}>
               <img 
-                key={logoSrc} // Forces re-render just like your Navbar
+                key={logoSrc} 
                 src={logoSrc} 
                 alt="NTS Logo" 
                 style={{ height: '50px', width: 'auto', objectFit: 'contain' }} 
@@ -84,6 +82,16 @@ export default function Footer() {
                     color: 'var(--text-muted)', transition: 'all 0.2s',
                     clipPath: 'polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px))',
                   }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.background = 'var(--red-dim)'
+                    e.currentTarget.style.borderColor = 'var(--border-red)'
+                    e.currentTarget.style.color = 'var(--red)'
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.background = 'var(--surface)'
+                    e.currentTarget.style.borderColor = 'var(--border)'
+                    e.currentTarget.style.color = 'var(--text-muted)'
+                  }}
                 >
                   <Icon size={15} />
                 </a>
@@ -97,7 +105,9 @@ export default function Footer() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
               {quickLinks.map(link => (
                 <a key={link.label} href={link.href}
-                  style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: '0.88rem', color: 'var(--text-muted)', transition: 'color 0.2s' }}
+                  style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: '0.88rem', color: 'var(--text-muted)', transition: 'color 0.2s', textDecoration: 'none' }}
+                  onMouseEnter={e => e.currentTarget.style.color = 'var(--text)'}
+                  onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}
                 >
                   <span style={{ color: 'var(--red)', fontSize: '0.7rem' }}>▸</span> {link.label}
                 </a>
@@ -117,7 +127,17 @@ export default function Footer() {
                     background: 'var(--surface)', border: '1px solid var(--border)',
                     fontSize: '0.85rem', fontFamily: 'var(--font-head)', fontWeight: 700,
                     letterSpacing: '0.05em', textTransform: 'uppercase',
-                    color: 'var(--text-muted)', transition: 'all 0.2s',
+                    color: 'var(--text-muted)', transition: 'all 0.2s', textDecoration: 'none'
+                  }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.background = 'var(--surface-2)'
+                    e.currentTarget.style.borderColor = 'var(--red)'
+                    e.currentTarget.style.color = 'var(--text)'
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.background = 'var(--surface)'
+                    e.currentTarget.style.borderColor = 'var(--border)'
+                    e.currentTarget.style.color = 'var(--text-muted)'
                   }}
                 >
                   {link.label} <ArrowUpRight size={14} />
@@ -136,7 +156,7 @@ export default function Footer() {
                 { icon: Mail,   text: 'ntswithankit@gmail.com', href: 'mailto:ntswithankit@gmail.com' },
               ].map(({ icon: Icon, text, href }) => (
                 <a key={text} href={href || '#'}
-                  style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: '0.88rem', color: 'var(--text-muted)' }}
+                  style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: '0.88rem', color: 'var(--text-muted)', textDecoration: 'none' }}
                 >
                   <div style={{
                     width: 30, height: 30, flexShrink: 0,
@@ -152,25 +172,36 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom Bar */}
+        {/* ── UPDATED BOTTOM BAR (Fully Centered) ── */}
         <div style={{
           borderTop: '1px solid var(--border)',
-          padding: '20px 0',
+          padding: '24px 0',
           display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          flexWrap: 'wrap',
-          gap: 12,
+          flexDirection: 'column',     // Stacks items vertically
+          alignItems: 'center',        // Centers items horizontally
+          justifyContent: 'center',
+          gap: 10,                     // Spacing between copyright and your name
+          textAlign: 'center'
         }}>
           <span style={{ fontSize: '0.78rem', color: 'var(--text-dim)', fontFamily: 'var(--font-head)', letterSpacing: '0.05em' }}>
             © {new Date().getFullYear()} Nail the Sale with Ankit. All Rights Reserved.
           </span>
-          <Link to="/admin/login"
-            style={{ fontSize: '0.72rem', color: 'var(--text-dim)', fontFamily: 'var(--font-head)', letterSpacing: '0.1em', textTransform: 'uppercase', transition: 'color 0.2s' }}
-          >
-            Admin Portal
-          </Link>
+          
+          <span style={{ fontSize: '0.75rem', color: 'var(--text-dim)', fontFamily: 'var(--font-head)', letterSpacing: '0.05em' }}>
+            Powered by <a 
+              href="https://ariyan-0p.github.io/Ariyan-portlio/" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              style={{ color: 'var(--red)', fontWeight: 700, textDecoration: 'none', transition: 'opacity 0.2s' }}
+              onMouseEnter={e => e.currentTarget.style.opacity = 0.8}
+              onMouseLeave={e => e.currentTarget.style.opacity = 1}
+            >
+              Ariyan Samal
+            </a>
+          </span>
         </div>
+        {/* ─────────────────────────────────────── */}
+
       </div>
     </footer>
   )
