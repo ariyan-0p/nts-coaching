@@ -104,13 +104,13 @@ export default function ContactSection() {
               <div className="form-group">
                 <label className="form-label">I'm Interested In *</label>
                 <select className="form-input" {...register('interest', { required: 'Please select an option' })} style={{ background: 'var(--surface)', color: 'var(--text)', borderColor: 'var(--border)' }}>
-                  <option value="">Select a service...</option>
-                  <option value="1on1">1-on-1 Sales Coaching</option>
-                  <option value="corporate">Corporate Sales Training</option>
-                  <option value="course">Nail the Sale Course</option>
-                  <option value="bootcamp">High-Ticket Closing Bootcamp</option>
-                  <option value="funnel">Sales Funnel Diagnosis</option>
-                  <option value="other">Other / Not Sure</option>
+                  <option value="" style={{ background: 'var(--bg)', color: 'var(--text)' }}>Select a service...</option>
+                  <option value="1on1" style={{ background: 'var(--bg)', color: 'var(--text)' }}>1-on-1 Sales Coaching</option>
+                  <option value="corporate" style={{ background: 'var(--bg)', color: 'var(--text)' }}>Corporate Sales Training</option>
+                  <option value="course" style={{ background: 'var(--bg)', color: 'var(--text)' }}>Nail the Sale Course</option>
+                  <option value="bootcamp" style={{ background: 'var(--bg)', color: 'var(--text)' }}>High-Ticket Closing Bootcamp</option>
+                  <option value="funnel" style={{ background: 'var(--bg)', color: 'var(--text)' }}>Sales Funnel Diagnosis</option>
+                  <option value="other" style={{ background: 'var(--bg)', color: 'var(--text)' }}>Other / Not Sure</option>
                 </select>
                 {errors.interest && <span className="form-error">{errors.interest.message}</span>}
               </div>
@@ -131,6 +131,10 @@ export default function ContactSection() {
       </div>
 
       <style>{`
+        #contact select option {
+          background-color: var(--bg);
+          color: var(--text);
+        }
         @media (max-width: 900px) {
           #contact .container > div:last-child { grid-template-columns: 1fr !important; }
         }
