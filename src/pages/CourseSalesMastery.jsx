@@ -5,7 +5,7 @@ import toast from 'react-hot-toast'
 import {
   CheckCircle, Target, Zap, ArrowLeft, Send,
   Brain, MessageSquare, Users, Shield,
-  BookOpen, Star, Clock, Check, AlertTriangle
+  BookOpen, Star, Clock, Check, Video
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import Navbar from "../components/Navbar"
@@ -108,7 +108,8 @@ export default function CourseSalesMastery() {
               <div className="smp-meta-row">
                 {[
                   { icon: BookOpen, text: '10 Modules' },
-                  { icon: Clock,    text: '~8 Hours'   },
+                  { icon: Clock,    text: '5 Hrs Recorded' },
+                  { icon: Video,    text: '4 Live Sessions' },
                   { icon: Users,    text: 'All Levels'  },
                   { icon: Star,     text: '4.9 Rated'  },
                 ].map(({ icon: Icon, text }) => (
@@ -291,7 +292,7 @@ export default function CourseSalesMastery() {
              <h2 className="section-title" style={{ textAlign: 'center', textTransform: 'uppercase' }}>SALES MASTERY PROGRAM-MODULES</h2>
           </div>
           <motion.div className="smp-modules-image-wrapper" initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}>
-            <img src="/assets/modules-books.png" alt="10 Sales Mastery Modules" className="smp-modules-img" />
+            <img src="/assets/modules-books.jpg" alt="10 Sales Mastery Modules" className="smp-modules-img" />
           </motion.div>
         </div>
       </section>
