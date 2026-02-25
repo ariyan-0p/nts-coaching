@@ -5,34 +5,34 @@ const row1Logos = [
   { src: '/assets/The_Times_of_India_Logo_full.png', alt: 'The Times of India' },
   { src: '/assets/Hindustan_Times_logo.svg.png', alt: 'Hindustan Times' },
   { src: '/assets/The_Economic_Times_logo.png', alt: 'The Economic Times' },
-  { src: '/assets/ANI-news-e1678554173312.webp', alt: 'ANI News' },
+  { src: '/assets/ANI.png.webp', alt: 'ANI News' }, // UPDATED
   // Repeated to make the marquee loop smooth
   { src: '/assets/The_Times_of_India_Logo_full.png', alt: 'The Times of India' },
   { src: '/assets/Hindustan_Times_logo.svg.png', alt: 'Hindustan Times' },
   { src: '/assets/The_Economic_Times_logo.png', alt: 'The Economic Times' },
-  { src: '/assets/ANI-news-e1678554173312.webp', alt: 'ANI News' },
+  { src: '/assets/ANI.png.webp', alt: 'ANI News' }, // UPDATED
 ]
 
 const row2Logos = [
-  { src: '/assets/dainik bhaskar logo.jpg', alt: 'Dainik Bhaskar' },
+  { src: '/assets/Dainik_Bhaskar_Logo.png', alt: 'Dainik Bhaskar' }, // UPDATED
   { src: '/assets/amar ujala.png', alt: 'Amar Ujala' },
-  { src: '/assets/dainik jagran.png', alt: 'Dainik Jagran' },
+  { src: '/assets/Dainik_Jagran_logo.png', alt: 'Dainik Jagran' }, // UPDATED
   { src: '/assets/daily-Hunt-Logo.png', alt: 'Daily Hunt' },
   // Repeated
-  { src: '/assets/dainik bhaskar logo.jpg', alt: 'Dainik Bhaskar' },
+  { src: '/assets/Dainik_Bhaskar_Logo.png', alt: 'Dainik Bhaskar' }, // UPDATED
   { src: '/assets/amar ujala.png', alt: 'Amar Ujala' },
-  { src: '/assets/dainik jagran.png', alt: 'Dainik Jagran' },
+  { src: '/assets/Dainik_Jagran_logo.png', alt: 'Dainik Jagran' }, // UPDATED
   { src: '/assets/daily-Hunt-Logo.png', alt: 'Daily Hunt' },
 ]
 
 const row3Logos = [
   { src: '/assets/DNA_Newspaper_Logo.svg.png', alt: 'DNA Newspaper' },
-  { src: '/assets/Wirelogo.svg.png', alt: 'The Wire' },
+  { src: '/assets/wire news.png', alt: 'The Wire' }, // UPDATED
   { src: '/assets/images.jpg', alt: 'News Outlet' },
-  { src: '/assets/The_Times_of_India_Logo_full.png', alt: 'The Times of India' }, // Mixing in a big one
+  { src: '/assets/The_Times_of_India_Logo_full.png', alt: 'The Times of India' }, 
   // Repeated
   { src: '/assets/DNA_Newspaper_Logo.svg.png', alt: 'DNA Newspaper' },
-  { src: '/assets/Wirelogo.svg.png', alt: 'The Wire' },
+  { src: '/assets/wire news.png', alt: 'The Wire' }, // UPDATED
   { src: '/assets/images.jpg', alt: 'News Outlet' },
   { src: '/assets/The_Times_of_India_Logo_full.png', alt: 'The Times of India' },
 ]
@@ -141,12 +141,9 @@ export default function FeaturedIn() {
         .brand-logo-item img {
            max-height: 40px;
            width: auto;
-           /* REMOVED THE GRAYSCALE FILTER HERE */
            transition: all 0.3s ease;
            object-fit: contain;
         }
-        
-        /* REMOVED THE HOVER FILTER RULE AS IT IS NO LONGER NEEDED */
 
         .scroll-left-1 .marquee-content {
           animation: scrollLeft 35s linear infinite;
