@@ -24,10 +24,13 @@ export default function LaptopSection() {
 
       <style>{`
         .laptop-section {
-          background: var(--bg);
-          /* Top padding keeps space from FeaturedIn, Bottom padding reduced to 40px to close gap */
-          padding: 80px 0 40px; 
-          overflow: hidden;
+          /* Made transparent so it blends seamlessly into the sections above/below */
+          background: transparent; 
+          
+          /* Increased bottom padding slightly to give the shadow room to breathe */
+          padding: 80px 0 60px; 
+          
+          /* REMOVED 'overflow: hidden;' WHICH WAS SLICING THE SHADOW IN HALF */
           position: relative;
         }
 
@@ -58,13 +61,13 @@ export default function LaptopSection() {
           display: block;
           position: relative;
           z-index: 1;
-          /* Heavy shadow to match the cinematic dark theme */
-          filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.8));
+          /* Softened the shadow slightly so it looks amazing on both Light and Dark mode */
+          filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.35));
         }
 
         @media (max-width: 768px) {
           .laptop-section {
-            padding: 40px 0 30px;
+            padding: 40px 0 40px;
           }
           .laptop-wrapper {
             max-width: 100%;
