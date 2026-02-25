@@ -4,9 +4,9 @@ import { useInView } from 'react-intersection-observer'
 const allLogos = [
   { src: '/assets/The_Times_of_India_Logo_full.png', alt: 'The Times of India' },
   { src: '/assets/Hindustan_Times_logo.svg.png', alt: 'Hindustan Times' },
-  { src: '/assets/The_Economic_Times_logo.png', alt: 'The Economic Times' },
+  { src: '/assets/The_Economic_Times_logo.jpg', alt: 'The Economic Times' },
   { src: '/assets/ANI.png.webp', alt: 'ANI News' }, 
-  { src: '/assets/Dainik_Bhaskar_Logo.png', alt: 'Dainik Bhaskar' }, 
+  { src: '/assets/Dainik_Bhaskar_Logo.jpg', alt: 'Dainik Bhaskar' }, 
   { src: '/assets/amar ujala.png', alt: 'Amar Ujala' },
   { src: '/assets/Dainik_Jagran_logo.png', alt: 'Dainik Jagran' }, 
   { src: '/assets/daily-Hunt-Logo.png', alt: 'Daily Hunt' },
