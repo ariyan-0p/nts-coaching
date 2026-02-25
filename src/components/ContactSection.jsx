@@ -49,7 +49,7 @@ export default function ContactSection() {
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-              {[{ icon: MapPin, label: 'Location', value: 'Delhi, India', href: null }, { icon: Phone, label: 'Phone', value: '+91 97528 09028', href: 'tel:+919752809028' }, { icon: Mail, label: 'Email', value: 'ntswithankit@gmail.com', href: 'mailto:ntswithankit@gmail.com' }].map(({ icon: Icon, label, value, href }) => (
+              {[{ icon: MapPin, label: 'Location', value: 'Delhi, India', href: null }, { icon: Phone, label: 'Phone', value: '+91 6269-956666', href: 'tel:+916269956666' }, { icon: Mail, label: 'Email', value: 'ntswithankit@gmail.com', href: 'mailto:ntswithankit@gmail.com' }].map(({ icon: Icon, label, value, href }) => (
                 <a key={label} href={href || '#'} style={{ display: 'flex', gap: 16, textDecoration: 'none' }}>
                   <div style={{ width: 46, height: 46, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--red-dim)', border: '1px solid var(--border-red)', clipPath: 'polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px))' }}><Icon size={20} color="var(--red)" /></div>
                   <div>

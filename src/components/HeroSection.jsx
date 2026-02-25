@@ -781,7 +781,7 @@ export default function HeroSection() {
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ delay: 1, type: "spring", stiffness: 200 }}
-        onClick={() => window.location.href = "tel:+919752809028"}
+        onClick={() => window.location.href = "tel:+916269956666"}
       >
         <Phone size={22} />
       </motion.button>

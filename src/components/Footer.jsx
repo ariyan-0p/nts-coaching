@@ -152,7 +152,7 @@ export default function Footer() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
               {[
                 { icon: MapPin, text: 'Delhi, India' },
-                { icon: Phone,  text: '+91 97528 09028',       href: 'tel:+919752809028' },
+                { icon: Phone,  text: '+91 6269-956666',       href: 'tel:+916269956666' },
                 { icon: Mail,   text: 'ntswithankit@gmail.com', href: 'mailto:ntswithankit@gmail.com' },
               ].map(({ icon: Icon, text, href }) => (
                 <a key={text} href={href || '#'}
