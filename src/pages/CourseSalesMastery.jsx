@@ -292,7 +292,7 @@ export default function CourseSalesMastery() {
              <h2 className="section-title" style={{ textAlign: 'center', textTransform: 'uppercase' }}>SALES MASTERY PROGRAM-MODULES</h2>
           </div>
           <motion.div className="smp-modules-image-wrapper" initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}>
-            <img src="/assets/modules-books.jpg" alt="10 Sales Mastery Modules" className="smp-modules-img" />
+            <img src="/assets/modules-books.png" alt="10 Sales Mastery Modules" className="smp-modules-img" />
           </motion.div>
         </div>
       </section>
