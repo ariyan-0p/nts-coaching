@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 import { ThemeProvider } from './context/ThemeContext'
+import Preloader from './components/Preloader' // Import your new preloader
 import Home from './pages/Home'
 import CourseFMP from './pages/CourseFMP'
 import CourseSalesMastery from './pages/CourseSalesMastery'
@@ -18,6 +19,9 @@ const ProtectedRoute = ({ children }) => {
 export default function App() {
   return (
     <ThemeProvider>
+      {/* The Preloader is placed outside the Router to ensure it covers everything */}
+      <Preloader />
+      
       <BrowserRouter>
         <Toaster
           position="top-right"
@@ -33,14 +37,14 @@ export default function App() {
           }}
         />
         <Routes>
-          <Route path="/"                              element={<Home />} />
+          <Route path="/"                               element={<Home />} />
           <Route path="/courses/fmp"                   element={<CourseFMP />} />
           <Route path="/courses/sales-mastery"         element={<CourseSalesMastery />} />
           <Route path="/admin/login"                   element={<AdminLogin />} />
           <Route path="/admin"                         element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
           <Route path="/admin/testimonials"            element={<ProtectedRoute><Testimonials /></ProtectedRoute>} />
           <Route path="/admin/submissions"             element={<ProtectedRoute><FormSubmissions /></ProtectedRoute>} />
-          <Route path="*"                              element={<Navigate to="/" replace />} />
+          <Route path="*"                               element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
