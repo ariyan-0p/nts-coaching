@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
@@ -12,8 +11,9 @@ const tabData = {
       href: '/courses/sales-mastery',
       title: 'Sales Mastery Program',
       desc: 'The exact roadmap to attract perfect-fit clients effortlessly and authentically — without ever feeling "salesy".',
-      ctaText: 'Join Sales Mastery',
-      imgBg: 'linear-gradient(135deg, #440000, var(--red))',
+      ctaText: 'Enroll Now',
+      // ADD YOUR FIRST THUMBNAIL HERE:
+      thumbnail: '/assets/sales-mastery-thumb.jpg', 
       hasVideo: false, 
     },
     {
@@ -21,20 +21,10 @@ const tabData = {
       href: '/courses/fmp',
       title: 'Financial Market Professional',
       desc: 'A certified program covering Stock Market Fundamentals, Money Management, Technical Analysis, and Derivatives to help you achieve financial freedom.',
-      ctaText: 'Explore FMP Program',
-      imgBg: 'linear-gradient(135deg, #111, #222)', 
+      ctaText: 'Enroll Now',
+      // ADD YOUR SECOND THUMBNAIL HERE:
+      thumbnail: '/assets/fmp-thumb.jpg', 
       hasVideo: false, 
-    }
-  ],
-  membership: [
-    {
-      id: 'inner-circle',
-      href: '/#contact',
-      title: 'NTS Inner Circle',
-      desc: 'Join an exclusive community of top-performing sales professionals. Get monthly group coaching, live Q&As, and direct access to Ankit.',
-      ctaText: 'Apply For Membership',
-      imgBg: 'linear-gradient(135deg, #0a0a0a, #1a1a1a)',
-      hasVideo: false,
     }
   ]
 }
@@ -42,11 +32,8 @@ const tabData = {
 export default function CoursesSection() {
   const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true })
   
-  // State to manage which tab is currently active
-  const [activeTab, setActiveTab] = useState('courses')
-
-  // Get the data for the currently active tab
-  const currentItems = tabData[activeTab]
+  // Since there are only courses to display now, we just use the courses array directly
+  const currentItems = tabData.courses
 
   return (
     <section id="courses" className="section" ref={ref} style={{ background: 'var(--bg)', padding: '100px 0' }}>
@@ -63,31 +50,30 @@ export default function CoursesSection() {
           <h2 className="section-title">Your Path to <span>Growth</span></h2>
         </motion.div>
 
-        {/* --- TABS --- */}
+        {/* --- TABS / LINKS --- */}
         <motion.div 
           className="tab-container"
           initial={{ opacity: 0, y: 10 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <button 
-            className={`tab-btn ${activeTab === 'courses' ? 'active' : ''}`}
-            onClick={() => setActiveTab('courses')}
-          >
+          <button className="tab-btn active">
             Courses
           </button>
-          <button 
-            className={`tab-btn ${activeTab === 'membership' ? 'active' : ''}`}
-            onClick={() => setActiveTab('membership')}
+          <a 
+            href="https://chat.whatsapp.com/IyP0WiRjuC4DtYPNwFuFan" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="tab-btn"
           >
-            Membership
-          </button>
+            Join Community
+          </a>
         </motion.div>
 
         {/* --- CARDS GRID --- */}
         <AnimatePresence mode="wait">
           <motion.div 
-            key={activeTab} 
+            key="courses"
             className="cards-grid"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -100,24 +86,21 @@ export default function CoursesSection() {
                 {/* CSS Laptop Mockup */}
                 <div className="laptop-mockup">
                   <div className="laptop-screen">
-                    <div className="screen-content" style={{ background: item.imgBg }}>
+                    <div className="screen-content">
                       
-                      {/* --- THE NTS LOGO --- */}
+                      {/* --- THUMBNAIL IMAGE --- */}
                       <img 
-                        src="/assets/nts-logo-white.png" 
-                        alt="NTS Logo" 
+                        src={item.thumbnail} 
+                        alt={item.title} 
                         style={{ 
-                          // If there's a play button, make the logo smaller and push it up. Otherwise, make it large and centered.
-                          height: item.hasVideo ? '30px' : '50px', 
-                          marginBottom: item.hasVideo ? '65px' : '0',
-                          opacity: 0.9,
-                          objectFit: 'contain',
-                          zIndex: 2,
-                          transition: 'all 0.3s ease'
+                          width: '100%', 
+                          height: '100%', 
+                          objectFit: 'cover', // Ensures the image perfectly fills the laptop screen
+                          zIndex: 1
                         }} 
                       />
 
-                      {/* --- THE PLAY BUTTON --- */}
+                      {/* --- THE PLAY BUTTON (Appears on top of thumbnail if hasVideo is true) --- */}
                       {item.hasVideo && (
                         <div className="screen-play-btn">
                           <Play size={20} fill="#fff" style={{ marginLeft: '4px' }} />
@@ -171,6 +154,10 @@ export default function CoursesSection() {
           cursor: pointer;
           border-radius: 4px;
           transition: all 0.3s ease;
+          text-decoration: none;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
         }
 
         .tab-btn:hover {
@@ -232,10 +219,10 @@ export default function CoursesSection() {
           width: 100%;
           height: 100%;
           display: flex;
-          flex-direction: column;
           align-items: center;
           justify-content: center;
           position: relative;
+          background: #000; /* Fallback background while image loads */
         }
 
         /* Play Button specific styles */
@@ -243,7 +230,7 @@ export default function CoursesSection() {
           position: absolute;
           top: 50%;
           left: 50%;
-          transform: translate(-50%, -30%);
+          transform: translate(-50%, -50%);
           width: 50px;
           height: 50px;
           background: var(--red);
@@ -257,7 +244,7 @@ export default function CoursesSection() {
         }
         
         .course-card:hover .screen-play-btn {
-          transform: translate(-50%, -30%) scale(1.1);
+          transform: translate(-50%, -50%) scale(1.1);
           background: #ff0000;
         }
 
