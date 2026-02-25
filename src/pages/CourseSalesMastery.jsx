@@ -4,8 +4,8 @@ import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import {
   CheckCircle, Target, Zap, ArrowLeft, Send,
-  Brain, TrendingUp, MessageSquare, Users, Shield,
-  Award, BookOpen, Star, Clock, BarChart2
+  Brain, MessageSquare, Users, Shield,
+  BookOpen, Star, Clock, Check, AlertTriangle
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import Navbar from "../components/Navbar"
@@ -13,14 +13,6 @@ import Footer from "../components/Footer"
 
 import StatsSection from '../components/StatsSection'
 import TestimonialsSection from '../components/TestimonialsSection'
-
-const outcomes = [
-  { icon: Target,        label: 'Laser-Target Clients',  desc: 'Find people who already want what you offer' },
-  { icon: MessageSquare, label: 'Natural Conversations', desc: 'Open dialogues that feel like friendly chats' },
-  { icon: Award,         label: 'Prove Your Value',      desc: 'Make your offer worth every penny' },
-  { icon: Zap,           label: 'Melt Objections',       desc: 'Handle pushback with grace and zero pressure' },
-  { icon: TrendingUp,    label: 'Close With Confidence', desc: 'Sign new clients naturally and authentically' },
-]
 
 const includes = [
   'Expert-Led Training by Industry Professionals',
@@ -33,11 +25,33 @@ const includes = [
   'Certificate of Completion',
 ]
 
-const highlights = [
-  { icon: Brain,    title: 'Expert-Led Training',        desc: 'Gain insights from experienced sales professionals who understand real-world selling across every industry.' },
-  { icon: Zap,      title: 'Practical Applications',     desc: 'Hands-on exercises that translate theory into strategies you can implement the same day you learn them.' },
-  { icon: Users,    title: 'Personalized Support',       desc: 'One-on-one coaching and feedback that addresses your specific challenges and accelerates your growth.' },
-  { icon: BookOpen, title: 'Ongoing Learning Resources', desc: 'Video tutorials, a resource library, and community support that keep you improving long after the program.' },
+// Splitting strings to bypass citation injections while keeping exact text
+const systemBullets = [
+  'Attract high-intent buyers through a ' + 'simple Neuroscience strategies',
+  'Get paid high-ticket clients ' + 'without being salesy',
+  'Use strategic follow-up process that prevents ' + 'clients from ghosting you',
+  'Get on calls with serious prospects who already see you ' + 'as the authority that can help them.'
+]
+
+const whatYouWillLearn = [
+  'You will learn solid prospecting so you ' + 'stop begging every client to buy.',
+  'You will learn how to nurture a lead toward ' + 'closure, not torture them for conversion.',
+  'You will learn how to create an irresistible offer that makes the ' + 'prospect buy on their own, instead of you selling.',
+  'You will see a neuroscience-based approach that emotionally ' + 'drives clients to become your repeat customers.',
+  'If you are a consultant or a coach, you will learn ' + 'how to double your webinar conversion rate.',
+  'You will learn follow-up strategies that ' + 'stop prospects from ghosting you.',
+  'You will learn how to soft close a lead ' + 'the right way.',
+  'You will learn tonality that positions you as a partner in ' + 'front of the client, not a seller.',
+  'You will learn advanced objection handling so prospects stop ' + 'hiding behind smoke screen objections.',
+  'After this course, you will be able to convert clients from any industry or niche. This course is ' + 'built on human psychology principles that work across all buyer types.'
+]
+
+const targetAudience = [
+  'Consultants who are tired of being ghosted ' + 'after "great" calls',
+  'Advisors and Sales Executives ' + 'who want to reclaim their time',
+  'Coaches who want to pre-qualify ' + 'and convert serious buyers',
+  'Anyone ready to stop chasing and ' + 'start charging for their expertise',
+  'Anyone who\'s spending a lot of money on Ads, Teams and wondering ' + 'when they\'ll see any ROI'
 ]
 
 export default function CourseSalesMastery() {
@@ -138,61 +152,195 @@ export default function CourseSalesMastery() {
       </section>
 
       {/* ══════════════════════════
-          OUTCOMES
+          THE HOOK
       ══════════════════════════ */}
-      <section className="smp-outcomes-section">
+      <section className="smp-hook-section">
         <div className="container">
-          <div className="smp-outcomes-grid">
-            {outcomes.map(({ icon: Icon, label, desc }, i) => (
-              <motion.div key={label} className="smp-outcome-card" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}>
-                <div className="smp-outcome-icon"><Icon size={24} /></div>
-                <div className="smp-outcome-label">{label}</div>
-                <div className="smp-outcome-desc">{desc}</div>
-              </motion.div>
-            ))}
+          <div className="smp-hook-grid">
+            <motion.div className="smp-hook-left" initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+              <div className="smp-hook-audience-badge">
+                <Target size={14} className="text-red" /> COACHES, CONSULTANTS, ADVISORS, FREELANCERS, SALES EXECUTIVES AND BUSINESS OWNERS:
+              </div>
+              <h2 className="smp-hook-title">
+                STOP SELLING AND MAKE PROSPECTS<br/>
+                FEEL <span className="text-red">COMPELLED TO BUY</span>
+              </h2>
+              <p className="smp-hook-highlight">
+                Build a Premium Pipeline and attract only qualified prospects who pay you for your offer
+              </p>
+            </motion.div>
+
+            <motion.div className="smp-hook-right" initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+              <div className="smp-hook-feature-card">
+                <Brain size={28} className="text-red smp-hook-icon" />
+                <p>Enroll in our neuroscience-based Client Converting Course that's ROI positive from week 1, so you can scale as high as you want without ever worrying about ad spend or marketing spend</p>
+              </div>
+              <div className="smp-hook-feature-card">
+                <BookOpen size={28} className="text-red smp-hook-icon" />
+                <p><strong>Discover the complete 10 modules course that flips your Regular Call into a Revenue Stream - and fills your calendar with serious buyers only.</strong></p>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* ══════════════════════════
-          CURRICULUM
+          THE PROBLEM
+      ══════════════════════════ */}
+      <section className="smp-problem-section">
+        <div className="container smp-problem-container">
+          <motion.div className="smp-problem-text" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            <h2>You might be great at what you do.<br/>But every week, you find yourself doing free calls that go nowhere.</h2>
+            
+            <div className="smp-quote-box">
+              <p>They say:</p>
+              <ul>
+                <li>"We'll think about it."</li>
+                <li>"We're just exploring options."</li>
+                <li>"Let's revisit next quarter."</li>
+                <li>"It's out of my budget"</li>
+                <li>"Once you pitch your service they GHOST you"</li>
+              </ul>
+            </div>
+
+            <p className="smp-frustration">And you walk away frustrated, thinking,  "Why do I even bother?"</p>
+            
+            <div className="smp-truth-bomb">
+              <h3>Here's the truth no one tells you:</h3>
+              <p>Your "free call" isn't free. It's costing you Authority, Time, and Money.</p>
+              <p className="smp-truth-bold">And serious buyers don't want free calls.</p>
+              <div className="smp-wants-list">
+                <span>They want clarity.</span>
+                <span>They want frameworks.</span>
+                <span>They want to work with an expert who values their own time.</span>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════
+          THE SOLUTION & SYSTEM
+      ══════════════════════════ */}
+      <section className="smp-solution-section">
+        <div className="container">
+          <div className="smp-solution-top">
+            <h2>And there's a better way...<br/><span>With Sales Mastery Program</span></h2>
+            <p>What if you could book calls with pre-sold prospects who know you, know your worth, know how you can help them, and have already given you money commitment before the closure call even happens?</p>
+            <p className="smp-solution-bold">That's exactly what this training teaches you.</p>
+          </div>
+
+          <div className="smp-system-box">
+            <h3>Learn the full system I use to:</h3>
+            <ul className="smp-system-list">
+              {systemBullets.map((bullet, i) => (
+                <li key={i}><Check size={20} className="text-red" /> <span>{bullet}</span></li>
+              ))}
+            </ul>
+            <div className="smp-system-footer">
+              This isn't a theory, it's a zero-fluff well articulated course and it's the same method I have used (and helped clients use) to generate paid calls that lead to predictable 5 and 7-figure deals.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════
+          MID-PAGE CTA
+      ══════════════════════════ */}
+      <section className="smp-mid-cta">
+        <div className="container">
+          <div className="smp-mid-cta-box">
+            <h2 className="smp-mid-warning">STOP DOING UNLIMITED CALLS<br/>AND HOPING FOR 10% CONVERSION</h2>
+            <p className="smp-mid-bold">THAT'S NOT A SALES STRATEGY!</p>
+            <p className="smp-mid-sub">If you want to GET PAID CLIENTS EFFORTLESSLY</p>
+            <a href="#enroll" className="btn smp-btn-white">
+              SECURE YOUR FREE 30-MINUTE SESSION
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════
+          WHAT YOU WILL LEARN
+      ══════════════════════════ */}
+      <section className="smp-learn-section">
+        <div className="container">
+          <div className="smp-section-header">
+            <h2 className="section-title" style={{ textAlign: 'center' }}>What You Will Learn In This Course</h2>
+          </div>
+
+          <div className="smp-learn-list-wrapper">
+            <ul className="smp-learn-list-clean">
+              {whatYouWillLearn.map((text, i) => (
+                <motion.li key={i} initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}>
+                  <Zap size={20} className="text-red smp-learn-icon-inline" />
+                  <span>{text}</span>
+                </motion.li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════
+          CURRICULUM MODULES (IMAGE)
       ══════════════════════════ */}
       <section id="modules" className="smp-curriculum-section">
         <div className="container">
           <div className="smp-section-header">
-            <div className="eyebrow" style={{ justifyContent: 'center' }}>The Curriculum</div>
-            <h2 className="section-title" style={{ textAlign: 'center' }}>What Happens <span>Inside?</span></h2>
+             <h2 className="section-title" style={{ textAlign: 'center', textTransform: 'uppercase' }}>SALES MASTERY PROGRAM-MODULES</h2>
           </div>
-          <div className="smp-journey">
-            <div className="smp-pillars">
-              {[
-                { num: '01–02', theme: 'The Foundation', teaser: 'Most salespeople lose before they even open their mouth. Discover how to rewire your mindset.' },
-                { num: '03–05', theme: 'The System', teaser: 'Master the sequence that top closers follow on every call.' },
-                { num: '06–07', theme: 'The Conversion', teaser: 'The techniques that turn "I\'ll think about it" into signed deals.' },
-                { num: '08–09', theme: 'The Armour', teaser: 'How to handle objections and price pushback with ease.' },
-                { num: '10',    theme: 'The Scale', teaser: 'Multiplying your results using modern digital tools.' },
-              ].map(({ num, theme, teaser }, i) => (
-                <motion.div key={num} className="smp-pillar" initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
-                  <div className="smp-pillar-num">{num}</div>
-                  <div className="smp-pillar-body">
-                    <div className="smp-pillar-theme">{theme}</div>
-                    <p className="smp-pillar-teaser">{teaser}</p>
-                  </div>
-                </motion.div>
-              ))}
+          <motion.div className="smp-modules-image-wrapper" initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}>
+            <img src="/assets/modules-books.png" alt="10 Sales Mastery Modules" className="smp-modules-img" />
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════
+          WHY IT WORKS
+      ══════════════════════════ */}
+      <section className="smp-why-section">
+        <div className="container">
+          <motion.div className="smp-why-content" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            <h3 className="smp-roi-heading">Imagine knowing every penny you spend on ads will come back the same day.</h3>
+            <p className="smp-roi-sub">That's what the Sales Mastery Program makes possible - Immediate ROI, Unlimited Growth.</p>
+            
+            <h4 className="smp-works-title">Here's why it works when nothing else does:</h4>
+            
+            <div className="smp-works-box">
+              <p><strong>The Sales Mastery Program flips the model:</strong><br/>Instead of paying to get clients, clients pay to get to you.</p>
+              <p>Neuroscience Strategies of Sales Mastery Program reverses the process. You stop chasing people who waste your time - and start talking only to those willing to invest first.</p>
+              
+              <ul className="smp-works-bullets">
+                <li><CheckCircle size={18} className="text-red" /> <span>It turns your funnel into a self-funding system.</span></li>
+                <li><CheckCircle size={18} className="text-red" /> <span>It pre-frames authority. Prospects show up already seeing you as the expert - not a vendor.</span></li>
+                <li><CheckCircle size={18} className="text-red" /> <span>It turns calls into conversions. Every conversation starts with trust, clarity, and buyer intent - not skepticism.</span></li>
+              </ul>
+              
+              <p>That's how real experts build predictable, profitable pipelines - and scale them as high as they choose, without begging, chasing, or convincing.</p>
+              <p className="smp-works-highlight">You also get the emotional rush every day of seeing buyers come into your business!</p>
             </div>
-            <motion.div className="smp-proof-block" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-              <div className="smp-proof-top-bar" />
-              <div className="smp-proof-headline">By the end, you won't just know how to sell. You'll think differently.</div>
-              <div className="smp-proof-stats">
-                 {[ { val: '10', l: 'Modules' }, { val: '8+', l: 'Hours' }, { val: '40+', l: 'Scripts' }, { val: '5K+', l: 'Trained' }].map(s => (
-                   <div key={s.l} className="smp-proof-stat"><div className="smp-proof-stat-val">{s.val}</div><div className="smp-proof-stat-label">{s.l}</div></div>
-                 ))}
-              </div>
-              <div className="smp-proof-quote">"The real transformation happens when you start applying what you learn on live calls."</div>
-              <div className="smp-proof-attr">— Ankit Khare, Founder NTS</div>
-            </motion.div>
-          </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════
+          WHO THIS IS FOR
+      ══════════════════════════ */}
+      <section className="smp-who-section">
+        <div className="container">
+          <motion.div className="smp-who-box" initial={{ opacity: 0, scale: 0.98 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}>
+            <div className="smp-who-top-bar" />
+            <h2 className="smp-who-title">WHO THIS IS FOR</h2>
+            <ul className="smp-who-list">
+              {targetAudience.map((audience, i) => (
+                <li key={i}><Target size={18} /> <span>{audience}</span></li>
+              ))}
+            </ul>
+            <div className="smp-who-footer">
+              If that's you - this is the Course you've been looking for
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -210,12 +358,15 @@ export default function CourseSalesMastery() {
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <div className="smp-enroll-wrap">
             <div className="smp-section-header">
-              <div className="eyebrow" style={{ justifyContent: 'center' }}>Enrollment</div>
-              <h2 className="section-title" style={{ textAlign: 'center' }}>Ready to <span>Master Sales?</span></h2>
-              <p className="smp-section-sub" style={{ textAlign: 'center', margin: '0 auto' }}>Fill in your details and Ankit will personally respond within 24 hours.</p>
+              <p className="smp-zero-fluff">ZERO FLUFF - NO UPSELLING - NO CROSS SELLING</p>
+              <p className="smp-one-course">Only 1 Course for all your Revenue Generating Needs.</p>
+              <h2 className="section-title" style={{ textAlign: 'center', marginTop: '30px' }}>So, if you're READY TO 10X REVENUE THE <span>EFFORTLESS WAY...</span></h2>
             </div>
 
             <div className="smp-form-card">
+              <div className="smp-form-header">
+                <h3>SECURE YOUR FREE 30-MINUTE SESSION</h3>
+              </div>
               <form onSubmit={handleSubmit(onSubmit)} style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
                 <div className="smp-form-row">
                   <div className="form-group">
@@ -275,7 +426,7 @@ export default function CourseSalesMastery() {
                 </div>
 
                 <button type="submit" className="btn btn-primary" disabled={isSubmitting} style={{ justifyContent: 'center', width: '100%', padding: '16px', fontSize: '1rem', opacity: isSubmitting ? 0.7 : 1 }}>
-                  {isSubmitting ? 'Submitting...' : <><Send size={18} /> Submit Enrollment Request</>}
+                  {isSubmitting ? 'Submitting...' : <><Send size={18} /> SECURE YOUR FREE 30-MINUTE SESSION</>}
                 </button>
                 <p className="smp-form-note">No spam. Your data is secure.</p>
               </form>
@@ -299,10 +450,8 @@ export default function CourseSalesMastery() {
         .smp-h1 { font-family: var(--font-head); font-weight: 900; font-size: clamp(3rem, 6vw, 5.5rem); line-height: 0.95; text-transform: uppercase; color: var(--text); margin-bottom: 20px; }
         .smp-h1-accent { color: var(--red); position: relative; }
         .smp-hero-sub { font-size: 1.15rem; color: var(--text-muted); line-height: 1.8; font-weight: 400; max-width: 480px; margin-bottom: 28px; }
-        
         .smp-meta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 36px; }
         .smp-meta-item { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; background: var(--surface); border: 1px solid var(--border); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; color: var(--text-muted); }
-        
         .smp-hero-card { background: var(--bg-2); border: 1px solid var(--border); padding: 36px 32px; position: relative; }
         .smp-card-top-bar { position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--red), transparent); }
         .smp-card-label { font-size: 0.8rem; font-weight: 700; color: var(--red); margin-bottom: 24px; text-transform: uppercase; letter-spacing: 0.1em; }
@@ -312,65 +461,112 @@ export default function CourseSalesMastery() {
         .smp-guarantee-title { font-weight: 700; font-size: 0.95rem; text-transform: uppercase; color: var(--text); margin-bottom: 6px; letter-spacing: 0.05em; }
         .smp-guarantee-text { font-size: 0.9rem; color: var(--text-muted); font-weight: 400; line-height: 1.6; }
 
-        /* Outcomes */
-        .smp-outcomes-section { background: var(--bg-2); padding: 64px 0; }
-        .smp-outcomes-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--border); }
-        .smp-outcome-card { background: var(--bg-2); padding: 32px 24px; text-align: center; }
-        .smp-outcome-icon { width: 48px; height: 48px; background: var(--red-dim); border: 1px solid var(--border-red); display: flex; align-items: center; justify-content: center; color: var(--red); margin: 0 auto 16px; }
-        .smp-outcome-label { font-weight: 700; font-size: 0.9rem; text-transform: uppercase; color: var(--text); margin-bottom: 8px; letter-spacing: 0.05em;}
-        .smp-outcome-desc { font-size: 0.85rem; color: var(--text-dim); font-weight: 400; line-height: 1.6; }
+        /* The Hook */
+        .smp-hook-section { background: var(--bg-2); padding: 100px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+        .smp-hook-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items: center; }
+        .smp-hook-audience-badge { display: inline-flex; align-items: center; gap: 8px; font-size: 0.75rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 24px; padding: 8px 14px; border: 1px solid var(--border); border-radius: 4px; background: var(--surface); }
+        .smp-hook-title { font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; color: var(--text); line-height: 1.15; margin-bottom: 24px; text-transform: uppercase; }
+        .smp-hook-title span.text-red { color: var(--red); }
+        .smp-hook-highlight { font-size: 1.25rem; font-weight: 600; color: var(--text-muted); line-height: 1.6; border-left: 3px solid var(--red); padding-left: 16px; margin: 0; }
+        .smp-hook-right { display: flex; flex-direction: column; gap: 20px; }
+        .smp-hook-feature-card { background: var(--bg); border: 1px solid var(--border); padding: 32px; border-radius: 6px; display: flex; gap: 24px; align-items: flex-start; transition: transform 0.2s; }
+        .smp-hook-feature-card:hover { transform: translateY(-3px); border-color: var(--border-red); }
+        .smp-hook-icon { flex-shrink: 0; background: var(--red-dim); padding: 14px; border-radius: 8px; width: 56px; height: 56px; border: 1px solid var(--border-red); }
+        .smp-hook-feature-card p { font-size: 1.05rem; color: var(--text); line-height: 1.6; margin: 0; }
 
-        /* Curriculum */
+        /* Problem Section */
+        .smp-problem-section { background: var(--surface); padding: 80px 0; border-bottom: 1px solid var(--border); }
+        .smp-problem-container { max-width: 800px; margin: 0 auto; }
+        .smp-problem-text h2 { font-size: 2rem; font-weight: 800; color: var(--text); line-height: 1.3; margin-bottom: 30px; text-align: center; }
+        .smp-quote-box { background: var(--bg-2); border: 1px solid var(--border); border-left: 4px solid var(--red); padding: 24px 32px; margin-bottom: 24px; }
+        .smp-quote-box p { font-weight: 700; text-transform: uppercase; font-size: 0.9rem; color: var(--red); margin-bottom: 16px; letter-spacing: 0.05em; }
+        .smp-quote-box ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+        .smp-quote-box li { font-size: 1.1rem; color: var(--text-muted); font-style: italic; }
+        .smp-frustration { font-size: 1.2rem; font-weight: 600; color: var(--text); text-align: center; margin-bottom: 40px; }
+        .smp-truth-bomb { background: var(--bg); padding: 40px; border-radius: 4px; text-align: center; border: 1px solid var(--border); }
+        .smp-truth-bomb h3 { font-size: 1.5rem; color: var(--red); margin-bottom: 16px; text-transform: uppercase; font-weight: 800; }
+        .smp-truth-bomb p { font-size: 1.1rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px; }
+        .smp-truth-bold { font-weight: 800; color: var(--text) !important; font-size: 1.2rem !important; }
+        .smp-wants-list { display: flex; flex-direction: column; gap: 12px; font-weight: 700; color: var(--text); font-size: 1.2rem; margin-top: 24px; }
+
+        /* Solution Section */
+        .smp-solution-section { background: var(--bg); padding: 80px 0; }
+        .smp-solution-top { max-width: 800px; margin: 0 auto 40px; text-align: center; }
+        .smp-solution-top h2 { font-size: 2rem; font-weight: 800; color: var(--text); margin-bottom: 20px; line-height: 1.3; }
+        .smp-solution-top h2 span { color: var(--red); }
+        .smp-solution-top p { font-size: 1.15rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; }
+        .smp-solution-bold { font-weight: 700; color: var(--text) !important; font-size: 1.25rem !important; }
+        .smp-system-box { max-width: 800px; margin: 0 auto; background: var(--bg-2); border: 1px solid var(--border); padding: 40px; border-radius: 4px; }
+        .smp-system-box h3 { font-size: 1.3rem; font-weight: 800; color: var(--text); margin-bottom: 24px; text-transform: uppercase; }
+        .smp-system-list { list-style: none; padding: 0; margin: 0 0 30px 0; display: flex; flex-direction: column; gap: 20px; }
+        .smp-system-list li { display: flex; gap: 16px; align-items: flex-start; font-size: 1.1rem; color: var(--text-muted); line-height: 1.5; }
+        .text-red { color: var(--red); flex-shrink: 0; margin-top: 3px; }
+        .smp-system-footer { font-size: 1rem; color: var(--text-dim); background: var(--surface); padding: 20px; border: 1px solid var(--border); font-style: italic; line-height: 1.6; }
+
+        /* Mid CTA */
+        .smp-mid-cta { background: #d62828; padding: 80px 20px; text-align: center; border-radius: 4px; }
+        .smp-mid-cta-box { max-width: 800px; margin: 0 auto; }
+        .smp-mid-warning { font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 900; color: #ffffff; line-height: 1.3; margin-bottom: 20px; text-transform: uppercase; }
+        .smp-mid-bold { font-size: clamp(1.2rem, 2vw, 1.5rem); font-weight: 700; color: #ffffff; margin-bottom: 24px; text-transform: uppercase; }
+        .smp-mid-sub { font-size: 1.2rem; font-weight: 700; color: #ffffff; margin-bottom: 40px; }
+        .smp-btn-white { display: inline-block; background: #ffffff; color: #d62828; font-weight: 800; font-size: 1.1rem; padding: 20px 40px; border-radius: 6px; text-transform: uppercase; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
+        .smp-btn-white:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,0.15); color: #b01a1a; }
+
+        /* Learn Section */
+        .smp-learn-section { background: var(--surface); padding: 80px 0; border-bottom: 1px solid var(--border); }
+        .smp-learn-list-wrapper { max-width: 800px; margin: 0 auto; background: var(--bg-2); border: 1px solid var(--border); padding: 40px; }
+        .smp-learn-list-clean { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 24px; }
+        .smp-learn-list-clean li { display: flex; gap: 16px; align-items: flex-start; font-size: 1.1rem; color: var(--text-muted); line-height: 1.6; }
+        .smp-learn-icon-inline { flex-shrink: 0; margin-top: 4px; }
+
+        /* Modules Section */
         .smp-curriculum-section { background: var(--bg); padding: 80px 0; }
-        .smp-section-header { text-align: center; margin-bottom: 48px; }
-        .smp-journey { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--border); border: 1px solid var(--border); }
-        .smp-pillars { display: flex; flex-direction: column; gap: 1px; background: var(--border); }
-        .smp-pillar { display: flex; background: var(--bg-2); transition: background 0.2s; border-left: 3px solid transparent; }
-        .smp-pillar:hover { background: var(--surface-2); border-left-color: var(--red); }
-        .smp-pillar-num { font-weight: 900; font-size: 0.8rem; color: var(--red); writing-mode: vertical-rl; padding: 24px 16px; border-right: 1px solid var(--border); letter-spacing: 0.1em; }
-        .smp-pillar-body { padding: 24px; }
-        .smp-pillar-theme { font-weight: 800; font-size: 1rem; text-transform: uppercase; color: var(--text); margin-bottom: 10px; letter-spacing: 0.05em; }
-        .smp-pillar-teaser { font-size: 0.95rem; color: var(--text-muted); font-weight: 400; line-height: 1.65; }
+        .smp-modules-image-wrapper { max-width: 1000px; margin: 0 auto; }
+        .smp-modules-img { width: 100%; height: auto; display: block; border-radius: 4px; }
 
-        /* Proof Block */
-        .smp-proof-block { background: var(--bg-2); padding: 40px 36px; position: relative; }
-        .smp-proof-top-bar { position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--red), transparent); }
-        .smp-proof-headline { font-weight: 800; font-size: 1.4rem; line-height: 1.3; color: var(--text); text-transform: uppercase; margin-bottom: 20px; }
-        .smp-proof-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 32px; }
-        .smp-proof-stat { background: var(--surface); padding: 20px 16px; text-align: center; }
-        .smp-proof-stat-val { font-weight: 900; font-size: 1.8rem; color: var(--red); line-height: 1; }
-        .smp-proof-stat-label { font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); margin-top: 8px; letter-spacing: 0.1em;}
-        .smp-proof-quote { font-size: 1rem; color: var(--text-muted); font-style: italic; line-height: 1.7; padding-left: 16px; border-left: 2px solid var(--red); }
-        .smp-proof-attr { font-size: 0.8rem; text-transform: uppercase; color: var(--text-dim); padding-left: 16px; margin-top: 10px; font-weight: 600; letter-spacing: 0.1em; }
+        /* Why It Works Section */
+        .smp-why-section { background: var(--surface); padding: 80px 0; border-top: 1px solid var(--border); }
+        .smp-why-content { max-width: 800px; margin: 0 auto; }
+        .smp-roi-heading { font-size: 1.8rem; font-weight: 800; color: var(--text); line-height: 1.3; text-align: center; margin-bottom: 16px; }
+        .smp-roi-sub { font-size: 1.2rem; font-weight: 600; color: var(--red); text-align: center; margin-bottom: 40px; }
+        .smp-works-title { font-size: 1.3rem; font-weight: 800; color: var(--text); margin-bottom: 24px; text-transform: uppercase; }
+        .smp-works-box { background: var(--bg-2); border: 1px solid var(--border); padding: 40px; border-left: 4px solid var(--red); font-size: 1.1rem; color: var(--text-muted); line-height: 1.7; }
+        .smp-works-box p { margin-bottom: 20px; }
+        .smp-works-bullets { list-style: none; padding: 0; margin: 0 0 24px 0; display: flex; flex-direction: column; gap: 16px; }
+        .smp-works-bullets li { display: flex; gap: 12px; align-items: flex-start; }
+        .smp-works-highlight { font-weight: 700; color: var(--text); font-size: 1.15rem; margin-top: 24px; margin-bottom: 0 !important; }
 
-        /* Highlights */
-        .smp-why-section { background: var(--bg-2); padding: 80px 0; }
-        .smp-highlights-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); }
-        .smp-highlight-card { background: var(--bg-2); padding: 36px 32px; border-left: 3px solid transparent; transition: all 0.2s; }
-        .smp-highlight-card:hover { background: var(--surface-2); border-left-color: var(--red); }
-        .smp-highlight-icon { width: 48px; height: 48px; background: var(--red-dim); border: 1px solid var(--border-red); display: flex; align-items: center; justify-content: center; color: var(--red); margin-bottom: 20px; }
-        .smp-highlight-title { font-weight: 700; font-size: 1.1rem; text-transform: uppercase; color: var(--text); margin-bottom: 12px; letter-spacing: 0.05em; }
-        .smp-highlight-desc { font-size: 1rem; color: var(--text-muted); font-weight: 400; line-height: 1.75; }
+        /* Who This Is For */
+        .smp-who-section { background: var(--bg); padding: 80px 0; }
+        .smp-who-box { max-width: 800px; margin: 0 auto; background: var(--bg-2); border: 1px solid var(--border); padding: 40px; position: relative; }
+        .smp-who-top-bar { position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--red), transparent); }
+        .smp-who-title { font-weight: 900; font-size: 1.8rem; color: var(--text); text-align: center; margin-bottom: 30px; letter-spacing: 0.05em; }
+        .smp-who-list { list-style: none; padding: 0; margin: 0 0 30px 0; display: flex; flex-direction: column; gap: 20px; }
+        .smp-who-list li { display: flex; gap: 16px; align-items: flex-start; font-size: 1.15rem; color: var(--text-muted); line-height: 1.5; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+        .smp-who-list li:last-child { border-bottom: none; padding-bottom: 0; }
+        .smp-who-list li svg { color: var(--red); flex-shrink: 0; margin-top: 4px; }
+        .smp-who-footer { font-size: 1.1rem; font-weight: 800; color: var(--text); text-align: center; background: var(--red-dim); padding: 20px; border: 1px solid var(--border-red); }
 
         /* Enroll */
-        .smp-enroll-section { background: var(--bg); padding: 80px 0; position: relative; overflow: hidden; }
+        .smp-enroll-section { background: var(--bg); padding: 80px 0; position: relative; overflow: hidden; border-top: 1px solid var(--border); }
         .smp-enroll-glow { position: absolute; top: 50%; left: 50%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(220,38,38,0.05) 0%, transparent 70%); transform: translate(-50%,-50%); pointer-events: none; }
         .smp-enroll-wrap { max-width: 800px; margin: 0 auto; }
+        .smp-zero-fluff { font-size: 1.2rem; font-weight: 800; color: var(--red); text-align: center; margin-bottom: 10px; }
+        .smp-one-course { font-size: 1.1rem; font-weight: 600; color: var(--text-muted); text-align: center; margin-bottom: 20px; }
         .smp-form-card { background: var(--bg-2); border: 1px solid var(--border); border-top: 3px solid var(--red); padding: 48px 40px; margin-top: 40px; }
+        .smp-form-header { text-align: center; margin-bottom: 30px; }
+        .smp-form-header h3 { font-size: 1.4rem; color: var(--text); text-transform: uppercase; font-weight: 900; margin-bottom: 8px; }
         .smp-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
         .smp-form-note { font-size: 0.85rem; color: var(--text-dim); text-align: center; margin-top: 16px; }
 
-        @media (max-width: 1024px) { .smp-outcomes-grid { grid-template-columns: repeat(3, 1fr) !important; } }
         @media (max-width: 900px) {
           .smp-hero-layout { grid-template-columns: 1fr !important; gap: 40px !important; }
-          .smp-highlights-grid { grid-template-columns: 1fr !important; }
-          .smp-journey { grid-template-columns: 1fr !important; }
+          .smp-hook-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
         }
         @media (max-width: 600px) {
-          .smp-outcomes-grid { grid-template-columns: 1fr !important; }
           .smp-form-row { grid-template-columns: 1fr !important; }
-          .smp-pillar { flex-direction: column; }
-          .smp-pillar-num { writing-mode: horizontal-tb; border-right: none; border-bottom: 1px solid var(--border); }
+          .smp-problem-text h2 { font-size: 1.5rem; }
+          .smp-btn-white { width: 100%; padding: 16px; }
         }
       `}</style>
     </div>
