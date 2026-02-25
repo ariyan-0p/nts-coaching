@@ -1,33 +1,45 @@
 import { useInView } from 'react-intersection-observer'
 
-// Row 1 Data
-const brandsRow1 = [
-  "Entrepreneur", "MSNBC", "ELITE DAILY", "HUFFPOST", "FOX NEWS", "Forbes",
-  "Entrepreneur", "MSNBC", "ELITE DAILY", "HUFFPOST", "FOX NEWS", "Forbes",
+// All logos based on the uploaded assets
+const row1Logos = [
+  { src: '/assets/The_Times_of_India_Logo_full.png', alt: 'The Times of India' },
+  { src: '/assets/Hindustan_Times_logo.svg.png', alt: 'Hindustan Times' },
+  { src: '/assets/The_Economic_Times_logo.png', alt: 'The Economic Times' },
+  { src: '/assets/ANI-news-e1678554173312.webp', alt: 'ANI News' },
+  // Repeated to make the marquee loop smooth
+  { src: '/assets/The_Times_of_India_Logo_full.png', alt: 'The Times of India' },
+  { src: '/assets/Hindustan_Times_logo.svg.png', alt: 'Hindustan Times' },
+  { src: '/assets/The_Economic_Times_logo.png', alt: 'The Economic Times' },
+  { src: '/assets/ANI-news-e1678554173312.webp', alt: 'ANI News' },
 ]
 
-// Row 2 Data
-const brandsRow2 = [
-  "TODAY", "Daily Mail", "FINANCIAL REVIEW", "CEO Magazine", "smartcompany", "THE AGE",
-  "TODAY", "Daily Mail", "FINANCIAL REVIEW", "CEO Magazine", "smartcompany", "THE AGE",
+const row2Logos = [
+  { src: '/assets/dainik bhaskar logo.jpg', alt: 'Dainik Bhaskar' },
+  { src: '/assets/amar ujala.png', alt: 'Amar Ujala' },
+  { src: '/assets/dainik jagran.png', alt: 'Dainik Jagran' },
+  { src: '/assets/daily-Hunt-Logo.png', alt: 'Daily Hunt' },
+  // Repeated
+  { src: '/assets/dainik bhaskar logo.jpg', alt: 'Dainik Bhaskar' },
+  { src: '/assets/amar ujala.png', alt: 'Amar Ujala' },
+  { src: '/assets/dainik jagran.png', alt: 'Dainik Jagran' },
+  { src: '/assets/daily-Hunt-Logo.png', alt: 'Daily Hunt' },
 ]
 
-// Row 3 Data
-const brandsRow3 = [
-  "Business Insider", "TechCrunch", "Wall Street Journal", "Bloomberg", "Inc.", "Fast Company",
-  "Business Insider", "TechCrunch", "Wall Street Journal", "Bloomberg", "Inc.", "Fast Company",
+const row3Logos = [
+  { src: '/assets/DNA_Newspaper_Logo.svg.png', alt: 'DNA Newspaper' },
+  { src: '/assets/Wirelogo.svg.png', alt: 'The Wire' },
+  { src: '/assets/images.jpg', alt: 'News Outlet' },
+  { src: '/assets/The_Times_of_India_Logo_full.png', alt: 'The Times of India' }, // Mixing in a big one
+  // Repeated
+  { src: '/assets/DNA_Newspaper_Logo.svg.png', alt: 'DNA Newspaper' },
+  { src: '/assets/Wirelogo.svg.png', alt: 'The Wire' },
+  { src: '/assets/images.jpg', alt: 'News Outlet' },
+  { src: '/assets/The_Times_of_India_Logo_full.png', alt: 'The Times of India' },
 ]
 
-const LogoItem = ({ text, index }) => (
-  <div 
-    className="brand-logo-item"
-    style={{
-      fontFamily: index % 2 === 0 ? 'serif' : 'sans-serif',
-      fontWeight: 800,
-      textTransform: text === "Forbes" || text === "Entrepreneur" || text === "Inc." ? 'capitalize' : 'uppercase',
-    }}
-  >
-    {text}
+const LogoItem = ({ logo }) => (
+  <div className="brand-logo-item">
+    <img src={logo.src} alt={logo.alt} title={logo.alt} />
   </div>
 )
 
@@ -38,7 +50,7 @@ export default function FeaturedIn() {
     <section ref={ref} style={{ padding: '60px 0', background: 'var(--bg)', overflow: 'hidden' }}>
       <div className="container-fluid" style={{ opacity: inView ? 1 : 0, transition: 'opacity 1s ease' }}>
         
-        {/* BROUGHT THIS BACK: The Section Heading */}
+        {/* The Section Heading */}
         <h3 style={{ 
           textAlign: 'center', 
           fontFamily: 'var(--font-head)', 
@@ -57,30 +69,30 @@ export default function FeaturedIn() {
           {/* ROW 1: Scrolls Left */}
           <div className="marquee-track scroll-left-1">
             <div className="marquee-content">
-              {brandsRow1.map((brand, i) => <LogoItem key={i} text={brand} index={i} />)}
+              {row1Logos.map((logo, i) => <LogoItem key={`r1-1-${i}`} logo={logo} />)}
             </div>
             <div className="marquee-content">
-              {brandsRow1.map((brand, i) => <LogoItem key={`dup-${i}`} text={brand} index={i} />)}
+              {row1Logos.map((logo, i) => <LogoItem key={`r1-2-${i}`} logo={logo} />)}
             </div>
           </div>
 
           {/* ROW 2: Scrolls Right */}
           <div className="marquee-track scroll-right" style={{ marginTop: '35px' }}>
             <div className="marquee-content">
-              {brandsRow2.map((brand, i) => <LogoItem key={i} text={brand} index={i + 6} />)}
+              {row2Logos.map((logo, i) => <LogoItem key={`r2-1-${i}`} logo={logo} />)}
             </div>
             <div className="marquee-content">
-              {brandsRow2.map((brand, i) => <LogoItem key={`dup-${i}`} text={brand} index={i + 6} />)}
+              {row2Logos.map((logo, i) => <LogoItem key={`r2-2-${i}`} logo={logo} />)}
             </div>
           </div>
 
           {/* ROW 3: Scrolls Left */}
           <div className="marquee-track scroll-left-2" style={{ marginTop: '35px' }}>
             <div className="marquee-content">
-              {brandsRow3.map((brand, i) => <LogoItem key={i} text={brand} index={i + 12} />)}
+              {row3Logos.map((logo, i) => <LogoItem key={`r3-1-${i}`} logo={logo} />)}
             </div>
             <div className="marquee-content">
-              {brandsRow3.map((brand, i) => <LogoItem key={`dup-${i}`} text={brand} index={i + 12} />)}
+              {row3Logos.map((logo, i) => <LogoItem key={`r3-2-${i}`} logo={logo} />)}
             </div>
           </div>
 
@@ -108,30 +120,33 @@ export default function FeaturedIn() {
           gap: 70px; 
           padding-right: 70px; 
           will-change: transform; 
+          flex-shrink: 0;
+          min-width: 100%;
+          justify-content: space-around;
         }
 
         .brand-logo-item {
-          font-size: 1.5rem;
-          color: var(--text-dim); 
+          display: flex;
+          align-items: center;
+          justify-content: center;
           transition: all 0.3s ease;
           cursor: pointer;
           flex-shrink: 0;
         }
 
         .brand-logo-item:hover {
-          color: var(--text);
           transform: scale(1.1);
         }
         
         .brand-logo-item img {
            max-height: 40px;
            width: auto;
-           filter: grayscale(100%) brightness(150%) opacity(0.5); 
+           /* REMOVED THE GRAYSCALE FILTER HERE */
            transition: all 0.3s ease;
+           object-fit: contain;
         }
-        .brand-logo-item:hover img {
-           filter: grayscale(0%) brightness(100%) opacity(1); 
-        }
+        
+        /* REMOVED THE HOVER FILTER RULE AS IT IS NO LONGER NEEDED */
 
         .scroll-left-1 .marquee-content {
           animation: scrollLeft 35s linear infinite;
@@ -157,7 +172,6 @@ export default function FeaturedIn() {
 
         @media (max-width: 768px) {
           .marquee-content { gap: 40px; padding-right: 40px; }
-          .brand-logo-item { font-size: 1.1rem; }
           .marquee-track { margin-top: 25px !important; }
         }
       `}</style>
