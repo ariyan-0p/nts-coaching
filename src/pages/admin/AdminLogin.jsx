@@ -114,12 +114,6 @@ export default function AdminLogin() {
               {isSubmitting ? 'Signing in...' : <><LogIn size={16} /> Sign In</>}
             </button>
           </form>
-
-          <div style={{ marginTop: 20, padding: '12px', background: 'var(--surface)', border: '1px solid var(--border)', textAlign: 'center' }}>
-            <p style={{ fontSize: '0.72rem', color: 'var(--text-dim)', fontFamily: 'var(--font-head)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-              Demo: admin / nts@2025
-            </p>
-          </div>
         </div>
 
         <p style={{ textAlign: 'center', marginTop: 20, fontSize: '0.78rem', color: 'var(--text-dim)' }}>
