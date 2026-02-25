@@ -37,7 +37,7 @@ export default function ContactSection() {
         <motion.div initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }} style={{ textAlign: 'center', marginBottom: 64 }}>
           <div className="eyebrow" style={{ justifyContent: 'center' }}>Let's Talk Sales Strategy</div>
           <h2 className="section-title" style={{ textAlign: 'center' }}>I'm Just One Message Away From <span>Helping You Grow</span></h2>
-          <p className="section-sub" style={{ margin: '16px auto 0', textAlign: 'center' }}>Whether you're an individual looking to close bigger deals or a company wanting to uplevel your entire sales team — let's make it happen.</p>
+          <p className="section-sub" style={{ margin: '16px auto 0', textAlign: 'center' }}>Whether you're an individual looking to close bigger deals or a company wanting to level-up your entire sales team — let's make it happen.</p>
         </motion.div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2px', background: 'var(--border)', border: '1px solid var(--border)' }}>

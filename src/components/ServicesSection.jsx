@@ -42,7 +42,7 @@ const services = [
     icon: Phone,
     number: '06',
     title: 'Sales Funnel Diagnosis',
-    desc: "Not converting? I'll audit your complete sales funnel — from first contact to close — and identify & fix the leaks fast. Includes a Video Review, PDF Report, and a 30-Min Strategy Session.",
+    desc: "Not converting? We will audit your complete sales funnel — from first contact to close — and identify & fix the leaks fast. Includes a Video Review, PDF Report, and a 30-Min Strategy Session.",
     tags: ['Full Audit', 'PDF Report', '30-Min Strategy'],
   },
 ]
@@ -69,7 +69,7 @@ export default function ServicesSection() {
           <div className="services-header__left">
             <div className="eyebrow">What We Do</div>
             <h2 className="section-title">
-              Ready To Level Up <span>Your Sales</span>
+              Ready To <span>Level Up?</span>
             </h2>
           </div>
           <div className="services-header__right">

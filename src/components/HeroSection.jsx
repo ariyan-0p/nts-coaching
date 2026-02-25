@@ -10,7 +10,7 @@ const slides = [
     tag: "Sales Mastery",
     headline: ["Helping You Master", "Sales & Close"],
     accent: "High Ticket Deals",
-    subtext: "Sales Coach | 18+ Years Experience | 500+ Corporate Workshops | Proven Results Across Industries",
+    subtext: "Sales Coach | 18+ Years of Sales Experience | 500+ Corporate Workshops | Proven Results Across Industries",
   },
   {
     id: 1,
@@ -24,12 +24,12 @@ const slides = [
     tag: "Team Transformation",
     headline: ["Transform Teams Into"],
     accent: "Closing Machines",
-    subtext: "Blend battle-tested sales strategies with neuroscience-backed buyer psychology to crack even the toughest deals.",
+    subtext: "Blending battle-tested sales strategies with neuroscience-backed buyer psychology to crack even the toughest deals.",
   },
 ];
 
 const stats = [
-  { icon: TrendingUp, value: "18+", label: "Years Experience" },
+  { icon: TrendingUp, value: "18+", label: "Years of Sales Experience" },
   { icon: Users,      value: "5K+", label: "Professionals Trained" },
   { icon: Award,      value: "500+", label: "Corporate Workshops" },
   { icon: Zap,        value: "98%",  label: "Success Rate" },
@@ -749,8 +749,7 @@ export default function HeroSection() {
                 From Zero to<br />Closing Machine
               </div>
               <div className="vid-panel-sub">
-                The unfiltered story behind 18 years, 5,000+ professionals trained,
-                and a sales system that works across every industry.
+                The unfiltered story behind 18 years of experience, empowering 5000+ professionals with a sales system that delivers across every industry.
               </div>
               <div
                 className="vid-panel-cta"

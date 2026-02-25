@@ -75,7 +75,7 @@ export default function TestimonialsSection() {
         >
           <div>
             <div className="eyebrow">Wall of Fame</div>
-            <h2 className="section-title">Client Wins That <span>Speak for Themselves</span></h2>
+            <h2 className="section-title">Client Wins That <span>Stands Out</span></h2>
           </div>
           <div style={{ display: 'flex', gap: 12 }}>
             <button onClick={prev} className="nav-btn"><ChevronLeft size={20} /></button>

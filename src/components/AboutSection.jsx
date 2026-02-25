@@ -39,9 +39,9 @@ export default function AboutSection() {
             </p>
 
             <p style={{ fontSize: '1.15rem', color: 'var(--text-muted)', lineHeight: 1.8, fontWeight: 400 }}>
-              The Nail the Sale system is the result of thousands of hours spent teaching, speaking, and coaching teams across IT, Real Estate, Startups, and Fortune 500 giants... 
+              The Nail the Sale system is the result of thousands of hours spent teaching, speaking, and coaching teams across Automobile, Retail, Subscription based businesses, Education ,SMEs ... 
               <br /><br />
-              And I can't wait to share it with you.
+              And I can't wait to share it with you!
             </p>
           </motion.div>
 

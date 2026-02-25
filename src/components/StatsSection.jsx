@@ -29,7 +29,7 @@ export default function StatsSection() {
           transition={{ duration: 0.6 }}
         >
           <div className="eyebrow">By The Numbers</div>
-          <h2 className="section-title">Growth That <span>Speaks Itself</span></h2>
+          <h2 className="section-title">Growth That <span>Speaks For Itself</span></h2>
         </motion.div>
 
         {/* Graph */}
@@ -75,7 +75,7 @@ export default function StatsSection() {
               fill="var(--text-muted)" fontSize="14" fontFamily="var(--font-head)"
               fontWeight="700" letterSpacing="0.12em" textAnchor="middle"
               initial={{ opacity: 0 }} animate={{ opacity: inView ? 1 : 0 }} transition={{ delay: inView ? 0.5 : 0 }}>
-              YEARS OF EXPERIENCE
+              YEARS OF SALES EXPERIENCE
             </motion.text>
 
             {/* ── Year ticks ── */}
@@ -84,7 +84,7 @@ export default function StatsSection() {
               { x: 280, label: '2010' },
               { x: 480, label: '2014' },
               { x: 680, label: '2018' },
-              { x: 880, label: '2024' },
+              { x: 880, label: '2026' },
             ].map(({ x, label }) => (
               <motion.g key={label}
                 initial={{ opacity: 0 }} animate={{ opacity: inView ? 1 : 0 }} transition={{ delay: inView ? 0.6 : 0 }}>
@@ -233,10 +233,10 @@ export default function StatsSection() {
         {/* ── 4 stat pills below graph ── */}
         <div className="stats-pills">
           {[
-            { value: 18,  suffix: '+', label: 'Years Experience' },
+            { value: 18,  suffix: '+', label: 'Years Sales Experience' },
             { value: 500, suffix: '+', label: 'Workshops' },
             { value: 98,  suffix: '%', label: 'Success Rate' },
-            { value: 30,  suffix: '+', label: 'Industries' },
+            { value: 20,  suffix: '+', label: 'Industries' },
           ].map(({ value, suffix, label }, i) => (
             <motion.div key={label} className="stats-pill"
               initial={{ opacity: 0, y: 16 }}
