@@ -19,8 +19,8 @@ export default function PromoBanner() {
 
           <div className="promo-content">
             <h2 className="promo-title">
-              <Zap size={28} fill="currentColor" className="promo-icon" />
-              SECURE YOUR FREE 30-MINUTE STRATEGY SESSION
+              <Zap size={24} fill="currentColor" className="promo-icon" />
+              <span>SECURE YOUR FREE 30-MINUTE SESSION</span>
             </h2>
             <p className="promo-subtext">
               Be quick! FREE spots are almost gone for February
@@ -28,14 +28,14 @@ export default function PromoBanner() {
           </div>
           
           <div className="promo-arrow">
-            <ArrowRight size={32} />
+            <ArrowRight size={24} />
           </div>
         </motion.a>
       </div>
 
       <style>{`
         .promo-container {
-          padding: 80px 0;
+          padding: 60px 0;
           background: var(--bg);
         }
 
@@ -43,21 +43,21 @@ export default function PromoBanner() {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          background: var(--red); /* Matches NTS Red */
-          padding: 40px 56px;
+          background: var(--red);
+          padding: 30px 45px;
           position: relative;
           overflow: hidden;
           text-decoration: none;
           color: #fff;
-          /* Matches the sharp clip-path style of your buttons */
+          /* Sharp professional clip-path */
           clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
-          box-shadow: 0 30px 60px rgba(220, 38, 38, 0.25);
+          box-shadow: 0 20px 40px rgba(220, 38, 38, 0.2);
           transition: all 0.3s ease;
         }
 
         .promo-banner:hover {
-          background: #ef4444; /* Slightly brighter red on hover */
-          box-shadow: 0 40px 80px rgba(220, 38, 38, 0.4);
+          background: #ef4444;
+          box-shadow: 0 30px 60px rgba(220, 38, 38, 0.35);
         }
 
         .promo-shine {
@@ -83,28 +83,27 @@ export default function PromoBanner() {
         .promo-content {
           position: relative;
           z-index: 2;
+          flex: 1;
         }
 
         .promo-title {
           font-family: var(--font-head);
-          font-size: clamp(1.4rem, 3.5vw, 2.8rem);
+          font-size: clamp(1rem, 2.5vw, 1.8rem);
           font-weight: 900;
-          line-height: 1.05;
+          line-height: 1.2;
           margin: 0;
           display: flex;
           align-items: center;
-          gap: 16px;
+          gap: 12px;
           text-transform: uppercase;
-          letter-spacing: -0.01em;
         }
 
         .promo-subtext {
-          font-size: 1.2rem;
+          font-size: clamp(0.75rem, 1.5vw, 1rem);
           font-weight: 400;
-          margin-top: 10px;
+          margin-top: 5px;
           opacity: 0.9;
           font-family: var(--font-body);
-          letter-spacing: 0.02em;
         }
 
         .promo-icon {
@@ -113,8 +112,8 @@ export default function PromoBanner() {
         }
 
         .promo-arrow {
-          width: 72px;
-          height: 72px;
+          width: 50px;
+          height: 50px;
           background: rgba(255, 255, 255, 0.1);
           border: 1px solid rgba(255, 255, 255, 0.2);
           border-radius: 50%;
@@ -126,38 +125,31 @@ export default function PromoBanner() {
           transition: all 0.3s ease;
           position: relative;
           z-index: 2;
+          margin-left: 20px;
         }
 
         .promo-banner:hover .promo-arrow {
-          transform: translateX(12px);
+          transform: translateX(8px);
           background: #fff;
           color: var(--red);
         }
 
-        @media (max-width: 900px) {
-          .promo-banner {
-            padding: 40px 32px;
-          }
-          .promo-title {
-            font-size: 1.8rem;
-          }
-        }
-
         @media (max-width: 768px) {
           .promo-banner {
-            flex-direction: column;
-            text-align: center;
-            padding: 48px 24px;
-            gap: 32px;
+            padding: 20px 25px; /* Thinner padding for mobile */
+            /* Forces horizontal layout on mobile */
+            flex-direction: row !important; 
+            text-align: left !important;
           }
           .promo-title {
-            justify-content: center;
-            font-size: 1.5rem;
-            flex-direction: column;
+            gap: 8px;
+          }
+          .promo-icon {
+            display: none; /* Hide icon on tiny screens to save space */
           }
           .promo-arrow {
-            width: 60px;
-            height: 60px;
+            width: 40px;
+            height: 40px;
           }
         }
       `}</style>
