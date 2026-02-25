@@ -5,34 +5,34 @@ const row1Logos = [
   { src: '/assets/The_Times_of_India_Logo_full.png', alt: 'The Times of India' },
   { src: '/assets/Hindustan_Times_logo.svg.png', alt: 'Hindustan Times' },
   { src: '/assets/The_Economic_Times_logo.png', alt: 'The Economic Times' },
-  { src: '/assets/ANI.png.webp', alt: 'ANI News' }, // UPDATED
+  { src: '/assets/ANI.png.webp', alt: 'ANI News' }, 
   // Repeated to make the marquee loop smooth
   { src: '/assets/The_Times_of_India_Logo_full.png', alt: 'The Times of India' },
   { src: '/assets/Hindustan_Times_logo.svg.png', alt: 'Hindustan Times' },
   { src: '/assets/The_Economic_Times_logo.png', alt: 'The Economic Times' },
-  { src: '/assets/ANI.png.webp', alt: 'ANI News' }, // UPDATED
+  { src: '/assets/ANI.png.webp', alt: 'ANI News' }, 
 ]
 
 const row2Logos = [
-  { src: '/assets/Dainik_Bhaskar_Logo.png', alt: 'Dainik Bhaskar' }, // UPDATED
+  { src: '/assets/Dainik_Bhaskar_Logo.png', alt: 'Dainik Bhaskar' }, 
   { src: '/assets/amar ujala.png', alt: 'Amar Ujala' },
-  { src: '/assets/Dainik_Jagran_logo.png', alt: 'Dainik Jagran' }, // UPDATED
+  { src: '/assets/Dainik_Jagran_logo.png', alt: 'Dainik Jagran' }, 
   { src: '/assets/daily-Hunt-Logo.png', alt: 'Daily Hunt' },
   // Repeated
-  { src: '/assets/Dainik_Bhaskar_Logo.png', alt: 'Dainik Bhaskar' }, // UPDATED
+  { src: '/assets/Dainik_Bhaskar_Logo.png', alt: 'Dainik Bhaskar' }, 
   { src: '/assets/amar ujala.png', alt: 'Amar Ujala' },
-  { src: '/assets/Dainik_Jagran_logo.png', alt: 'Dainik Jagran' }, // UPDATED
+  { src: '/assets/Dainik_Jagran_logo.png', alt: 'Dainik Jagran' }, 
   { src: '/assets/daily-Hunt-Logo.png', alt: 'Daily Hunt' },
 ]
 
 const row3Logos = [
   { src: '/assets/DNA_Newspaper_Logo.svg.png', alt: 'DNA Newspaper' },
-  { src: '/assets/wire news.png', alt: 'The Wire' }, // UPDATED
+  { src: '/assets/wire news.png', alt: 'The Wire' }, 
   { src: '/assets/images.jpg', alt: 'News Outlet' },
   { src: '/assets/The_Times_of_India_Logo_full.png', alt: 'The Times of India' }, 
   // Repeated
   { src: '/assets/DNA_Newspaper_Logo.svg.png', alt: 'DNA Newspaper' },
-  { src: '/assets/wire news.png', alt: 'The Wire' }, // UPDATED
+  { src: '/assets/wire news.png', alt: 'The Wire' }, 
   { src: '/assets/images.jpg', alt: 'News Outlet' },
   { src: '/assets/The_Times_of_India_Logo_full.png', alt: 'The Times of India' },
 ]
@@ -50,16 +50,16 @@ export default function FeaturedIn() {
     <section ref={ref} style={{ padding: '60px 0', background: 'var(--bg)', overflow: 'hidden' }}>
       <div className="container-fluid" style={{ opacity: inView ? 1 : 0, transition: 'opacity 1s ease' }}>
         
-        {/* The Section Heading */}
+        {/* The Section Heading - UPDATED HERE */}
         <h3 style={{ 
           textAlign: 'center', 
           fontFamily: 'var(--font-head)', 
-          fontSize: '0.9rem', 
-          letterSpacing: '0.3em', 
+          fontSize: '1.5rem', 
+          letterSpacing: '0.15em', 
           textTransform: 'uppercase', 
-          color: 'var(--text-dim)',
+          color: 'var(--red)',
           marginBottom: '50px',
-          fontWeight: 700
+          fontWeight: 900
         }}>
           As Featured In
         </h3>
