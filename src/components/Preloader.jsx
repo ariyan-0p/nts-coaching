@@ -10,12 +10,13 @@ export default function Preloader() {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(interval);
-          setTimeout(() => setLoading(false), 500); 
+          // Reduced pause at 100% for a faster transition
+          setTimeout(() => setLoading(false), 300); 
           return 100;
         }
         return prev + 1;
       });
-    }, 20); 
+    }, 10); // CUT IN HALF: Changed from 20ms to 10ms for 2x speed
 
     return () => clearInterval(interval);
   }, []);
@@ -34,12 +35,11 @@ export default function Preloader() {
           }}
         >
           <div className="preloader-content">
-            {/* LOGO SECTION - NOW LARGER WITH PULSE */}
             <motion.div
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ 
                 opacity: 1, 
-                scale: [1, 1.05, 1], // Breathing/Pulse effect
+                scale: [1, 1.05, 1],
               }}
               transition={{ 
                 opacity: { duration: 0.5 },
@@ -51,14 +51,13 @@ export default function Preloader() {
                 src="/assets/nts-logo-white.png" 
                 alt="NTS Logo" 
                 style={{ 
-                  width: '120px', // INCREASED SIZE
+                  width: '120px', 
                   height: 'auto', 
-                  filter: 'drop-shadow(0 0 20px rgba(220, 38, 38, 0.6))' // STRONGER GLOW
+                  filter: 'drop-shadow(0 0 20px rgba(220, 38, 38, 0.6))' 
                 }} 
               />
             </motion.div>
 
-            {/* BRAND TEXT */}
             <motion.div 
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -67,7 +66,6 @@ export default function Preloader() {
               NAIL THE SALE <span style={{ color: 'var(--red)', opacity: 0.8 }}>WITH ANKIT</span>
             </motion.div>
 
-            {/* Percentage Bar */}
             <div className="progress-container">
               <div className="progress-text">{progress}%</div>
               <div className="progress-track">
