@@ -1,40 +1,18 @@
 import { useInView } from 'react-intersection-observer'
 
-// All logos based on the uploaded assets
-const row1Logos = [
+// Combined all unique logos into a single array
+const allLogos = [
   { src: '/assets/The_Times_of_India_Logo_full.png', alt: 'The Times of India' },
   { src: '/assets/Hindustan_Times_logo.svg.png', alt: 'Hindustan Times' },
   { src: '/assets/The_Economic_Times_logo.png', alt: 'The Economic Times' },
   { src: '/assets/ANI.png.webp', alt: 'ANI News' }, 
-  // Repeated to make the marquee loop smooth
-  { src: '/assets/The_Times_of_India_Logo_full.png', alt: 'The Times of India' },
-  { src: '/assets/Hindustan_Times_logo.svg.png', alt: 'Hindustan Times' },
-  { src: '/assets/The_Economic_Times_logo.png', alt: 'The Economic Times' },
-  { src: '/assets/ANI.png.webp', alt: 'ANI News' }, 
-]
-
-const row2Logos = [
   { src: '/assets/Dainik_Bhaskar_Logo.png', alt: 'Dainik Bhaskar' }, 
   { src: '/assets/amar ujala.png', alt: 'Amar Ujala' },
   { src: '/assets/Dainik_Jagran_logo.png', alt: 'Dainik Jagran' }, 
   { src: '/assets/daily-Hunt-Logo.png', alt: 'Daily Hunt' },
-  // Repeated
-  { src: '/assets/Dainik_Bhaskar_Logo.png', alt: 'Dainik Bhaskar' }, 
-  { src: '/assets/amar ujala.png', alt: 'Amar Ujala' },
-  { src: '/assets/Dainik_Jagran_logo.png', alt: 'Dainik Jagran' }, 
-  { src: '/assets/daily-Hunt-Logo.png', alt: 'Daily Hunt' },
-]
-
-const row3Logos = [
   { src: '/assets/DNA_Newspaper_Logo.svg.png', alt: 'DNA Newspaper' },
   { src: '/assets/wire news.png', alt: 'The Wire' }, 
-  { src: '/assets/images.jpg', alt: 'News Outlet' },
-  { src: '/assets/The_Times_of_India_Logo_full.png', alt: 'The Times of India' }, 
-  // Repeated
-  { src: '/assets/DNA_Newspaper_Logo.svg.png', alt: 'DNA Newspaper' },
-  { src: '/assets/wire news.png', alt: 'The Wire' }, 
-  { src: '/assets/images.jpg', alt: 'News Outlet' },
-  { src: '/assets/The_Times_of_India_Logo_full.png', alt: 'The Times of India' },
+  { src: '/assets/images.jpg', alt: 'News Outlet' }
 ]
 
 const LogoItem = ({ logo }) => (
@@ -50,7 +28,6 @@ export default function FeaturedIn() {
     <section ref={ref} style={{ padding: '60px 0', background: 'var(--bg)', overflow: 'hidden' }}>
       <div className="container-fluid" style={{ opacity: inView ? 1 : 0, transition: 'opacity 1s ease' }}>
         
-        {/* The Section Heading - UPDATED HERE */}
         <h3 style={{ 
           textAlign: 'center', 
           fontFamily: 'var(--font-head)', 
@@ -66,33 +43,14 @@ export default function FeaturedIn() {
 
         <div className="marquee-wrapper-mask">
           
-          {/* ROW 1: Scrolls Left */}
-          <div className="marquee-track scroll-left-1">
+          {/* SINGLE ROW: Scrolls Left */}
+          <div className="marquee-track scroll-left">
             <div className="marquee-content">
-              {row1Logos.map((logo, i) => <LogoItem key={`r1-1-${i}`} logo={logo} />)}
+              {allLogos.map((logo, i) => <LogoItem key={`logo-1-${i}`} logo={logo} />)}
             </div>
+            {/* Duplicated for seamless loop */}
             <div className="marquee-content">
-              {row1Logos.map((logo, i) => <LogoItem key={`r1-2-${i}`} logo={logo} />)}
-            </div>
-          </div>
-
-          {/* ROW 2: Scrolls Right */}
-          <div className="marquee-track scroll-right" style={{ marginTop: '35px' }}>
-            <div className="marquee-content">
-              {row2Logos.map((logo, i) => <LogoItem key={`r2-1-${i}`} logo={logo} />)}
-            </div>
-            <div className="marquee-content">
-              {row2Logos.map((logo, i) => <LogoItem key={`r2-2-${i}`} logo={logo} />)}
-            </div>
-          </div>
-
-          {/* ROW 3: Scrolls Left */}
-          <div className="marquee-track scroll-left-2" style={{ marginTop: '35px' }}>
-            <div className="marquee-content">
-              {row3Logos.map((logo, i) => <LogoItem key={`r3-1-${i}`} logo={logo} />)}
-            </div>
-            <div className="marquee-content">
-              {row3Logos.map((logo, i) => <LogoItem key={`r3-2-${i}`} logo={logo} />)}
+              {allLogos.map((logo, i) => <LogoItem key={`logo-2-${i}`} logo={logo} />)}
             </div>
           </div>
 
@@ -145,16 +103,9 @@ export default function FeaturedIn() {
            object-fit: contain;
         }
 
-        .scroll-left-1 .marquee-content {
-          animation: scrollLeft 35s linear infinite;
-        }
-
-        .scroll-right .marquee-content {
-          animation: scrollRight 45s linear infinite -15s; 
-        }
-
-        .scroll-left-2 .marquee-content {
-          animation: scrollLeft 40s linear infinite -25s; 
+        /* Adjusted animation duration to account for the longer list of logos */
+        .scroll-left .marquee-content {
+          animation: scrollLeft 40s linear infinite;
         }
 
         @keyframes scrollLeft {
@@ -162,14 +113,8 @@ export default function FeaturedIn() {
           to { transform: translateX(-100%); }
         }
 
-        @keyframes scrollRight {
-          from { transform: translateX(-100%); }
-          to { transform: translateX(0%); }
-        }
-
         @media (max-width: 768px) {
           .marquee-content { gap: 40px; padding-right: 40px; }
-          .marquee-track { margin-top: 25px !important; }
         }
       `}</style>
     </section>
