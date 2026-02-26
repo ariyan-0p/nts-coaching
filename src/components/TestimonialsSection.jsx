@@ -95,19 +95,19 @@ export default function TestimonialsSection() {
               transition={{ duration: 0.5, ease: "easeOut" }}
               className="testimonial-main-card"
             >
-              {/* Media Content Area */}
+              {/* Media Content Area - UPDATED FOR NEW STORAGE PATH */}
               {featured.type !== 'text' && (
                 <div className="testimonial-media-box">
                   {featured.type === 'video' ? (
                     <video 
                       key={featured.content} // Force reload on change
-                      src={`https://ntswithankit.com${featured.content}`} 
+                      src={`${featured.content}`} 
                       controls 
                       className="t-video"
                     />
                   ) : (
                     <img 
-                      src={`https://ntswithankit.com${featured.content}`} 
+                      src={`${featured.content}`} 
                       alt={`${featured.name}'s testimonial`} 
                       className="t-image"
                     />
