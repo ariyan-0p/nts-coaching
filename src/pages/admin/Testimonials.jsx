@@ -37,6 +37,9 @@ export default function Testimonials() {
   const [rating, setRating] = useState(5)
   const [preview, setPreview] = useState(null)
   const [filter, setFilter] = useState('all')
+  
+  // NEW: State to securely hold the actual file data
+  const [selectedFile, setSelectedFile] = useState(null) 
   const fileRef = useRef()
 
   const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm()
@@ -58,13 +61,18 @@ export default function Testimonials() {
     fetchTestimonials()
   }, [])
 
+  // UPDATED: Now saves the actual file into React state
   const handleFile = (e) => {
     const file = e.target.files[0]
     if (!file) return
+    
+    setSelectedFile(file) // Securely store the file
+    
     const url = URL.createObjectURL(file)
     setPreview({ url, type: file.type.startsWith('video') ? 'video' : 'image', name: file.name })
   }
 
+  // UPDATED: Uses the securely stored file to send to the backend
   const onSubmit = async (data) => {
     const formData = new FormData()
     formData.append('type', uploadType)
@@ -75,8 +83,9 @@ export default function Testimonials() {
 
     if (uploadType === 'text') {
       formData.append('text', data.text)
-    } else if (fileRef.current.files[0]) {
-      formData.append('media', fileRef.current.files[0])
+    } else if (selectedFile) {
+      // CRITICAL CHECK: This word 'media' must perfectly match your backend's Multer setup!
+      formData.append('media', selectedFile)
     }
 
     try {
@@ -87,11 +96,11 @@ export default function Testimonials() {
       
       const result = await response.json()
       if (result.success) {
-        // Real-time addition to UI
         setTestimonials(p => [result.data, ...p])
         toast.success('Testimonial published live!')
         reset()
         setPreview(null)
+        setSelectedFile(null) // Clear file from memory after success
         setShowForm(false)
       }
     } catch {
@@ -99,7 +108,6 @@ export default function Testimonials() {
     }
   }
 
-  // Real-time Delete Function
   const deleteItem = async (id) => {
     if (!confirm('Permanently delete this testimonial?')) return
 
@@ -111,7 +119,6 @@ export default function Testimonials() {
       const result = await response.json()
       
       if (result.success) {
-        // REAL-TIME UI UPDATE: Instantly filters out the exact MongoDB _id
         setTestimonials(prev => prev.filter(t => t._id !== id))
         toast.success('Deleted permanently')
       } else {
@@ -122,7 +129,6 @@ export default function Testimonials() {
     }
   }
 
-  // Local toggle for now (Add a PUT route to backend later if you want this saved permanently)
   const togglePublish = (id) => {
     setTestimonials(p => p.map(t => t._id === id ? { ...t, published: !t.published } : t))
     toast.success('Visibility toggled')
@@ -154,7 +160,7 @@ export default function Testimonials() {
                 
                 <div style={{ display: 'flex', gap: 1, background: 'var(--border)', marginBottom: 24, width: 'fit-content' }}>
                   {TYPES.map(({ value, label, icon: Icon }) => (
-                    <button key={value} type="button" onClick={() => { setUploadType(value); setPreview(null) }}
+                    <button key={value} type="button" onClick={() => { setUploadType(value); setPreview(null); setSelectedFile(null); }}
                       style={{ padding: '10px 18px', background: uploadType === value ? 'var(--red)' : 'var(--surface)', color: uploadType === value ? '#fff' : 'var(--text-dim)', border: 'none', cursor: 'pointer', fontFamily: 'var(--font-head)', fontWeight: 700, fontSize: '0.7rem', textTransform: 'uppercase' }}>
                       <Icon size={14} style={{ marginRight: 8 }} /> {label}
                     </button>
@@ -179,7 +185,7 @@ export default function Testimonials() {
                     <div style={{ marginBottom: 16 }}>
                       <div onClick={() => fileRef.current?.click()} style={{ border: '2px dashed var(--border)', padding: '40px', textAlign: 'center', cursor: 'pointer', background: 'var(--bg)' }}>
                         {preview ? (
-                          preview.type === 'image' ? <img src={preview.url} style={{ maxHeight: 150 }} /> : <video src={preview.url} style={{ maxHeight: 150 }} />
+                          preview.type === 'image' ? <img src={preview.url} style={{ maxHeight: 150 }} alt="preview" /> : <video src={preview.url} style={{ maxHeight: 150 }} />
                         ) : <p>Click to upload {uploadType}</p>}
                       </div>
                       <input ref={fileRef} type="file" onChange={handleFile} style={{ display: 'none' }} accept={uploadType === 'image' ? 'image/*' : 'video/*'} />
